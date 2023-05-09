@@ -4,9 +4,9 @@ from .models import Quiz
 
 # Register your models here.
 class QuizAdmin(admin.ModelAdmin):
-    list_display = ['name']
+    list_display = ['name', 'tags', 'available']
     list_display_links = ['name']
-    search_fields = ['name']
+    search_fields = ['name', 'tags']
 
 
 admin.site.register(Quiz, QuizAdmin)
