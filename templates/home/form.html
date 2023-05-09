@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ name }} - вікторина від SuperQuizzes</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/form.css') }}">
+</head>
+<body>
+    <form action="result" method="post">
+        {% for q in questions %}
+            <div class="question">
+                <h1>{{ q[0] }}</h1>
+                {% for v in q[1:] %}
+                <div class="option">
+                    <input type="radio" name="{{ q[0] }}" value="{{ v }}" required><b class="color-box" style="background-color: rgb({{ randint(0, 255) }}, {{ randint(0, 255) }}, {{ randint(0, 255) }});">{{ v }}</b>
+                </div>
+                {% endfor %}
+            </div>
+            {% endfor %}
+        <br>
+        <input type="submit" value="Результат" class="submit">
+    </form>
+</body>
+</html>

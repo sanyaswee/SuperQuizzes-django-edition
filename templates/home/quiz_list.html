@@ -1,0 +1,14 @@
+{% extends "index.html" %}
+{% block quiz_list %}
+{% for quiz in quizzes %}
+<div class="quiz-label">
+    <h2 class="quiz-name">{{ quiz[0] }}</h2>
+    <p>
+        Від <b class="color-box green-box">{{ quiz[1] }}</b> років до <b class="color-box red-box">{{ quiz[2] }}</b> років
+    </p>
+    <p><b class="color-box blue-box">{{ amounts[quiz[0]] }}</b> запитань(ня)</p>
+    <a href="form?id={{ quiz[-1] }}"><button class="complete complete-as-form">Проти як форму</button></a>
+    <a href="quiz?id={{ quiz[-1] }}"><button class="complete complete-as-quiz">Проти як квіз</button></a>
+</div>
+{% endfor %}
+{% endblock %}

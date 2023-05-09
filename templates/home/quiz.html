@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ name }} - вікторина від SuperQuizzes</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/quiz.css') }}">
+</head>
+<body>
+    <div class="hat">
+        <h1>{{ question }}</h1>
+    </div>
+
+    <div class="answers-grid">
+        <div class="answer-variant">
+            <button class="answer-button ans-1">{{ answers[0] }}</button>
+        </div>
+        <div class="answer-variant">
+            <button class="answer-button ans-2">{{ answers[1] }}</button>
+        </div>
+        <div class="answer-variant">
+            <button class="answer-button ans-3">{{ answers[2] }}</button>
+        </div>
+        <div class="answer-variant">
+            <button class="answer-button ans-4">{{ answers[3] }}</button>
+        </div>
+
+    </div>
+</body>
+</html>

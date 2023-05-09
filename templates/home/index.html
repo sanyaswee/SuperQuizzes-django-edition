@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="uk">
+    <head>
+        <title>{% block title %}Список вікторин - SuperQuizzes{% endblock %}</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;700&display=swap" rel="stylesheet">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Display:ital@1&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="{% static 'home/css/base.css' %}">
+        <link rel="stylesheet" href="{% static 'home/css/index.css' %}">
+    </head>
+    <body>
+        <div class="hat">
+            <h1><i>Ми пропонуємо вам пройти одну з наступних вікторин</i></h1>
+        </div>
+
+        <div class="content-grid">
+            <div class="side-bar">
+                <form action="filter">
+                    <h1>Фільтри</h1>
+
+                    <div class="search">
+                        <p>Шукати за назвою</p>
+                        <input type="text" name="search" placeholder="Введіть назву">
+                    </div>
+
+<!--                    <div class="question-amount-filter">-->
+<!--                        <p>Кількість запитань</p>-->
+<!--                        <label>Від</label>-->
+<!--                        <input type="number" name="min-questions" class="number-input" max="99" min="1">-->
+<!--                        <label>до</label>-->
+<!--                        <input type="number" name="max-questions" class="number-input" max="99" min="1">-->
+<!--                    </div>-->
+
+                    <div class="for-age">
+                        <label>Підходить для</label>
+                        <input type="number" name="for-age" class="number-input" max="99" min="1">
+                        <label>років</label>
+                    </div>
+
+                    <div class="tags">
+                        <p>Дозволити теґи</p>
+                        <div class="tag-filter-field"><input type="checkbox" name="geography"><label>Географія</label></div>
+                        <div class="tag-filter-field"><input type="checkbox" name="history"><label>Історія</label></div>
+                        <div class="tag-filter-field"><input type="checkbox" name="programming"><label>Програмування</label></div>
+                        <div class="tag-filter-field"><input type="checkbox" name="songs"><label>Пісні</label></div>
+                        <div class="tag-filter-field"><input type="checkbox" name="ukraine"><label>Україна</label></div>
+                        <div class="tag-filter-field"><input type="checkbox" name="films"><label>Фільми</label></div>
+                    </div>
+
+                    <input type="submit" value="Фільтрувати" class="submit">
+                </form>
+            </div>
+
+            <div class="questions-block">
+                {% block quiz_list %}
+                {% endblock %}
+                <a href="/"><button class="submit">Скинути фільтри</button></a>
+            </div>
+        </div>
+    </body>
+</html>
