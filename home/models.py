@@ -29,7 +29,7 @@ class Question(models.Model):
     answers_amount = models.IntegerField(default=0)
     correct_answers = models.IntegerField(default=0)
 
-    quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE)
+    quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE, null=True)
 
     def __str__(self):
         return f'#{self.id}: {self.question}'
