@@ -1,6 +1,9 @@
 from django.shortcuts import render
+from .models import Quiz
 
 
 # Create your views here.
 def index(request):
-    return render(request, 'home/index.html')
+    quizzes = Quiz.objects.all()
+
+    return render(request, 'home/quiz_list.html', {'quizzes': quizzes})

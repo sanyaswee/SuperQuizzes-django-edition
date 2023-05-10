@@ -8,5 +8,7 @@ class QuizAdmin(admin.ModelAdmin):
     list_display_links = ['name']
     search_fields = ['name', 'tags']
 
+    fields = ['name', 'min_age', 'max_age', 'tags', 'available']
+
 
 admin.site.register(Quiz, QuizAdmin)

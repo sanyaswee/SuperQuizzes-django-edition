@@ -10,6 +10,7 @@ class Quiz(models.Model):
 
     completed_as_form = models.IntegerField(default=0)
     completed_as_quiz = models.IntegerField(default=0)
+    average_score = models.IntegerField(default=0)
 
     available = models.BooleanField(default=False)
 
