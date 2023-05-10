@@ -4,7 +4,7 @@ from .models import Quiz, Question
 
 # Register your models here.
 class QuizAdmin(admin.ModelAdmin):
-    list_display = ['name', 'tags', 'available']
+    list_display = ['id', 'name', 'tags', 'available']
     list_display_links = ['name']
     search_fields = ['name', 'tags']
 
@@ -12,7 +12,7 @@ class QuizAdmin(admin.ModelAdmin):
 
 
 class QuestionAdmin(admin.ModelAdmin):
-    list_display = ['question', 'quiz']
+    list_display = ['id', 'question', 'quiz']
     list_display_links = ['question']
     search_fields = ['question', 'quiz']
 
