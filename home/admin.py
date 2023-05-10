@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Quiz
+from .models import Quiz, Question
 
 
 # Register your models here.
@@ -11,4 +11,13 @@ class QuizAdmin(admin.ModelAdmin):
     fields = ['name', 'min_age', 'max_age', 'tags', 'available']
 
 
+class QuestionAdmin(admin.ModelAdmin):
+    list_display = ['question', 'quiz']
+    list_display_links = ['question']
+    search_fields = ['question', 'quiz']
+
+    fields = ['question', 'right_answer', 'wrong_answer1', 'wrong_answer2', 'wrong_answer3', 'quiz']
+
+
 admin.site.register(Quiz, QuizAdmin)
+admin.site.register(Question, QuestionAdmin)
