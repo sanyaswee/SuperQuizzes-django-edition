@@ -6,6 +6,7 @@ from django.db import models
 
 class Tag(models.Model):
     tag = models.CharField(max_length=20, unique=True)
+    localized_uk_ua = models.CharField(max_length=20, unique=True, blank=True)
     popular = models.BooleanField()
 
     def __str__(self):
@@ -31,7 +32,7 @@ class Quiz(models.Model):
     name = models.CharField(max_length=50, unique=True)
     min_age = models.SmallIntegerField()
     max_age = models.SmallIntegerField(default=100)
-    tags = models.TextField()
+    tags = models.ManyToManyField(Tag, related_name='quizzes')
     questions = models.ManyToManyField(Question, related_name='quizzes')
 
     completed_as_form = models.IntegerField(default=0)
