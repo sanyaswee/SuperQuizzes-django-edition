@@ -8,15 +8,15 @@ class QuizAdmin(admin.ModelAdmin):
     list_display_links = ['name']
     search_fields = ['name', 'tags']
 
-    fields = ['name', 'min_age', 'max_age', 'tags', 'available']
+    fields = ['name', 'min_age', 'max_age', 'tags', 'available', 'questions']
 
 
 class QuestionAdmin(admin.ModelAdmin):
-    list_display = ['id', 'question', 'quiz']
+    list_display = ['id', 'question']
     list_display_links = ['question']
     search_fields = ['question', 'quiz']
 
-    fields = ['question', 'right_answer', 'wrong_answer1', 'wrong_answer2', 'wrong_answer3', 'quiz']
+    fields = ['question', 'right_answer', 'wrong_answer1', 'wrong_answer2', 'wrong_answer3']
 
 
 admin.site.register(Quiz, QuizAdmin)
