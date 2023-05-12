@@ -4,8 +4,16 @@ from django.db import models
 # Create your models here.
 
 
+class Tag(models.Model):
+    tag = models.CharField(max_length=20, unique=True)
+    popular = models.BooleanField()
+
+    def __str__(self):
+        return self.tag
+
+
 class Question(models.Model):
-    question = models.CharField(max_length=200)
+    question = models.CharField(max_length=200, unique=True)
 
     right_answer = models.CharField(max_length=100)
     wrong_answer1 = models.CharField(max_length=100)
