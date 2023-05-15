@@ -92,3 +92,9 @@ label {
 	width: 30px;
 	margin: 5px;
 }
+
+
+li {
+	display: inline-block;
+	font-family: 'Comfortaa', cursive;
+}

@@ -9,6 +9,14 @@
             <p><b class="color-box blue-box">{{ quiz.questions.all|length }}</b> запитань(ня)</p>
             <a href="form?id={# quiz[-1] #}"><button class="complete complete-as-form">Проти як форму</button></a>
             <a href="quiz?id={# quiz[-1] #}"><button class="complete complete-as-quiz">Проти як квіз</button></a>
+            {# &#127991 #}
+            <div class="tag-space">
+                <ul>
+                    {% for tag in quiz.tags.all %}
+                        <li class="color-box {{ color_classes|random }}">&#127991 {{ tag.localized_uk_ua }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
         </div>
     {% endfor %}
 {% endblock %}
