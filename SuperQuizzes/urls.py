@@ -21,4 +21,5 @@ from home.views import *
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', index, name='index'),
+    path('form', form, name='form'),
 ]

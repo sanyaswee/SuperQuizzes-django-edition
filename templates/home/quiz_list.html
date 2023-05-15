@@ -7,7 +7,7 @@
                 Від <b class="color-box green-box">{{ quiz.min_age }}</b> років до <b class="color-box red-box">{{ quiz.max_age }}</b> років
             </p>
             <p><b class="color-box blue-box">{{ quiz.questions.all|length }}</b> запитань(ня)</p>
-            <a href="form?id={# quiz[-1] #}"><button class="complete complete-as-form">Проти як форму</button></a>
+            <a href="{% url 'form' %}?id={{ quiz.id }}"><button class="complete complete-as-form">Проти як форму</button></a>
             <a href="quiz?id={# quiz[-1] #}"><button class="complete complete-as-quiz">Проти як квіз</button></a>
             {# &#127991 #}
             <div class="tag-space">
