@@ -16,7 +16,11 @@ def form(request: HttpRequest):
     form_id = request.GET.get('id', '')
     if form_id:
         quiz = Quiz.objects.get(id=form_id)
+        questions = quiz.questions.all()
 
-        return render(request, 'home/form.html', {'quiz': quiz})
+        for q in questions:
+            q.answers = [q.right_answer, q.wrong_answer1, q.wrong_answer2, q.wrong_answer3]
+
+        return render(request, 'home/form.html', {'quiz_name': quiz.name, 'questions': questions})
     else:
         return redirect('index')
