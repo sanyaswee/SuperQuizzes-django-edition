@@ -1,25 +1,24 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="uk">
 <head>
     <meta charset="UTF-8">
     <title>Результат</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/result.css') }}">
+    <link rel="stylesheet" href="{% static 'home/css/base.css' %}">
+    <link rel="stylesheet" href="{% static 'home/css/result.css' %}">
 </head>
 <body>
     <h1>Вітаємо! Ви пройшли вікторину</h1>
     <p>Відповіді на запитання: <span class="color-box green-box">{{ right_answers }}</span>/<span class="color-box blue-box">{{ total_questions }}</span></p>
     {% if score <= 40 %}
     <p>У відсотках: <span class="color-box red-box">{{ score }}%</span></p>
-    {% endif %}
-    {% if 40 < score <= 65 %}
+    {% elif 40 < score <= 65 %}
         <p>У відсотках: <span class="color-box yellow-box">{{ score }}%</span></p>
-    {% endif %}
-    {% if score > 65 %}
+    {% elif score > 65 %}  {# always yellow (fix) #}
         <p>У відсотках: <span class="color-box green-box">{{ score }}%</span></p>
     {% endif %}
     <div class="return-to-main">
-        <a href="/"><button class="submit">На головну</button></a>
+        <a href="{% url 'index' %}"><button class="submit">На головну</button></a>
     </div>
     <div class="answers-block">
         <h2>Перевірте свої відповіді</h2>
@@ -32,13 +31,13 @@
             </tr>
             {% for answer in answers %}
                 <tr>
-                    <td>{{ answer[0] }}</td>
-                    <td>{{ answer[1] }}</td>
-                    <td>{{ answer[2] }}</td>
-                    {% if answer[3] == 'Так' %}
-                        <td><span class="color-box green-box">{{ answer[3] }}</span></td>
+                    <td>{{ answer.0 }}</td>
+                    <td>{{ answer.1 }}</td>
+                    <td>{{ answer.2 }}</td>
+                    {% if answer.3 == 'Так' %}
+                        <td><span class="color-box green-box">{{ answer.3 }}</span></td>
                     {% else %}
-                        <td><span class="color-box red-box">{{ answer[3] }}</span></td>
+                        <td><span class="color-box red-box">{{ answer.3 }}</span></td>
                     {% endif %}
                 </tr>
             {% endfor %}

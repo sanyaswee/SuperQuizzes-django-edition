@@ -43,6 +43,10 @@ h1, h2 {
     color: black;
 }
 
+.transparent-box {
+    color: black;
+}
+
 
 .submit {
     background-color: yellow;

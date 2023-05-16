@@ -13,12 +13,13 @@
 </head>
 <body>
     <form action="result" method="post">
+        {% csrf_token %}
         {% for q in questions|shuffle %}
             <div class="question">
                 <h1>{{ q.question }}</h1>
                 {% for v in q.answers|shuffle %}
                 <div class="option">
-                    <input type="radio" name="{{ q.question }}" value="{{ v }}" required><b class="color-box" style="background-color: rgb({{ randcolor }}, {{ randcolor }}, {{ randcolor }});">{{ v }}</b>
+                    <input type="radio" name="{{ q.question }}" value="{{ v }}" required><b class="color-box transparent-box">{{ v }}</b>
                 </div>
                 {% endfor %}
             </div>
