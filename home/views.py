@@ -1,6 +1,7 @@
 from django.http import HttpResponse, HttpRequest
 from django.shortcuts import render, redirect
-from .models import Quiz, Question
+from django.contrib.auth import get_user
+from .models import Quiz, Question, Completion, UserAnswer
 
 
 # Create your views here.
@@ -33,30 +34,44 @@ def result(request: HttpRequest):
 
         quiz = Quiz.objects.get(id=post_copy.pop('quiz-id')[0])
         completed_as = post_copy.pop('completed-as')[0]
+        is_form = False
 
         if completed_as == 'form':
-            quiz.completed_as_form += 1
-            quiz.save()
-        elif completed_as == 'quiz':
-            pass
+            is_form = True
+
+        completion = Completion(
+            quiz=quiz, is_form=is_form, start_time=post_copy.pop('start-time')[0]
+        )
+        user = get_user(request)
+        if not user.is_anonymous:
+            completion.user = user
+        completion.save()
 
         right_answers = 0
         total_questions = 0
         answers = []
         for q, a in post_copy.items():
-            db_object = Question.objects.get(question=q)
-            answer = [q, a[0], db_object.right_answer]
+            db_question = Question.objects.get(question=q)
+            answer = [q, a[0], db_question.right_answer]
+            user_answer = UserAnswer(completion=completion, quiz=quiz, question=db_question)
+            if not user.is_anonymous:
+                user_answer.user = user
 
-            if a[0] == db_object.right_answer:
+            if a[0] == db_question.right_answer:
                 right_answers += 1
                 answer.append('Так')
+                user_answer.right = True
             else:
                 answer.append('Ні')
+                user_answer.right = False
 
             total_questions += 1
             answers.append(answer)
+            user_answer.save()
 
         score = round(right_answers / total_questions * 100, 2)
+        completion.score = score
+        completion.save()
 
         return render(
             request, 'home/result.html',

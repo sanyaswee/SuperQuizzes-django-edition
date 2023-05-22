@@ -27,6 +27,7 @@
         <br>
         <input type="hidden" name="quiz-id" value="{{ quiz_id }}">
         <input type="hidden" name="completed-as" value="form">
+        <input type="hidden" name="start-time" value="{% now 'Y-m-d G:i:s' %}">
         <input type="submit" value="Результат" class="submit">
     </form>
 </body>

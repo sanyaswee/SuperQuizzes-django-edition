@@ -59,8 +59,8 @@ class Completion(models.Model):  # Instead of 'Quiz.completed_as_...' and 'Quiz.
     end_time = models.DateTimeField(auto_now=True)
 
     # Results info
-    right_answers = models.IntegerField()
-    score = models.IntegerField()
+    # right_answers = models.IntegerField()
+    score = models.IntegerField(default=0)
 
 
 class UserAnswer(models.Model):
