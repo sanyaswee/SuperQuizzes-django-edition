@@ -1,4 +1,5 @@
 {% extends "home/index.html" %}
+{% load is_form %}
 {% block quiz_list %}
     {% for quiz in quizzes %}
         <div class="quiz-label">
@@ -20,8 +21,8 @@
             <div class="additional-info">
                 <p>Проходження:</p>
                 <ul>
-                    <li class="completed-times">Форма: {{ quiz.completed_as_form }}</li>
-                    <li class="completed-times">Квіз: {{ quiz.completed_as_quiz }}</li>
+                    <li class="completed-times">Форма: {{ quiz.completions|is_form|length }}</li>
+                    <li class="completed-times">Квіз: {{ quiz.completions|is_quiz|length }}</li>
                 </ul>
             </div>
         </div>
