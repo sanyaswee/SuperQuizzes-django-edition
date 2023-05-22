@@ -12,7 +12,7 @@
     <p>Відповіді на запитання: <span class="color-box green-box">{{ right_answers }}</span>/<span class="color-box blue-box">{{ total_questions }}</span></p>
     {% if score <= 40 %}
     <p>У відсотках: <span class="color-box red-box">{{ score }}%</span></p>
-    {% elif 40 < score <= 65 %}
+    {% elif score > 40 and score <= 65 %}
         <p>У відсотках: <span class="color-box yellow-box">{{ score }}%</span></p>
     {% elif score > 65 %}  {# always yellow (fix) #}
         <p>У відсотках: <span class="color-box green-box">{{ score }}%</span></p>
