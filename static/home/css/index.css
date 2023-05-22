@@ -98,3 +98,22 @@ li {
 	display: inline-block;
 	font-family: 'Comfortaa', cursive;
 }
+
+ul {
+	padding: 0;
+}
+
+.completed-times {
+	margin-left: 10px;
+	margin-right: 10px;
+}
+
+.additional-info {
+	border-width: 3px;
+	border-style: solid;
+	border-radius: 5px;
+	border-color: red;
+
+	margin-left: 25%;
+	margin-right: 25%;
+}
