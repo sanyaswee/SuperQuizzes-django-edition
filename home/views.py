@@ -31,6 +31,15 @@ def result(request: HttpRequest):
         post_copy = dict(request.POST)
         post_copy.pop('csrfmiddlewaretoken')
 
+        quiz = Quiz.objects.get(id=post_copy.pop('quiz-id')[0])
+        completed_as = post_copy.pop('completed-as')[0]
+
+        if completed_as == 'form':
+            quiz.completed_as_form += 1
+            quiz.save()
+        elif completed_as == 'quiz':
+            pass
+
         right_answers = 0
         total_questions = 0
         answers = []
