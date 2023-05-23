@@ -1,6 +1,7 @@
-from django.http import HttpResponse, HttpRequest
-from django.shortcuts import render, redirect
 from django.contrib.auth import get_user
+from django.http import HttpRequest
+from django.shortcuts import render, redirect
+
 from .models import Quiz, Question, Completion, UserAnswer
 
 
@@ -73,9 +74,19 @@ def result(request: HttpRequest):
         completion.score = score
         completion.save()
 
+        completion = Completion.objects.get(id=completion.id)
+
+        time_taken = completion.end_time - completion.start_time
+
         return render(
             request, 'home/result.html',
-            {'right_answers': right_answers, 'total_questions': total_questions, 'score': score, 'answers': answers}
+            {
+                'right_answers': right_answers,
+                'total_questions': total_questions,
+                'score': score,
+                'answers': answers,
+                'time_taken': time_taken.seconds,
+            }
         )
     else:
         return redirect('index')
