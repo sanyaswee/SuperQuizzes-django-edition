@@ -2,7 +2,7 @@ from django.contrib.auth import get_user
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render, redirect
 
-from .models import Quiz, Question, Completion, UserAnswer
+from .models import Quiz, Question, Completion, UserAnswer, Tag
 
 
 # Create your views here.
@@ -99,6 +99,14 @@ def filter_view(request: HttpRequest):
         search = request.GET.get('search')
         if search:
             conditions['searchable__contains'] = search.lower()
+
+        for_age = request.GET.get('for-age')
+        if for_age:
+            conditions['min_age__lte'] = for_age
+            conditions['max_age__gte'] = for_age
+
+        for tag in Tag.objects.all():
+            active = request.GET.get(tag.tag)  # TODO continue
 
         quizzes = Quiz.objects.filter(**conditions)
         if len(quizzes) == 0:
