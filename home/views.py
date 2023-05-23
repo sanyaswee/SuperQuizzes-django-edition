@@ -98,7 +98,7 @@ def filter_view(request: HttpRequest):
 
         search = request.GET.get('search')
         if search:
-            conditions['name__icontains'] = search  # TODO solve cyrillic problem
+            conditions['searchable__contains'] = search.lower()
 
         quizzes = Quiz.objects.filter(**conditions)
         if len(quizzes) == 0:

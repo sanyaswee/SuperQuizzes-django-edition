@@ -31,6 +31,7 @@ class Question(models.Model):
 
 class Quiz(models.Model):
     name = models.CharField(max_length=50, unique=True)
+    searchable = models.CharField(max_length=50, null=True)  # = name.lower()
     min_age = models.SmallIntegerField()
     max_age = models.SmallIntegerField(default=100)
     tags = models.ManyToManyField(Tag, related_name='quizzes')
@@ -41,6 +42,11 @@ class Quiz(models.Model):
     # average_score = models.IntegerField(default=0)
 
     available = models.BooleanField(default=False)
+
+    def save(self, *args, **kwargs):
+        # Save searchable
+        self.searchable = self.name.lower()
+        super(Quiz, self).save(*args, **kwargs)
 
     def __str__(self):
         return f'#{self.id}: {self.name}'
