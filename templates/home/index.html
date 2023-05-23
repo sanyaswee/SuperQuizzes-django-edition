@@ -22,7 +22,8 @@
 
         <div class="content-grid">
             <div class="side-bar">
-                <form action="filter">
+                <form action="{% url 'filter' %}">
+                    {# csrf_token #}
                     <h1>Фільтри</h1>
 
                     <div class="search">

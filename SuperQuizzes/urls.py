@@ -23,4 +23,5 @@ urlpatterns = [
     path('', index, name='index'),
     path('form', form, name='form'),
     path('result', result, name='result'),
+    path('filter', filter_view, name='filter'),
 ]

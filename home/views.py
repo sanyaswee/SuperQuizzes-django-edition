@@ -1,5 +1,5 @@
 from django.contrib.auth import get_user
-from django.http import HttpRequest
+from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render, redirect
 
 from .models import Quiz, Question, Completion, UserAnswer
@@ -90,3 +90,19 @@ def result(request: HttpRequest):
         )
     else:
         return redirect('index')
+
+
+def filter_view(request: HttpRequest):
+    if request.method == 'GET':
+        conditions = {'available': True}
+
+        search = request.GET.get('search')
+        if search:
+            conditions['name__icontains'] = search  # TODO solve cyrillic problem
+
+        quizzes = Quiz.objects.filter(**conditions)
+        if len(quizzes) == 0:
+            return render(request, 'home/nothing_found.html')
+
+        color_classes = ['red-box', 'yellow-box', 'blue-box', 'green-box']
+        return render(request, 'home/quiz_list.html', {'quizzes': quizzes, 'color_classes': color_classes})
