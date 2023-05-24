@@ -1,7 +1,9 @@
 from django.contrib.auth import get_user
 from django.db.models import Avg
-from django.http import HttpRequest, HttpResponse
+from django.http import HttpRequest  # , HttpResponse
 from django.shortcuts import render, redirect
+
+from . import tools
 
 from .models import Quiz, Question, Completion, UserAnswer, Tag
 
@@ -18,11 +20,7 @@ def index(request):
 def form(request: HttpRequest):
     form_id = request.GET.get('id', '')
     if form_id:
-        quiz = Quiz.objects.get(id=form_id)
-        questions = quiz.questions.all()
-
-        for q in questions:
-            q.answers = [q.right_answer, q.wrong_answer1, q.wrong_answer2, q.wrong_answer3]
+        quiz, questions = tools.get_qq(form_id)
 
         return render(request, 'home/form.html', {'quiz_name': quiz.name, 'quiz_id': quiz.id, 'questions': questions})
     else:
@@ -31,78 +29,27 @@ def form(request: HttpRequest):
 
 def result(request: HttpRequest):
     if request.method == 'POST':
-        post_copy = dict(request.POST)
-        post_copy.pop('csrfmiddlewaretoken')
-
-        quiz = Quiz.objects.get(id=post_copy.pop('quiz-id')[0])
-        completed_as = post_copy.pop('completed-as')[0]
-        is_form = False
-
-        if completed_as == 'form':
-            is_form = True
-
-        completion = Completion(
-            quiz=quiz, is_form=is_form, start_time=post_copy.pop('start-time')[0]
-        )
-        user = get_user(request)
-        if not user.is_anonymous:
-            completion.user = user
-        completion.save()
-
-        right_answers = 0
-        total_questions = 0
-        answers = []
-        for q, a in post_copy.items():
-            db_question = Question.objects.get(question=q)
-            answer = [q, a[0], db_question.right_answer]
-            user_answer = UserAnswer(completion=completion, quiz=quiz, question=db_question)
-            if not user.is_anonymous:
-                user_answer.user = user
-
-            if a[0] == db_question.right_answer:
-                right_answers += 1
-                answer.append('Так')
-                user_answer.right = True
-            else:
-                answer.append('Ні')
-                user_answer.right = False
-
-            total_questions += 1
-            answers.append(answer)
-            user_answer.save()
-
-        score = round(right_answers / total_questions * 100, 2)
-        completion.score = score
-        completion.save()
+        quiz, post_copy, completion, user = tools.result_post(request)
+        processed_answers = tools.process_answers(post_copy, user, completion, quiz)
 
         completion = Completion.objects.get(id=completion.id)
-
         time_taken = completion.end_time - completion.start_time
 
         # Getting average stats
         completions = Completion.objects.filter(quiz=quiz)
-        average_score = completions.aggregate(Avg('score'))['score__avg']
+        average_score = round(completions.aggregate(Avg('score'))['score__avg'], 2)
 
-        average_time, i = 0, 0
-        for c in completions:
-            taken = c.end_time - c.start_time
-            average_time += taken.seconds
-            i += 1
+        average_time = tools.get_avg_time(completions)
 
-        average_time /= i
+        params = {
+            'time_taken': time_taken.seconds,
+            'average_score': average_score,
+            'average_time': average_time,
+        }
 
-        return render(
-            request, 'home/result.html',
-            {
-                'right_answers': right_answers,
-                'total_questions': total_questions,
-                'score': score,
-                'answers': answers,
-                'time_taken': time_taken.seconds,
-                'average_score': round(average_score, 2),
-                'average_time': round(average_time, 2),
-            }
-        )
+        context = processed_answers | params
+
+        return render(request, 'home/result.html', context)
     else:
         return redirect('index')
 
