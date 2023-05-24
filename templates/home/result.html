@@ -17,6 +17,7 @@
     {% elif score > 65 %}  {# always yellow (fix) #}
         <p>У відсотках: <span class="color-box green-box">{{ score }}%</span></p>
     {% endif %}
+    {# TODO average score #}
     <p>Витрачено часу: {{ time_taken }} секунд(а/и)</p>
     <div class="return-to-main">
         <a href="{% url 'index' %}"><button class="submit">На головну</button></a>

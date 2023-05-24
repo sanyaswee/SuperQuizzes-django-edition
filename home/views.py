@@ -105,8 +105,15 @@ def filter_view(request: HttpRequest):
             conditions['min_age__lte'] = for_age
             conditions['max_age__gte'] = for_age
 
+        ids = set()
         for tag in Tag.objects.all():
-            active = request.GET.get(tag.tag)  # TODO continue
+            status = request.GET.get(tag.tag)
+            if status == 'on':
+                for q in tag.quizzes.all():
+                    ids.add(q.id)
+
+        if ids:
+            conditions['id__in'] = ids
 
         quizzes = Quiz.objects.filter(**conditions)
         if len(quizzes) == 0:
