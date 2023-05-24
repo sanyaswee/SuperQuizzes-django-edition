@@ -14,11 +14,20 @@
     <p>У відсотках: <span class="color-box red-box">{{ score }}%</span></p>
     {% elif score > 40 and score <= 65 %}
         <p>У відсотках: <span class="color-box yellow-box">{{ score }}%</span></p>
-    {% elif score > 65 %}  {# always yellow (fix) #}
+    {% elif score > 65 %}
         <p>У відсотках: <span class="color-box green-box">{{ score }}%</span></p>
     {% endif %}
-    {# TODO average score #}
+    <p>Середній результат:
+        {% if average_score <= 40 %}
+            <span class="color-box red-box">{{ average_score }}%</span>
+        {% elif average_score > 40 and average_score <= 65 %}
+            <span class="color-box yellow-box">{{ average_score }}%</span>
+        {% elif average_score > 65 %}
+            <span class="color-box green-box">{{ average_score }}%</span>
+        {% endif %}
+    </p>
     <p>Витрачено часу: {{ time_taken }} секунд(а/и)</p>
+    <p>Середній час: {{ average_time }} секунд(а/и)</p>
     <div class="return-to-main">
         <a href="{% url 'index' %}"><button class="submit">На головну</button></a>
     </div>

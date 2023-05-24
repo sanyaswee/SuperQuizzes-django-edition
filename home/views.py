@@ -1,4 +1,5 @@
 from django.contrib.auth import get_user
+from django.db.models import Avg
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render, redirect
 
@@ -78,6 +79,18 @@ def result(request: HttpRequest):
 
         time_taken = completion.end_time - completion.start_time
 
+        # Getting average stats
+        completions = Completion.objects.filter(quiz=quiz)
+        average_score = completions.aggregate(Avg('score'))['score__avg']
+
+        average_time, i = 0, 0
+        for c in completions:
+            taken = c.end_time - c.start_time
+            average_time += taken.seconds
+            i += 1
+
+        average_time /= i
+
         return render(
             request, 'home/result.html',
             {
@@ -86,6 +99,8 @@ def result(request: HttpRequest):
                 'score': score,
                 'answers': answers,
                 'time_taken': time_taken.seconds,
+                'average_score': round(average_score, 2),
+                'average_time': round(average_time, 2),
             }
         )
     else:
