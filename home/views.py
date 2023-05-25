@@ -1,5 +1,6 @@
 from django.contrib.auth import get_user
 from django.db.models import Avg
+from django.db.utils import IntegrityError
 from django.http import HttpRequest  # , HttpResponse
 from django.shortcuts import render, redirect
 
@@ -29,18 +30,22 @@ def form(request: HttpRequest):
 
 def result(request: HttpRequest):
     if request.method == 'POST':
-        quiz, post_copy, completion, user = tools.result_post(request)
-        processed_answers = tools.process_answers(post_copy, user, completion, quiz)
+        try:
+            quiz, post_copy, completion, user = tools.result_post(request)
+        except IntegrityError:
+            processed_answers = tools.get_answers(request)
+        else:
+            processed_answers = tools.process_answers(post_copy, user, completion, quiz)
 
-        completion = Completion.objects.get(id=completion.id)
-        time_taken = completion.end_time - completion.start_time
+        completion = tools.get_completion(request)
 
         # Getting average stats
-        completions = Completion.objects.filter(quiz=quiz)
+        completions = Completion.objects.filter(quiz=completion.quiz)
         average_score = round(completions.aggregate(Avg('score'))['score__avg'], 2)
 
         average_time = tools.get_avg_time(completions)
 
+        time_taken = completion.end_time - completion.start_time
         params = {
             'time_taken': time_taken.seconds,
             'average_score': average_score,

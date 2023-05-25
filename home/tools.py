@@ -26,14 +26,14 @@ def result_post(request: HttpRequest):
     else:
         is_form = False
 
-    completion, copy, user = _create_completion(request, quiz, is_form, copy)
+    completion, copy, user = _create_completion(request, quiz, is_form, copy, request.POST.get('csrfmiddlewaretoken'))
 
     return quiz, copy, completion, user
 
 
-def _create_completion(request: HttpRequest, quiz: Quiz, is_form: bool, post_copy: dict):
+def _create_completion(request: HttpRequest, quiz: Quiz, is_form: bool, post_copy: dict, csrf_token):
     completion = Completion(
-        quiz=quiz, is_form=is_form, start_time=post_copy.pop('start-time')[0]
+        quiz=quiz, is_form=is_form, token=csrf_token, start_time=post_copy.pop('start-time')[0]
     )
     user = get_user(request)
     if not user.is_anonymous:
@@ -42,10 +42,15 @@ def _create_completion(request: HttpRequest, quiz: Quiz, is_form: bool, post_cop
     return completion, post_copy, user
 
 
+def _clear_request(request: HttpRequest):
+    copy = request.POST.copy()
+    del copy['csrfmiddlewaretoken'], copy['quiz-id'], copy['completed-as'], copy['start-time']
+    return copy
+
+
 def process_answers(answers_query: dict, user, completion: Completion, quiz: Quiz):
     """Process user's answers"""
-    right_answers = 0
-    total_questions = 0
+    right_answers, total_questions = 0, 0
     answers = []
     for q, a in answers_query.items():
         db_question = Question.objects.get(question=q)
@@ -77,6 +82,34 @@ def process_answers(answers_query: dict, user, completion: Completion, quiz: Qui
                 'answers': answers,
             }
 
+    return processed
+
+
+def get_answers(request: HttpRequest):
+    """Returns answers from Completion object"""
+    copy = _clear_request(request)
+    right_answers, total_questions = 0, 0
+    answers = []
+    for q, a in copy.items():
+        db_question = Question.objects.get(question=q)
+        answer = [q, a[0], db_question.right_answer]
+
+        if a[0] == db_question.right_answer:
+            right_answers += 1
+            answer.append('Так')
+        else:
+            answer.append('Ні')
+
+        total_questions += 1
+        answers.append(answer)
+
+    score = round(right_answers / total_questions * 100, 2)
+    processed = {
+        'right_answers': right_answers,
+        'total_questions': total_questions,
+        'score': score,
+        'answers': answers,
+    }
     return processed
 
 
@@ -125,3 +158,11 @@ def process_tags(request: HttpRequest, conditions: dict):
         conditions['id__in'] = ids
 
     return conditions
+
+
+def get_completion(request: HttpRequest):
+    """Get Completion by token"""
+    token = request.POST.get('csrfmiddlewaretoken')
+    completion = Completion.objects.get(token=token)
+
+    return completion

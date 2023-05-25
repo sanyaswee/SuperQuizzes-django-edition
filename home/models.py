@@ -37,10 +37,6 @@ class Quiz(models.Model):
     tags = models.ManyToManyField(Tag, related_name='quizzes')
     questions = models.ManyToManyField(Question, related_name='quizzes')
 
-    # completed_as_form = models.IntegerField(default=0)
-    # completed_as_quiz = models.IntegerField(default=0)
-    # average_score = models.IntegerField(default=0)
-
     available = models.BooleanField(default=False)
 
     def save(self, *args, **kwargs):
@@ -59,13 +55,13 @@ class Completion(models.Model):  # Instead of 'Quiz.completed_as_...' and 'Quiz.
         settings.AUTH_USER_MODEL, on_delete=models.DO_NOTHING, related_name='completions', null=True
     )
     is_form = models.BooleanField()  # Instead of 'completion_type' filed. True = form, False = quiz
+    token = models.CharField(unique=True, max_length=64, null=True)
 
     # Time info
     start_time = models.DateTimeField()
     end_time = models.DateTimeField(auto_now=True)
 
     # Results info
-    # right_answers = models.IntegerField()
     score = models.IntegerField(default=0)
 
 
