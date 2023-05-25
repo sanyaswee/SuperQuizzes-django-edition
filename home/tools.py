@@ -1,6 +1,6 @@
 from django.contrib.auth import get_user
 from django.http import HttpRequest
-from .models import Quiz, Completion, Question, UserAnswer
+from .models import Quiz, Completion, Question, UserAnswer, Tag
 
 
 def get_qq(id_):
@@ -91,3 +91,37 @@ def get_avg_time(completions):
     average_time /= i
 
     return round(average_time, 2)
+
+
+def search(request: HttpRequest, conditions: dict):
+    """Get search conditions for SQL"""
+    search_request = request.GET.get('search')
+    if search:
+        conditions['searchable__contains'] = search_request.lower()
+
+    return conditions
+
+
+def filter_age(request: HttpRequest, conditions: dict):
+    """Build a conditions for particular age"""
+    for_age = request.GET.get('for-age')
+    if for_age:
+        conditions['min_age__lte'] = for_age
+        conditions['max_age__gte'] = for_age
+
+    return conditions
+
+
+def process_tags(request: HttpRequest, conditions: dict):
+    """Build a conditions with included tags"""
+    ids = set()
+    for tag in Tag.objects.all():
+        status = request.GET.get(tag.tag)
+        if status == 'on':
+            for q in tag.quizzes.all():
+                ids.add(q.id)
+
+    if ids:
+        conditions['id__in'] = ids
+
+    return conditions

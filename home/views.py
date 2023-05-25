@@ -57,27 +57,12 @@ def result(request: HttpRequest):
 def filter_view(request: HttpRequest):
     if request.method == 'GET':
         conditions = {'available': True}
-
-        search = request.GET.get('search')
-        if search:
-            conditions['searchable__contains'] = search.lower()
-
-        for_age = request.GET.get('for-age')
-        if for_age:
-            conditions['min_age__lte'] = for_age
-            conditions['max_age__gte'] = for_age
-
-        ids = set()
-        for tag in Tag.objects.all():
-            status = request.GET.get(tag.tag)
-            if status == 'on':
-                for q in tag.quizzes.all():
-                    ids.add(q.id)
-
-        if ids:
-            conditions['id__in'] = ids
+        conditions = tools.search(request, conditions)
+        conditions = tools.filter_age(request, conditions)
+        conditions = tools.process_tags(request, conditions)
 
         quizzes = Quiz.objects.filter(**conditions)
+
         if len(quizzes) == 0:
             return render(request, 'home/nothing_found.html')
 
