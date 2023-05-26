@@ -1,12 +1,10 @@
-from django.contrib.auth import get_user
 from django.db.models import Avg
 from django.db.utils import IntegrityError
 from django.http import HttpRequest  # , HttpResponse
 from django.shortcuts import render, redirect
 
 from . import tools
-
-from .models import Quiz, Question, Completion, UserAnswer, Tag
+from .models import Quiz, Completion
 
 
 # Create your views here.
@@ -18,6 +16,10 @@ def index(request):
     return render(request, 'home/quiz_list.html', {'quizzes': quizzes, 'color_classes': color_classes})
 
 
+def coming_soon(request: HttpRequest):
+    return render(request, 'home/soon.html')
+
+
 def form(request: HttpRequest):
     form_id = request.GET.get('id', '')
     if form_id:
@@ -26,6 +28,10 @@ def form(request: HttpRequest):
         return render(request, 'home/form.html', {'quiz_name': quiz.name, 'quiz_id': quiz.id, 'questions': questions})
     else:
         return redirect('index')
+
+
+def quiz(request: HttpRequest):
+    return redirect('soon')
 
 
 def result(request: HttpRequest):

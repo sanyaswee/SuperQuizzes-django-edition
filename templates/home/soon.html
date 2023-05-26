@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>Скоро...</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Display:ital@1&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'home/css/base.css' %}">
+    <link rel="stylesheet" href="{% static 'home/css/soon.css' %}">
+</head>
+<body>
+    <p>Ця частина SuperQuizzes ще в розробці...</p>
+    <div class="return-to-main">
+        <a href="{% url 'index' %}"><button class="submit">На головну</button></a>
+    </div>
+</body>
+</html>
