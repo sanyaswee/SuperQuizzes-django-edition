@@ -126,3 +126,8 @@ STATICFILES_DIRS = [
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+# Required-by-project settings
+RED_SCORE_COLOR_BORDER = 50  # if score <= : red-box
+YELLOW_SCORE_COLOR_BORDER = 75  # if score <= : yellow-box

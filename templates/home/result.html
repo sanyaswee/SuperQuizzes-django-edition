@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 {% load static %}
+{% load color %}
 <html lang="uk">
 <head>
     <meta charset="UTF-8">
@@ -10,21 +11,8 @@
 <body>
     <h1>Вітаємо! Ви пройшли вікторину</h1>
     <p>Відповіді на запитання: <span class="color-box green-box">{{ right_answers }}</span>/<span class="color-box blue-box">{{ total_questions }}</span></p>
-    {% if score <= 40 %}
-    <p>У відсотках: <span class="color-box red-box">{{ score }}%</span></p>
-    {% elif score > 40 and score <= 65 %}
-        <p>У відсотках: <span class="color-box yellow-box">{{ score }}%</span></p>
-    {% elif score > 65 %}
-        <p>У відсотках: <span class="color-box green-box">{{ score }}%</span></p>
-    {% endif %}
-    <p>Середній результат:
-        {% if average_score <= 40 %}
-            <span class="color-box red-box">{{ average_score }}%</span>
-        {% elif average_score > 40 and average_score <= 65 %}
-            <span class="color-box yellow-box">{{ average_score }}%</span>
-        {% elif average_score > 65 %}
-            <span class="color-box green-box">{{ average_score }}%</span>
-        {% endif %}
+    <p>У відсотках: <span class="color-box {% color_class score %}">{{ score }}%</span></p>
+    <p>Середній результат: <span class="color-box {% color_class average_score %}">{{ average_score }}%</span>
     </p>
     <p>Витрачено часу: {{ time_taken }} секунд(а/и)</p>
     <p>Середній час: {{ average_time }} секунд(а/и)</p>
@@ -51,13 +39,7 @@
                     {% else %}
                         <td><span class="color-box red-box">{{ answer.3 }}</span></td>
                     {% endif %}
-                    {% if answer.4 <= 40 %}
-                        <td><span class="color-box red-box">{{ answer.4 }}%</span></td>
-                    {% elif answer.4 <= 65 %}
-                        <td><span class="color-box red-box">{{ answer.4 }}%</span></td>
-                    {% else %}
-                        <td><span class="color-box red-box">{{ answer.4 }}%</span></td>
-                    {% endif %}
+                    <td><span class="color-box {% color_class answer.4 %}">{{ answer.4 }}%</span></td>
                 </tr>
             {% endfor %}
         </table>
