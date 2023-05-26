@@ -71,6 +71,8 @@ def process_answers(answers_query: dict, user, completion: Completion, quiz: Qui
         answers.append(answer)
         user_answer.save()
 
+        answers.append(get_avg_right_answers(db_question))
+
     score = round(right_answers / total_questions * 100, 2)
     completion.score = score
     completion.save()
@@ -83,6 +85,11 @@ def process_answers(answers_query: dict, user, completion: Completion, quiz: Qui
             }
 
     return processed
+
+
+def get_avg_right_answers(question: Question):
+    """Returns % of right answers for given question"""
+    return len(question.user_answers.all()) / len(question.user_answers.filter(right=True)) * 100
 
 
 def get_answers(request: HttpRequest):
@@ -100,6 +107,7 @@ def get_answers(request: HttpRequest):
         else:
             answer.append('Ні')
 
+        answers.append(get_avg_right_answers(db_question))
         total_questions += 1
         answers.append(answer)
 

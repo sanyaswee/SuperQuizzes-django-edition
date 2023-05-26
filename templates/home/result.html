@@ -39,6 +39,7 @@
                 <th>Ваша відповідь</th>
                 <th>Правильна відповідь</th>
                 <th>Зараховано?</th>
+                <th>Правильних відповідей</th>
             </tr>
             {% for answer in answers %}
                 <tr>
@@ -49,6 +50,13 @@
                         <td><span class="color-box green-box">{{ answer.3 }}</span></td>
                     {% else %}
                         <td><span class="color-box red-box">{{ answer.3 }}</span></td>
+                    {% endif %}
+                    {% if answer.4 <= 40 %}
+                        <td><span class="color-box red-box">{{ answer.4 }}%</span></td>
+                    {% elif answer.4 <= 65 %}
+                        <td><span class="color-box red-box">{{ answer.4 }}%</span></td>
+                    {% else %}
+                        <td><span class="color-box red-box">{{ answer.4 }}%</span></td>
                     {% endif %}
                 </tr>
             {% endfor %}
