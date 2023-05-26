@@ -71,7 +71,7 @@ def process_answers(answers_query: dict, user, completion: Completion, quiz: Qui
         answers.append(answer)
         user_answer.save()
 
-        answers.append(get_avg_right_answers(db_question))
+        answer.append(get_avg_right_answers(db_question))
 
     score = round(right_answers / total_questions * 100, 2)
     completion.score = score
@@ -89,25 +89,26 @@ def process_answers(answers_query: dict, user, completion: Completion, quiz: Qui
 
 def get_avg_right_answers(question: Question):
     """Returns % of right answers for given question"""
-    return len(question.user_answers.all()) / len(question.user_answers.filter(right=True)) * 100
+    return round(len(question.user_answers.filter(right=True)) / len(question.user_answers.all()) * 100, 2)
 
 
 def get_answers(request: HttpRequest):
     """Returns answers from Completion object"""
     copy = _clear_request(request)
+    print(copy)
     right_answers, total_questions = 0, 0
     answers = []
     for q, a in copy.items():
         db_question = Question.objects.get(question=q)
-        answer = [q, a[0], db_question.right_answer]
+        answer = [q, a, db_question.right_answer]
 
-        if a[0] == db_question.right_answer:
+        if a == db_question.right_answer:
             right_answers += 1
             answer.append('Так')
         else:
             answer.append('Ні')
 
-        answers.append(get_avg_right_answers(db_question))
+        answer.append(get_avg_right_answers(db_question))
         total_questions += 1
         answers.append(answer)
 
