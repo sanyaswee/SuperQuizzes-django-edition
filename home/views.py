@@ -4,7 +4,7 @@ from django.http import HttpRequest  # , HttpResponse
 from django.shortcuts import render, redirect
 
 from . import tools
-from .models import Quiz, Completion
+from .models import Quiz, Completion, Tag
 
 
 # Create your views here.
@@ -13,8 +13,9 @@ def index(request):
     quizzes = sorted(quizzes, key=tools.sort_alphabetically_key)
 
     color_classes = ['red-box', 'yellow-box', 'blue-box', 'green-box']
+    tags = Tag.objects.filter(popular=True)
 
-    return render(request, 'home/quiz_list.html', {'quizzes': quizzes, 'color_classes': color_classes})
+    return render(request, 'home/quiz_list.html', {'quizzes': quizzes, 'color_classes': color_classes, 'tags': tags})
 
 
 def coming_soon(request: HttpRequest):
@@ -80,4 +81,7 @@ def filter_view(request: HttpRequest):
             return render(request, 'home/nothing_found.html')
 
         color_classes = ['red-box', 'yellow-box', 'blue-box', 'green-box']
-        return render(request, 'home/quiz_list.html', {'quizzes': quizzes, 'color_classes': color_classes})
+        tags = Tag.objects.filter(popular=True)
+        return render(
+            request, 'home/quiz_list.html', {'quizzes': quizzes, 'color_classes': color_classes, 'tags': tags}
+        )

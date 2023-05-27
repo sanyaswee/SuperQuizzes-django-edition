@@ -41,12 +41,9 @@
 
                     <div class="tags">
                         <p>Дозволити теґи</p>
-                        <div class="tag-filter-field"><input type="checkbox" name="geography"><label>Географія</label></div>
-                        <div class="tag-filter-field"><input type="checkbox" name="history"><label>Історія</label></div>
-                        <div class="tag-filter-field"><input type="checkbox" name="programming"><label>Програмування</label></div>
-                        <div class="tag-filter-field"><input type="checkbox" name="songs"><label>Пісні</label></div>
-                        <div class="tag-filter-field"><input type="checkbox" name="ukraine"><label>Україна</label></div>
-                        <div class="tag-filter-field"><input type="checkbox" name="films"><label>Фільми</label></div>
+                        {% for tag in tags %}
+                            <div class="tag-filter-field"><input type="checkbox" name="{{ tag.tag }}"><label>{{ tag.localized_uk_ua }}</label></div>
+                        {% endfor %}
                     </div>
 
                     <input type="submit" value="Фільтрувати" class="submit">
