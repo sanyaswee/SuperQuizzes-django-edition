@@ -30,7 +30,7 @@ def form(request: HttpRequest):
         return redirect('index')
 
 
-def quiz(request: HttpRequest):
+def quiz_view(request: HttpRequest):
     return redirect('soon')
 
 

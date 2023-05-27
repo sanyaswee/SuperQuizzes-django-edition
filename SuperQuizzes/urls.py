@@ -22,7 +22,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', index, name='index'),
     path('form', form, name='form'),
-    path('quiz', quiz, name='quiz'),
+    path('quiz', quiz_view, name='quiz'),
     path('result', result, name='result'),
     path('filter', filter_view, name='filter'),
     path('coming-soon', coming_soon, name='soon'),
