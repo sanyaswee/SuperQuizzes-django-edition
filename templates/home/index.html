@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 {% load static %}
+{% load sort %}
 <html lang="uk">
     <head>
         <title>{% block title %}Список вікторин - SuperQuizzes{% endblock %}</title>
@@ -41,7 +42,7 @@
 
                     <div class="tags">
                         <p>Дозволити теґи</p>
-                        {% for tag in tags %}
+                        {% for tag in tags|sort %}
                             <div class="tag-filter-field"><input type="checkbox" name="{{ tag.tag }}"><label>{{ tag.localized_uk_ua }}</label></div>
                         {% endfor %}
                     </div>
