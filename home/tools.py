@@ -1,12 +1,13 @@
 from django.contrib.auth import get_user
 from django.conf import settings
 from django.http import HttpRequest
+from django.shortcuts import get_object_or_404
 from .models import Quiz, Completion, Question, UserAnswer, Tag
 
 
 def get_qq(id_):
     """Get quizzes and questions"""
-    quiz = Quiz.objects.get(id=id_)
+    quiz = get_object_or_404(Quiz, id=id_)
     questions = quiz.questions.all()
 
     for q in questions:

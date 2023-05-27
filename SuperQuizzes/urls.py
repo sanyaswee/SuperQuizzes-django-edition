@@ -21,7 +21,7 @@ from home.views import *
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', index, name='index'),
-    path('form', form, name='form'),
+    path('form/<id_>', form, name='form'),
     path('quiz', quiz_view, name='quiz'),
     path('result', result, name='result'),
     path('filter', filter_view, name='filter'),

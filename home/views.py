@@ -22,10 +22,10 @@ def coming_soon(request: HttpRequest):
     return render(request, 'home/soon.html')
 
 
-def form(request: HttpRequest):
-    form_id = request.GET.get('id', '')
-    if form_id:
-        quiz, questions = tools.get_qq(form_id)
+def form(request: HttpRequest, id_):
+    # form_id = request.GET.get('id', '')
+    if id_:
+        quiz, questions = tools.get_qq(id_)
 
         return render(request, 'home/form.html', {'quiz_name': quiz.name, 'quiz_id': quiz.id, 'questions': questions})
     else:
