@@ -47,6 +47,9 @@ class Quiz(models.Model):
     def __str__(self):
         return f'#{self.id}: {self.name}'
 
+    def __lt__(self, other):
+        return self.name < other.name
+
 
 class Completion(models.Model):  # Instead of 'Quiz.completed_as_...' and 'Quiz.average_score'
     # General quiz info

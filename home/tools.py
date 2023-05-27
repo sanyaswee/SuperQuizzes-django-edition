@@ -1,4 +1,5 @@
 from django.contrib.auth import get_user
+from django.conf import settings
 from django.http import HttpRequest
 from .models import Quiz, Completion, Question, UserAnswer, Tag
 
@@ -175,3 +176,8 @@ def get_completion(request: HttpRequest):
     completion = Completion.objects.get(token=token)
 
     return completion
+
+
+def sort_alphabetically_key(quiz: Quiz):
+    """Key for sorting quizzes alphabetically"""
+    return settings.ALPHABET.find(str(quiz.name)[0].lower())

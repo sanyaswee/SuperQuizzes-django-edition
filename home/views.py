@@ -10,6 +10,7 @@ from .models import Quiz, Completion
 # Create your views here.
 def index(request):
     quizzes = Quiz.objects.filter(available=True)
+    quizzes = sorted(quizzes, key=tools.sort_alphabetically_key)
 
     color_classes = ['red-box', 'yellow-box', 'blue-box', 'green-box']
 
@@ -73,6 +74,7 @@ def filter_view(request: HttpRequest):
         conditions = tools.process_tags(request, conditions)
 
         quizzes = Quiz.objects.filter(**conditions)
+        quizzes = sorted(quizzes, key=tools.sort_alphabetically_key)
 
         if len(quizzes) == 0:
             return render(request, 'home/nothing_found.html')

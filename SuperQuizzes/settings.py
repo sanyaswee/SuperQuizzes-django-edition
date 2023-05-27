@@ -131,3 +131,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # Required-by-project settings
 RED_SCORE_COLOR_BORDER = 50  # if score <= : red-box
 YELLOW_SCORE_COLOR_BORDER = 75  # if score <= : yellow-box
+
+# Sorting
+ALPHABET_UK = 'абвгґдеєжзиіїйклмнопрстуфхцчшщьюя'
+ALPHABET_EN = 'abcdefghijklmnopqrstuvwxyz'
+ALPHABET = ALPHABET_UK + ALPHABET_EN
