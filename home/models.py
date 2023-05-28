@@ -58,14 +58,14 @@ class Completion(models.Model):  # Instead of 'Quiz.completed_as_...' and 'Quiz.
         settings.AUTH_USER_MODEL, on_delete=models.DO_NOTHING, related_name='completions', null=True
     )
     is_form = models.BooleanField()  # Instead of 'completion_type' filed. True = form, False = quiz
-    token = models.CharField(unique=True, max_length=64, null=True)
+    token = models.CharField(unique=True, max_length=64)
 
     # Time info
     start_time = models.DateTimeField()
     end_time = models.DateTimeField(auto_now=True)
 
     # Results info
-    score = models.IntegerField(default=0)
+    score = models.FloatField(default=0)
 
 
 class UserAnswer(models.Model):
