@@ -26,4 +26,5 @@ urlpatterns = [
     path('result', result, name='result'),
     path('filter', filter_view, name='filter'),
     path('coming-soon', coming_soon, name='soon'),
+    path('search', advanced_search, name='advanced_search'),
 ]

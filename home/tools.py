@@ -182,3 +182,15 @@ def get_completion(request: HttpRequest):
 def sort_alphabetically_key(quiz: Quiz):
     """Key for sorting quizzes alphabetically"""
     return settings.ALPHABET.find(str(quiz.name)[0].lower())
+
+
+def convert_tags_to_table(tags):
+    rows = []
+    row = []
+    for i, t in enumerate(tags):
+        row.append(t)
+        if (i + 1) % 4 == 0:
+            rows.append(row.copy())
+            row.clear()
+
+    return rows

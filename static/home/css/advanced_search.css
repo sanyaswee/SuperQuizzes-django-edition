@@ -1,0 +1,17 @@
+.search, .for-age {
+	display: inline-block;
+	justify-content: center;
+	vertical-align: middle;
+	margin: 20px;
+}
+
+
+table {
+	text-align: left;
+	margin: auto;
+	padding: 20px;
+}
+
+td {
+	padding: 10px;
+}

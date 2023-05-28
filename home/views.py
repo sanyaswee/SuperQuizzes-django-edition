@@ -5,6 +5,7 @@ from django.shortcuts import render, redirect
 
 from . import tools
 from .models import Quiz, Completion, Tag
+from .templatetags.sort import key as tag_sort_key
 
 
 # Create your views here.
@@ -85,3 +86,10 @@ def filter_view(request: HttpRequest):
         return render(
             request, 'home/quiz_list.html', {'quizzes': quizzes, 'color_classes': color_classes, 'tags': tags}
         )
+
+
+def advanced_search(request: HttpRequest):
+    tags = sorted(Tag.objects.all(), key=tag_sort_key)
+    tags = tools.convert_tags_to_table(tags)
+
+    return render(request, 'home/advanced_search.html', {'tags': tags})

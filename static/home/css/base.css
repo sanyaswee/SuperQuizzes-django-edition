@@ -3,6 +3,11 @@ body {
 }
 
 
+label {
+	font-family: 'Comfortaa', cursive;
+}
+
+
 p {
     font-family: 'Comfortaa', cursive;
 }
