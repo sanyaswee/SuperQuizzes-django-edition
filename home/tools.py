@@ -174,7 +174,7 @@ def filter_questions_amount(request: HttpRequest, conditions: dict):
     less_than = set()
     if max_questions:
         max_questions = int(max_questions)
-        # assert min_questions <= max_questions
+        assert min_questions <= max_questions
         for q in Quiz.objects.all():
             if len(q.questions.all()) <= max_questions:
                 less_than.add(q.id)

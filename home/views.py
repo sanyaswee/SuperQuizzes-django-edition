@@ -71,10 +71,13 @@ def result(request: HttpRequest):
 def filter_view(request: HttpRequest):
     if request.method == 'GET':
         conditions = {'available': True}
-        conditions = tools.search(request, conditions)
-        conditions = tools.filter_age(request, conditions)
-        conditions = tools.filter_questions_amount(request, conditions)
-        conditions = tools.process_tags(request, conditions)
+        try:
+            conditions = tools.search(request, conditions)
+            conditions = tools.filter_age(request, conditions)
+            conditions = tools.filter_questions_amount(request, conditions)
+            conditions = tools.process_tags(request, conditions)
+        except AssertionError:
+            return render(request, 'home/filter_error.html')
 
         quizzes = Quiz.objects.filter(**conditions)
         quizzes = sorted(quizzes, key=tools.sort_alphabetically_key)
