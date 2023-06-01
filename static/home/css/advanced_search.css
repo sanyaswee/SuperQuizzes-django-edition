@@ -1,8 +1,13 @@
-.search, .for-age {
+.upper-filter {
 	display: inline-block;
 	justify-content: center;
 	vertical-align: middle;
 	margin: 20px;
+}
+
+.number-input {
+	width: 30px;
+	margin: 5px;
 }
 
 

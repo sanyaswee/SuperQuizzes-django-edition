@@ -19,14 +19,20 @@
         {# csrf_token #}
         <h1>Фільтри</h1>
 
-        <div class="search">
+        <div class="upper-filter">
             <p>Пошук за назвою</p>
             <input type="text" name="search" placeholder="Введіть назву">
         </div>
 
-        {# question amount filter here #}
+        <div class="upper-filter">
+            <p>Кількість запитань</p>
+            <label>Від</label>
+            <input type="number" name="min-questions" min="0" class="number-input">
+            <label>до</label>
+            <input type="number" name="max-questions" min="1" class="number-input">
+        </div>
 
-        <div class="for-age">
+        <div class="upper-filter">
             <label>Підходить для</label>
             <input type="number" name="for-age" class="number-input" max="99" min="1">
             <label>років</label>
