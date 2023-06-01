@@ -73,6 +73,7 @@ def filter_view(request: HttpRequest):
         conditions = {'available': True}
         conditions = tools.search(request, conditions)
         conditions = tools.filter_age(request, conditions)
+        conditions = tools.filter_questions_amount(request, conditions)
         conditions = tools.process_tags(request, conditions)
 
         quizzes = Quiz.objects.filter(**conditions)

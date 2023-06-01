@@ -156,6 +156,38 @@ def filter_age(request: HttpRequest, conditions: dict):
     return conditions
 
 
+def filter_questions_amount(request: HttpRequest, conditions: dict):
+    """Build a conditions for questions amount"""
+    min_questions = request.GET.get('min-questions')
+    max_questions = request.GET.get('max-questions')
+    ids = set()
+
+    greater_than = set()
+    if min_questions:
+        min_questions = int(min_questions)
+        for q in Quiz.objects.all():
+            if len(q.questions.all()) >= min_questions:
+                greater_than.add(q.id)
+
+    ids = ids.union(greater_than)
+
+    less_than = set()
+    if max_questions:
+        max_questions = int(max_questions)
+        # assert min_questions <= max_questions
+        for q in Quiz.objects.all():
+            if len(q.questions.all()) <= max_questions:
+                less_than.add(q.id)
+
+    if less_than:
+        ids.intersection_update(less_than)
+
+    if ids:
+        conditions['id__in'] = ids
+
+    return conditions
+
+
 def process_tags(request: HttpRequest, conditions: dict):
     """Build a conditions with included tags"""
     ids = set()
@@ -166,6 +198,11 @@ def process_tags(request: HttpRequest, conditions: dict):
                 ids.add(q.id)
 
     if ids:
+        existing = conditions.get('id__in')
+        if existing:  # ids that were filtered before should not be overriden
+            ids.intersection_update(existing)
+            print(ids)
+
         conditions['id__in'] = ids
 
     return conditions
