@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="{% static 'home/css/advanced_search.css' %}">
 </head>
 <body>
-    <form>
+    <form action="{% url 'filter' %}">
         {# csrf_token #}
         <h1>Фільтри</h1>
 
