@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     'home.apps.HomeConfig',
 ]
 
-CSRF_TRUSTED_ORIGINS = ['https://web-production-7c09.up.railway.app/']
+CSRF_TRUSTED_ORIGINS = ['https://web-production-7c09.up.railway.app']
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
