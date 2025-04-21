@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 {% load static %}
 {% load sort %}
+{% load i18n %}
 <html lang="uk">
     <head>
-        <title>{% block title %}Список вікторин - SuperQuizzes{% endblock %}</title>
+        <title>{% block title %}{% trans 'Quiz list - SuperQuizzes' %}{% endblock %}</title>
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
@@ -18,44 +19,44 @@
     </head>
     <body>
         <div class="hat">
-            <h1><i>Ми пропонуємо вам пройти одну з наступних вікторин</i></h1>
+            <h1><i>{% trans "Take a look at those quizzes!" %}</i></h1>
         </div>
 
         <div class="content-grid">
             <div class="side-bar">
                 <form action="{% url 'filter' %}">
                     {# csrf_token #}
-                    <h1>Фільтри</h1>
+                    <h1>{% trans "Filters" %}</h1>
 
                     <div class="search">
-                        <p>Шукати за назвою</p>
-                        <input type="text" name="search" placeholder="Введіть назву">
+                        <p>{% trans "Search by name" %}</p>
+                        <input type="text" name="search" placeholder="{% trans 'Input quiz name' %}">
                     </div>
 
                     {# question amount filter here #}
 
                     <div class="for-age">
-                        <label>Підходить для</label>
+                        <label>{% trans "Fine for" %}</label>
                         <input type="number" name="for-age" class="number-input" max="99" min="1">
-                        <label>років</label>
+                        <label>{% trans "years of age" %}</label>
                     </div>
 
                     <div class="tags">
-                        <p>Дозволити теґи</p>
+                        <p>{% trans "Allow tags" %}</p>
                         {% for tag in tags|sort %}
                             <div class="tag-filter-field"><input type="checkbox" name="{{ tag.tag }}"><label>{{ tag.localized_uk_ua }}</label></div>
                         {% endfor %}
                     </div>
 
-                    <input type="submit" value="Фільтрувати" class="submit">
+                    <input type="submit" value="{% trans 'Apply filter' %}" class="submit">
                 </form>
-                <a href="{% url 'advanced_search' %}"><button class="submit">Розширений пошук</button></a>
+                <a href="{% url 'advanced_search' %}"><button class="submit">{% trans "Advanced search" %}</button></a>
             </div>
 
             <div class="questions-block">
                 {% block quiz_list %}
                 {% endblock %}
-                <a href="/"><button class="submit">Скинути фільтри</button></a>
+                <a href="/"><button class="submit">{% trans "Drop filters" %}</button></a>
             </div>
         </div>
     </body>

@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 {% load static %}
+{% load i18n %}
 <html lang="uk">
 <head>
     <meta charset="UTF-8">
-    <title>Ой ой...</title>
+    <title>{% trans 'Oops...' %}</title>
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;700&display=swap" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -13,9 +14,9 @@
     <link rel="stylesheet" href="{% static 'home/css/soon.css' %}">
 </head>
 <body>
-    <p>Упс, здається фільтри задано недійсні фільтри... Перевірте їх ще раз!</p>
+    <p>{% trans 'Oops, seems like your filters are invalid... Check them one more time!' %}</p>
     <div class="return-to-main">
-        <a href="{% url 'advanced_search' %}"><button class="submit">Назад до фільтрів</button></a>
+        <a href="{% url 'advanced_search' %}"><button class="submit">{% trans 'Back to filters' %}</button></a>
     </div>
 </body>
 </html>

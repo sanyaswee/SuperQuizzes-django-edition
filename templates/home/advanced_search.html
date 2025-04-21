@@ -2,9 +2,10 @@
 <html lang="uk">
 {% load static %}
 {% load sort %}
+{% load i18n %}
 <head>
     <meta charset="UTF-8">
-    <title>Розширений пошук</title>
+    <title>{% trans 'Advanced search' %}</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;700&display=swap" rel="stylesheet">
@@ -17,29 +18,29 @@
 <body>
     <form action="{% url 'filter' %}">
         {# csrf_token #}
-        <h1>Фільтри</h1>
+        <h1>{% trans 'Filters' %}</h1>
 
         <div class="upper-filter">
-            <p>Пошук за назвою</p>
-            <input type="text" name="search" placeholder="Введіть назву">
+            <p>{% trans "Search by name" %}</p>
+            <input type="text" name="search" placeholder="{% trans 'Input quiz name' %}">
         </div>
 
         <div class="upper-filter">
-            <p>Кількість запитань</p>
-            <label>Від</label>
+            <p>{% trans 'Question amount' %}</p>
+            <label>{% trans 'From' %}</label>
             <input type="number" name="min-questions" min="0" class="number-input">
-            <label>до</label>
+            <label>{% trans 'to' %}</label>
             <input type="number" name="max-questions" min="1" class="number-input">
         </div>
 
         <div class="upper-filter">
-            <label>Підходить для</label>
+            <label>{% trans "Fine for" %}</label>
             <input type="number" name="for-age" class="number-input" max="99" min="1">
-            <label>років</label>
+            <label>{% trans "years of age" %}</label>
         </div>
 
         <div class="tags">
-            <h2>Теґи</h2>
+            <h2>{% trans 'Tags' %}</h2>
 
             <table>
                 {% for row in tags %}
@@ -52,8 +53,8 @@
             </table>
         </div>
 
-        <input type="submit" value="Фільтрувати" class="submit">
+        <input type="submit" value="{% trans 'Apply filters' %}" class="submit">
     </form>
-    <a href="{% url 'index' %}"><button class="submit">На головну</button></a>
+    <a href="{% url 'index' %}"><button class="submit">{% trans 'Home' %}</button></a>
 </body>
 </html>

@@ -16,9 +16,15 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from django.conf.urls.i18n import i18n_patterns
 from home.views import *
 
 urlpatterns = [
+
+]
+
+
+urlpatterns += i18n_patterns(
     path('admin/', admin.site.urls),
     path('', index, name='index'),
     path('form/<id_>', form, name='form'),
@@ -27,4 +33,5 @@ urlpatterns = [
     path('filter', filter_view, name='filter'),
     path('coming-soon', coming_soon, name='soon'),
     path('search', advanced_search, name='advanced_search'),
-]
+    prefix_default_language=True
+)

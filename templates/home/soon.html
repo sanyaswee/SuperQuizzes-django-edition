@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 {% load static %}
+{% load i18n %}
 <html lang="uk">
 <head>
     <meta charset="UTF-8">
-    <title>Скоро...</title>
+    <title>{% trans 'Soon...' %}</title>
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;700&display=swap" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -13,9 +14,9 @@
     <link rel="stylesheet" href="{% static 'home/css/soon.css' %}">
 </head>
 <body>
-    <p>Ця частина SuperQuizzes ще в розробці...</p>
+    <p>{% trans 'This part of SupperQuizzes is being developed...' %}</p>
     <div class="return-to-main">
-        <a href="{% url 'index' %}"><button class="submit">На головну</button></a>
+        <a href="{% url 'index' %}"><button class="submit">{% trans 'Home' %}</button></a>
     </div>
 </body>
 </html>
