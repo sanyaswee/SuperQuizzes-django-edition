@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-04-21 16:57+0300\n"
+"POT-Creation-Date: 2025-04-28 14:40+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -67,7 +67,7 @@ msgstr "Теґи"
 msgid "Apply filters"
 msgstr "Фільтрувати"
 
-#: .\templates\home\advanced_search.html:58 .\templates\home\soon.html:18
+#: .\templates\home\advanced_search.html:58 .\templates\home\soon.html:19
 msgid "Home"
 msgstr "На головну"
 
@@ -80,10 +80,6 @@ msgid "Oops, seems like your filters are invalid... Check them one more time!"
 msgstr "Упс, здається фільтри задано недійсні фільтри... Перевірте їх ще раз!"
 
 #: .\templates\home\filter_error.html:19
-#, fuzzy
-msgid "Drop filters"
-msgstr "Скинути фільтри"
-
 msgid "Back to filters"
 msgstr "Назад до фільтрів"
 
@@ -104,14 +100,73 @@ msgid "Apply filter"
 msgstr "Фільтрувати"
 
 #: .\templates\home\index.html:59
+#, fuzzy
 msgid "Drop filters"
 msgstr "Скинути фільтри"
 
-#: .\templates\home\soon.html:6
+#: .\templates\home\result.html:8
+msgid "Result"
+msgstr "Результат"
+
+#: .\templates\home\result.html:13
+msgid "Congrats! You finished the quiz!"
+msgstr "Вітаємо! Ви пройшли вікторину!"
+
+#: .\templates\home\result.html:14
+msgid "Your answers"
+msgstr "Ваші відповіді"
+
+#: .\templates\home\result.html:15
+msgid "Your score"
+msgstr "У відсотках"
+
+#: .\templates\home\result.html:16
+msgid "Average score"
+msgstr "Середній результат"
+
+#: .\templates\home\result.html:18
+msgid "Time taken"
+msgstr "Витрачено часу"
+
+#: .\templates\home\result.html:19
+msgid "Avergae time"
+msgstr "Середній час"
+
+#: .\templates\home\result.html:24
+msgid "Check your answers"
+msgstr "Перевірте свої відповіді"
+
+#: .\templates\home\result.html:27
+#, fuzzy
+# msgid "Question amount"
+# msgstr "Кількість запитань"
+
+msgid "Question"
+msgstr "Запитання"
+
+#: .\templates\home\result.html:28
+msgid "Your answer"
+msgstr "Ваша відповідь"
+
+#: .\templates\home\result.html:29
+msgid "Correct answer"
+msgstr "Правильна відповідь"
+
+#: .\templates\home\result.html:30
+msgid "Passed?"
+msgstr "Зараховано?"
+
+#: .\templates\home\result.html:31
+msgid "Correct answers"
+msgstr "Правильних відповідей"
+
+# msgid "Drop filters"
+# msgstr "Скинути фільтри"
+#: .\templates\home\soon.html:7
 msgid "Soon..."
 msgstr "Скоро..."
 
-#: .\templates\home\soon.html:16
+#: .\templates\home\soon.html:17
 msgid "This part of SupperQuizzes is being developed..."
 msgstr "Ця частина SuperQuizzes знаходиться в розробці..."
 

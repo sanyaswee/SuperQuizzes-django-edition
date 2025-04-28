@@ -1,33 +1,34 @@
 <!DOCTYPE html>
 {% load static %}
 {% load color %}
-<html lang="uk">
+{% load i18n %}
+<html>
 <head>
     <meta charset="UTF-8">
-    <title>Результат</title>
+    <title>{% trans 'Result' %}</title>
     <link rel="stylesheet" href="{% static 'home/css/base.css' %}">
     <link rel="stylesheet" href="{% static 'home/css/result.css' %}">
 </head>
 <body>
-    <h1>Вітаємо! Ви пройшли вікторину</h1>
-    <p>Відповіді на запитання: <span class="color-box green-box">{{ right_answers }}</span>/<span class="color-box blue-box">{{ total_questions }}</span></p>
-    <p>У відсотках: <span class="color-box {% color_class score %}">{{ score }}%</span></p>
-    <p>Середній результат: <span class="color-box {% color_class average_score %}">{{ average_score }}%</span>
+    <h1>{% trans 'Congrats! You finished the quiz!' %}</h1>
+    <p>{% trans 'Your answers' %}: <span class="color-box green-box">{{ right_answers }}</span>/<span class="color-box blue-box">{{ total_questions }}</span></p>
+    <p>{% trans 'Your score' %}: <span class="color-box {% color_class score %}">{{ score }}%</span></p>
+    <p>{% trans 'Average score' %}: <span class="color-box {% color_class average_score %}">{{ average_score }}%</span>
     </p>
-    <p>Витрачено часу: {{ time_taken }} секунд(а/и)</p>
-    <p>Середній час: {{ average_time }} секунд(а/и)</p>
+    <p>{% trans 'Time taken' %}: {{ time_taken }} секунд(а/и)</p>
+    <p>{% trans 'Avergae time' %}: {{ average_time }} секунд(а/и)</p>
     <div class="return-to-main">
         <a href="{% url 'index' %}"><button class="submit">На головну</button></a>
     </div>
     <div class="answers-block">
-        <h2>Перевірте свої відповіді</h2>
+        <h2>{% trans 'Check your answers' %}</h2>
         <table>
             <tr class="table-info">
-                <th>Запитання</th>
-                <th>Ваша відповідь</th>
-                <th>Правильна відповідь</th>
-                <th>Зараховано?</th>
-                <th>Правильних відповідей</th>
+                <th>{% trans 'Question' %}</th>
+                <th>{% trans 'Your answer' %}</th>
+                <th>{% trans 'Correct answer' %}</th>
+                <th>{% trans 'Passed?' %}</th>
+                <th>{% trans 'Correct answers' %}</th>
             </tr>
             {% for answer in answers %}
                 <tr>
