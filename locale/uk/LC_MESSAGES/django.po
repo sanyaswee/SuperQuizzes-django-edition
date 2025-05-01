@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-04-28 14:40+0300\n"
+"POT-Creation-Date: 2025-05-01 16:13+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -83,6 +83,10 @@ msgstr "Упс, здається фільтри задано недійсні ф
 msgid "Back to filters"
 msgstr "Назад до фільтрів"
 
+#: .\templates\home\form.html:32 .\templates\home\result.html:8
+msgid "Result"
+msgstr "Результат"
+
 #: .\templates\home\index.html:7
 msgid "Quiz list - SuperQuizzes"
 msgstr "Список вікторин - SuperQuizzes"
@@ -104,9 +108,31 @@ msgstr "Фільтрувати"
 msgid "Drop filters"
 msgstr "Скинути фільтри"
 
-#: .\templates\home\result.html:8
-msgid "Result"
-msgstr "Результат"
+# msgid "Question amount"
+# msgstr "Кількість запитань"
+#: .\templates\home\quiz_list.html:11
+msgid "questions"
+msgstr "запитань(я)"
+
+#: .\templates\home\quiz_list.html:12
+msgid "Attempt as a form"
+msgstr "Пройти як форму"
+
+#: .\templates\home\quiz_list.html:13
+msgid "Attempt as a quiz"
+msgstr "Пройти як квіз"
+
+#: .\templates\home\quiz_list.html:23
+msgid "Global attempts"
+msgstr "Всього проходжень"
+
+#: .\templates\home\quiz_list.html:25
+msgid "Form"
+msgstr "Форма"
+
+#: .\templates\home\quiz_list.html:26
+msgid "Quiz"
+msgstr "Квіз"
 
 #: .\templates\home\result.html:13
 msgid "Congrats! You finished the quiz!"
@@ -136,11 +162,10 @@ msgstr "Середній час"
 msgid "Check your answers"
 msgstr "Перевірте свої відповіді"
 
-#: .\templates\home\result.html:27
-#, fuzzy
 # msgid "Question amount"
 # msgstr "Кількість запитань"
-
+#: .\templates\home\result.html:27
+#, fuzzy
 msgid "Question"
 msgstr "Запитання"
 

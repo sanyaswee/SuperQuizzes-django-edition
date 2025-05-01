@@ -1,5 +1,6 @@
 {% extends "home/index.html" %}
 {% load is_form %}
+{% load i18n %}
 {% block quiz_list %}
     {% for quiz in quizzes %}
         <div class="quiz-label">
@@ -7,9 +8,9 @@
             <p>
                 Від <b class="color-box green-box">{{ quiz.min_age }}</b> років до <b class="color-box red-box">{{ quiz.max_age }}</b> років
             </p>
-            <p><b class="color-box blue-box">{{ quiz.questions.all|length }}</b> запитань(ня)</p>
-            <a href="{% url 'form' quiz.id %}"><button class="complete complete-as-form">Проти як форму</button></a>
-            <a href="{% url 'quiz' %}?id={{ quiz.id }}"><button class="complete complete-as-quiz">Проти як квіз</button></a>
+            <p><b class="color-box blue-box">{{ quiz.questions.all|length }}</b> {% trans 'questions' %}</p>
+            <a href="{% url 'form' quiz.id %}"><button class="complete complete-as-form">{% trans 'Attempt as a form' %}</button></a>
+            <a href="{% url 'quiz' %}?id={{ quiz.id }}"><button class="complete complete-as-quiz">{% trans 'Attempt as a quiz' %}</button></a>
             {# &#127991 - tag emoji #}
             <div class="tag-space">
                 <ul>
@@ -19,10 +20,10 @@
                 </ul>
             </div>
             <div class="additional-info">
-                <p>Проходження:</p>
+                <p>{% trans 'Global attempts' %}:</p>
                 <ul>
-                    <li class="completed-times">Форма: {{ quiz.completions|is_form|length }}</li>
-                    <li class="completed-times">Квіз: {{ quiz.completions|is_quiz|length }}</li>
+                    <li class="completed-times">{% trans 'Form' %}: {{ quiz.completions|is_form|length }}</li>
+                    <li class="completed-times">{% trans 'Quiz' %}: {{ quiz.completions|is_quiz|length }}</li>
                 </ul>
             </div>
         </div>
