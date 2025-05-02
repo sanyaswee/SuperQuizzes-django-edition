@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-05-01 16:13+0300\n"
+"POT-Creation-Date: 2025-05-02 10:57+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -67,7 +67,8 @@ msgstr "Теґи"
 msgid "Apply filters"
 msgstr "Фільтрувати"
 
-#: .\templates\home\advanced_search.html:58 .\templates\home\soon.html:19
+#: .\templates\home\advanced_search.html:58 .\templates\home\result.html:21
+#: .\templates\home\soon.html:19
 msgid "Home"
 msgstr "На головну"
 
@@ -154,6 +155,10 @@ msgstr "Середній результат"
 msgid "Time taken"
 msgstr "Витрачено часу"
 
+#: .\templates\home\result.html:18 .\templates\home\result.html:19
+msgid "seconds"
+msgstr "секунда(и)"
+
 #: .\templates\home\result.html:19
 msgid "Avergae time"
 msgstr "Середній час"
@@ -184,6 +189,16 @@ msgstr "Зараховано?"
 #: .\templates\home\result.html:31
 msgid "Correct answers"
 msgstr "Правильних відповідей"
+
+#: .\templates\home\result.html:39
+#: .\venv\Lib\site-packages\django\forms\widgets.py:795
+msgid "Yes"
+msgstr "Так"
+
+#: .\templates\home\result.html:41
+#: .\venv\Lib\site-packages\django\forms\widgets.py:796
+msgid "No"
+msgstr "Ні"
 
 # msgid "Drop filters"
 # msgstr "Скинути фільтри"
@@ -829,14 +844,6 @@ msgstr ""
 
 #: .\venv\Lib\site-packages\django\forms\widgets.py:794
 msgid "Unknown"
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\forms\widgets.py:795
-msgid "Yes"
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\forms\widgets.py:796
-msgid "No"
 msgstr ""
 
 #. Translators: Please do not add spaces around commas.

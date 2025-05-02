@@ -15,10 +15,10 @@
     <p>{% trans 'Your score' %}: <span class="color-box {% color_class score %}">{{ score }}%</span></p>
     <p>{% trans 'Average score' %}: <span class="color-box {% color_class average_score %}">{{ average_score }}%</span>
     </p>
-    <p>{% trans 'Time taken' %}: {{ time_taken }} секунд(а/и)</p>
-    <p>{% trans 'Avergae time' %}: {{ average_time }} секунд(а/и)</p>
+    <p>{% trans 'Time taken' %}: {{ time_taken }} {% trans 'seconds' %}</p>
+    <p>{% trans 'Avergae time' %}: {{ average_time }} {% trans 'seconds' %}</p>
     <div class="return-to-main">
-        <a href="{% url 'index' %}"><button class="submit">На головну</button></a>
+        <a href="{% url 'index' %}"><button class="submit">{% trans 'Home' %}</button></a>
     </div>
     <div class="answers-block">
         <h2>{% trans 'Check your answers' %}</h2>
@@ -36,9 +36,9 @@
                     <td>{{ answer.1 }}</td>
                     <td>{{ answer.2 }}</td>
                     {% if answer.3 == 'Так' %}
-                        <td><span class="color-box green-box">{{ answer.3 }}</span></td>
+                        <td><span class="color-box green-box">{% trans 'Yes' %}</span></td>
                     {% else %}
-                        <td><span class="color-box red-box">{{ answer.3 }}</span></td>
+                        <td><span class="color-box red-box">{% trans 'No' %}</span></td>
                     {% endif %}
                     <td><span class="color-box {% color_class answer.4 %}">{{ answer.4 }}%</span></td>
                 </tr>
