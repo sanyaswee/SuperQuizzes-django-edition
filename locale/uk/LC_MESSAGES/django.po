@@ -106,7 +106,6 @@ msgid "Apply filter"
 msgstr "Фільтрувати"
 
 #: .\templates\home\index.html:59
-#, fuzzy
 msgid "Drop filters"
 msgstr "Скинути фільтри"
 
