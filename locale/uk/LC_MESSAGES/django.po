@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-05-02 10:57+0300\n"
+"POT-Creation-Date: 2025-05-05 14:16+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -41,7 +41,7 @@ msgstr "Введіть назву"
 msgid "Question amount"
 msgstr "Кількість запитань"
 
-#: .\templates\home\advanced_search.html:30
+#: .\templates\home\advanced_search.html:30 .\templates\home\quiz_list.html:9
 msgid "From"
 msgstr "Від"
 
@@ -54,6 +54,7 @@ msgid "Fine for"
 msgstr "Підходить для"
 
 #: .\templates\home\advanced_search.html:39 .\templates\home\index.html:41
+#: .\templates\home\quiz_list.html:9
 msgid "years of age"
 msgstr "років"
 
@@ -108,6 +109,10 @@ msgstr "Фільтрувати"
 #, fuzzy
 msgid "Drop filters"
 msgstr "Скинути фільтри"
+
+#: .\templates\home\quiz_list.html:9
+msgid "up to"
+msgstr "до"
 
 # msgid "Question amount"
 # msgstr "Кількість запитань"

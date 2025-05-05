@@ -6,7 +6,7 @@
         <div class="quiz-label">
             <h2 class="quiz-name">{{ quiz.name }}</h2>
             <p>
-                Від <b class="color-box green-box">{{ quiz.min_age }}</b> років до <b class="color-box red-box">{{ quiz.max_age }}</b> років
+                {% trans 'From' %} <b class="color-box green-box">{{ quiz.min_age }}</b> {% trans 'up to' %} <b class="color-box red-box">{{ quiz.max_age }}</b> {% trans 'years of age' %}
             </p>
             <p><b class="color-box blue-box">{{ quiz.questions.all|length }}</b> {% trans 'questions' %}</p>
             <a href="{% url 'form' quiz.id %}"><button class="complete complete-as-form">{% trans 'Attempt as a form' %}</button></a>
