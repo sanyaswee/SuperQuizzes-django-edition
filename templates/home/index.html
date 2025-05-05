@@ -19,7 +19,33 @@
     </head>
     <body>
         <div class="hat">
+            <ul class="lang-select">
+                <li>
+                    <a href="{% url 'set_language' %}" onclick="event.preventDefault(); document.getElementById('lang-en').submit();">
+                        <img src="{% static 'home/img/uk-flag.png' %}" class="lang-icon">
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'set_language' %}" onclick="event.preventDefault(); document.getElementById('lang-uk').submit();">
+                        <img src="{% static 'home/img/ua-flag.png' %}" class="lang-icon">
+                    </a>
+                </li>
+            </ul>
+
             <h1><i>{% trans "Take a look at those quizzes!" %}</i></h1>
+
+            <form id="lang-en" action="{% url 'set_language' %}" method="post" style="display:none;">
+                {% csrf_token %}
+                <input name="language" type="hidden" value="en-us">
+                <input name="next" type="hidden" value="{{ request.path }}">
+            </form>
+
+            <form id="lang-uk" action="{% url 'set_language' %}" method="post" style="display:none;">
+                {% csrf_token %}
+                <input name="language" type="hidden" value="uk-ua">
+                <input name="next" type="hidden" value="{{ request.path }}">
+            </form>
+
         </div>
 
         <div class="content-grid">
@@ -56,7 +82,7 @@
             <div class="questions-block">
                 {% block quiz_list %}
                 {% endblock %}
-                <a href="/"><button class="submit">{% trans "Drop filters" %}</button></a>
+                <a href="{% url 'index' %}"><button class="submit">{% trans "Drop filters" %}</button></a>
             </div>
         </div>
     </body>

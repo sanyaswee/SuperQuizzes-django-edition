@@ -15,7 +15,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 from django.conf.urls.i18n import i18n_patterns
 from home.views import *
 
@@ -33,5 +33,7 @@ urlpatterns += i18n_patterns(
     path('filter', filter_view, name='filter'),
     path('coming-soon', coming_soon, name='soon'),
     path('search', advanced_search, name='advanced_search'),
+    path('i18n/', include('django.conf.urls.i18n')),
+
     prefix_default_language=True
 )

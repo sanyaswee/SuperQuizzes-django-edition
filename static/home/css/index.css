@@ -112,3 +112,17 @@ ul {
 	margin-left: 25%;
 	margin-right: 25%;
 }
+
+.lang-icon {
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+}
+
+.lang-select {
+	text-align: right;
+}
+
+.lang-select li {
+	margin: 5px;
+}
