@@ -1,7 +1,9 @@
 {% extends "home/index.html" %}
 {% load is_form %}
+{% load static %}
 {% load i18n %}
 {% block quiz_list %}
+    <script src="{% static 'home/js/tagColoring.js' %}"></script>
     {% for quiz in quizzes %}
         <div class="quiz-label">
             <h2 class="quiz-name">{{ quiz.name }}</h2>
@@ -15,7 +17,7 @@
             <div class="tag-space">
                 <ul>
                     {% for tag in quiz.tags.all %}
-                        <li class="color-box {{ color_classes|random }}">&#127991 {{ tag.localized_uk_ua }}</li>
+                        <li class="color-box tag-box">&#127991 {{ tag.localized_uk_ua }}</li>
                     {% endfor %}
                 </ul>
             </div>
