@@ -2,10 +2,12 @@ from django.db.models import Avg
 from django.db.utils import IntegrityError
 from django.http import HttpRequest  # , HttpResponse
 from django.shortcuts import render, redirect
+from django import forms
 
 from . import tools
 from .models import Quiz, Completion, Tag
 from .templatetags.sort import key as tag_sort_key
+from .forms import FilterForm
 
 
 # Create your views here.
@@ -13,11 +15,42 @@ def index(request):
     quizzes = Quiz.objects.filter(available=True)
     quizzes = sorted(quizzes, key=tools.sort_alphabetically_key)
 
-    color_classes = ['red-box', 'yellow-box', 'blue-box', 'green-box']
     tags = Tag.objects.filter(popular=True)
+    tag_choices = [(tag.tag, tag.localized_uk_ua) for tag in tags]
 
-    return render(request, 'home/quiz_list.html', {'quizzes': quizzes, 'color_classes': color_classes, 'tags': tags})
+    # Dynamically add checkbox fields for tags
+    class DynamicFilterForm(FilterForm):
+        pass
 
+    for tag_value, tag_label in tag_choices:
+        DynamicFilterForm.base_fields[tag_value] = forms.BooleanField(
+            label=tag_label, required=False  # No _(tag_label)
+        )
+
+    form = DynamicFilterForm(request.GET or None)
+
+    if form.is_valid():
+        search = form.cleaned_data.get('search')
+        for_age = form.cleaned_data.get('for_age')
+
+        # Filter by name
+        if search:
+            quizzes = [q for q in quizzes if search.lower() in q.name.lower()]
+
+        # Filter by age
+        if for_age:
+            quizzes = [q for q in quizzes if q.for_age <= for_age]
+
+        # Filter by tags
+        selected_tags = [tag.tag for tag in tags if form.cleaned_data.get(tag.tag)]
+        if selected_tags:
+            quizzes = [q for q in quizzes if any(tag.tag in selected_tags for tag in q.tags.all())]
+
+    return render(request, 'home/quiz_list.html', {
+        'quizzes': quizzes,
+        'tags': tags,
+        'form': form
+    })
 
 def coming_soon(request: HttpRequest):
     return render(request, 'home/soon.html')
@@ -85,10 +118,9 @@ def filter_view(request: HttpRequest):
         if len(quizzes) == 0:
             return render(request, 'home/nothing_found.html')
 
-        color_classes = ['red-box', 'yellow-box', 'blue-box', 'green-box']
         tags = Tag.objects.filter(popular=True)
         return render(
-            request, 'home/quiz_list.html', {'quizzes': quizzes, 'color_classes': color_classes, 'tags': tags}
+            request, 'home/quiz_list.html', {'quizzes': quizzes, 'tags': tags}
         )
 
 
