@@ -25,9 +25,25 @@ class AdvancedSearchForm(forms.Form):
     search = forms.CharField(required=False, label='', widget=forms.TextInput(attrs={
         'placeholder': _('Input quiz name')
     }))
-    min_questions = forms.IntegerField(required=False, min_value=0, label=_('From'))
-    max_questions = forms.IntegerField(required=False, min_value=1, label='to')
-    for_age = forms.IntegerField(required=False, min_value=1, max_value=99, label='Age')
+    min_questions = forms.IntegerField(
+        required=False,
+        min_value=0,
+        label=_("From"),
+        widget=forms.NumberInput(attrs={'class': 'number-input'})
+    )
+    max_questions = forms.IntegerField(
+        required=False,
+        min_value=1,
+        label=_("to"),
+        widget=forms.NumberInput(attrs={'class': 'number-input'})
+    )
+    for_age = forms.IntegerField(
+        required=False,
+        min_value=1,
+        max_value=99,
+        label='',
+        widget=forms.NumberInput(attrs={'class': 'number-input'})
+    )
 
     def __init__(self, *args, tags=None, **kwargs):
         super().__init__(*args, **kwargs)
