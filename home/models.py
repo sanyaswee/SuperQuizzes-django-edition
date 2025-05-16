@@ -62,7 +62,7 @@ class Completion(models.Model):  # Instead of 'Quiz.completed_as_...' and 'Quiz.
 
     # Time info
     start_time = models.DateTimeField()
-    end_time = models.DateTimeField(auto_now=True)
+    end_time = models.DateTimeField(auto_now_add=True)
 
     # Results info
     score = models.FloatField(default=0)

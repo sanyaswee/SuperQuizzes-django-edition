@@ -2,10 +2,10 @@
 {% load static %}
 {% load shuffle %}
 {% load i18n %}
-<html lang="uk">
+<html>
 <head>
     <meta charset="UTF-8">
-    <title>{{ quiz_name }} - вікторина від SuperQuizzes</title>
+    <title>{{ quiz_name }} | SuperQuizzes</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@500&display=swap" rel="stylesheet">
@@ -14,22 +14,28 @@
 </head>
 <body>
     <form action="{% url 'result' %}" method="post">
-        {% csrf_token %}
-        {% for q in questions|shuffle %}
+    {% csrf_token %}
+
+    {% for field in form %}
+        {% if field.name not in "quiz_id completed_as start_time" %}
             <div class="question">
-                <h1>{{ q.question }}</h1>
-                {% for v in q.answers|shuffle %}
-                <div class="option">
-                    <input type="radio" name="{{ q.question }}" value="{{ v }}" required><b class="color-box transparent-box">{{ v }}</b>
-                </div>
+                <h1>{{ field.label }}</h1>
+                {% for radio in field %}
+                    <div class="option">
+                        {{ radio.tag }}
+                        <b class="color-box transparent-box">{{ radio.choice_label }}</b>
+                    </div>
                 {% endfor %}
             </div>
-        {% endfor %}
-        <br>
-        <input type="hidden" name="quiz-id" value="{{ quiz_id }}">
-        <input type="hidden" name="completed-as" value="form">
-        <input type="hidden" name="start-time" value="{% now 'Y-m-d G:i:s' %}">
-        <input type="submit" value="{% trans 'Result' %}" class="submit">
-    </form>
+        {% endif %}
+    {% endfor %}
+
+    {{ form.quiz_id }}
+    {{ form.completed_as }}
+    {{ form.start_time }}
+
+    <input type="submit" value="{% trans 'Result' %}" class="submit">
+</form>
+
 </body>
 </html>

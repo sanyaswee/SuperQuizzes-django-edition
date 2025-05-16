@@ -2,9 +2,10 @@ from django.db.models import Avg
 from django.db.utils import IntegrityError
 from django.http import HttpRequest  # , HttpResponse
 from django.shortcuts import render, redirect
+from django.utils.timezone import now
 
 from . import tools
-from .forms import FilterForm, AdvancedSearchForm
+from .forms import FilterForm, AdvancedSearchForm, QuizForm
 from .models import Quiz, Completion, Tag
 from .templatetags.sort import key as tag_sort_key
 
@@ -26,14 +27,24 @@ def coming_soon(request: HttpRequest):
 
 
 def form(request: HttpRequest, id_):
-    # form_id = request.GET.get('id', '')
-    if id_:
-        quiz, questions = tools.get_qq(id_)
-
-        return render(request, 'home/form.html', {'quiz_name': quiz.name, 'quiz_id': quiz.id, 'questions': questions})
-    else:
+    if not id_:
         return redirect('index')
 
+    quiz, questions = tools.get_qq(id_)
+
+    # Prepare the form to be POSTed to 'result'
+    q_form = QuizForm(questions, initial={
+        'quiz_id': quiz.id,
+        'start_time': now().isoformat(),
+        'completed_as': 'form',
+    })
+
+    return render(request, 'home/form.html', {
+        'quiz_name': quiz.name,
+        'quiz_id': quiz.id,
+        'questions': questions,
+        'form': q_form,
+    })
 
 def quiz_view(request: HttpRequest):
     return redirect('soon')

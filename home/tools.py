@@ -1,7 +1,11 @@
-from django.contrib.auth import get_user
+from datetime import datetime
+
 from django.conf import settings
+from django.contrib.auth import get_user
 from django.http import HttpRequest
 from django.shortcuts import get_object_or_404
+from django.utils import timezone
+
 from .models import Quiz, Completion, Question, UserAnswer, Tag
 
 
@@ -20,22 +24,28 @@ def result_post(request: HttpRequest):
     """Handle POST request for result"""
     copy = dict(request.POST)
     del copy['csrfmiddlewaretoken']
-    quiz = Quiz.objects.get(id=copy.pop('quiz-id')[0])
-    is_form = copy.pop('completed-as')[0]
 
-    if is_form == 'form':
-        is_form = True
-    else:
-        is_form = False
+    # Updated field name to match form definition
+    quiz = Quiz.objects.get(id=copy.pop('quiz_id')[0])
+    is_form = copy.pop('completed_as')[0]  # Also changed from 'completed-as' to 'completed_as'
 
-    completion, copy, user = _create_completion(request, quiz, is_form, copy, request.POST.get('csrfmiddlewaretoken'))
+    is_form = is_form == 'form'
+
+    completion, copy, user = _create_completion(
+        request,
+        quiz,
+        is_form,
+        copy,
+        request.POST.get('csrfmiddlewaretoken')
+    )
 
     return quiz, copy, completion, user
 
 
 def _create_completion(request: HttpRequest, quiz: Quiz, is_form: bool, post_copy: dict, csrf_token):
+    start_time = post_copy.pop('start_time')[0]
     completion = Completion(
-        quiz=quiz, is_form=is_form, token=csrf_token, start_time=post_copy.pop('start-time')[0]
+        quiz=quiz, is_form=is_form, token=csrf_token, start_time=start_time
     )
     user = get_user(request)
     if not user.is_anonymous:
@@ -46,7 +56,7 @@ def _create_completion(request: HttpRequest, quiz: Quiz, is_form: bool, post_cop
 
 def _clear_request(request: HttpRequest):
     copy = request.POST.copy()
-    del copy['csrfmiddlewaretoken'], copy['quiz-id'], copy['completed-as'], copy['start-time']
+    del copy['csrfmiddlewaretoken'], copy['quiz_id'], copy['completed_as'], copy['start_time']
     return copy
 
 

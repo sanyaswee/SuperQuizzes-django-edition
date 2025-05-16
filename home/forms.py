@@ -53,3 +53,23 @@ class AdvancedSearchForm(forms.Form):
                     required=False,
                     label=tag.localized_uk_ua,
                 )
+
+
+class QuizForm(forms.Form):
+    def __init__(self, questions, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        for q in questions:
+            choices = [(ans, ans) for ans in q.answers]
+            self.fields[q.question] = forms.ChoiceField(
+                label=q.question,
+                choices=choices,
+                widget=forms.RadioSelect,
+                required=True,
+            )
+
+        # Extra hidden fields
+        self.fields['quiz_id'] = forms.CharField(widget=forms.HiddenInput)
+        self.fields['completed_as'] = forms.CharField(widget=forms.HiddenInput, initial='form')
+        self.fields['start_time'] = forms.CharField(widget=forms.HiddenInput)
+
