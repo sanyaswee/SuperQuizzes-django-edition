@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-05-05 14:16+0300\n"
+"POT-Creation-Date: 2025-05-16 15:53+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -21,27 +21,31 @@ msgstr ""
 "100 > 14) ? 1 : n % 1 == 0 && (n % 10 ==0 || (n % 10 >=5 && n % 10 <=9) || "
 "(n % 100 >=11 && n % 100 <=14 )) ? 2: 3);\n"
 
-#: .\templates\home\advanced_search.html:8 .\templates\home\index.html:53
-msgid "Advanced search"
-msgstr "Розширений пошук"
-
-#: .\templates\home\advanced_search.html:21 .\templates\home\index.html:29
-msgid "Filters"
-msgstr "Фільтри"
-
-#: .\templates\home\advanced_search.html:24 .\templates\home\index.html:32
+#: .\home\forms.py:6 .\templates\home\advanced_search.html:24
 msgid "Search by name"
 msgstr "Шукати за назвою"
 
-#: .\templates\home\advanced_search.html:25 .\templates\home\index.html:33
+#: .\home\forms.py:7 .\templates\home\advanced_search.html:25
 msgid "Input quiz name"
 msgstr "Введіть назву"
+
+#: .\home\forms.py:10 .\templates\home\advanced_search.html:37
+msgid "Fine for"
+msgstr "Підходить для"
+
+#: .\templates\home\advanced_search.html:8 .\templates\home\index.html:83
+msgid "Advanced search"
+msgstr "Розширений пошук"
+
+#: .\templates\home\advanced_search.html:21 .\templates\home\index.html:54
+msgid "Filters"
+msgstr "Фільтри"
 
 #: .\templates\home\advanced_search.html:29
 msgid "Question amount"
 msgstr "Кількість запитань"
 
-#: .\templates\home\advanced_search.html:30 .\templates\home\quiz_list.html:9
+#: .\templates\home\advanced_search.html:30 .\templates\home\quiz_list.html:11
 msgid "From"
 msgstr "Від"
 
@@ -49,12 +53,8 @@ msgstr "Від"
 msgid "to"
 msgstr "до"
 
-#: .\templates\home\advanced_search.html:37 .\templates\home\index.html:39
-msgid "Fine for"
-msgstr "Підходить для"
-
-#: .\templates\home\advanced_search.html:39 .\templates\home\index.html:41
-#: .\templates\home\quiz_list.html:9
+#: .\templates\home\advanced_search.html:39 .\templates\home\index.html:66
+#: .\templates\home\quiz_list.html:11
 msgid "years of age"
 msgstr "років"
 
@@ -93,49 +93,57 @@ msgstr "Результат"
 msgid "Quiz list - SuperQuizzes"
 msgstr "Список вікторин - SuperQuizzes"
 
-#: .\templates\home\index.html:22
+#: .\templates\home\index.html:35
 msgid "Take a look at those quizzes!"
 msgstr "Ми пропонуємо вам пройти одну з наступних вікторин!"
 
-#: .\templates\home\index.html:45
+#: .\templates\home\index.html:70
 msgid "Allow tags"
 msgstr "Дозволити теґи"
 
-#: .\templates\home\index.html:51
+#: .\templates\home\index.html:80
 msgid "Apply filter"
 msgstr "Фільтрувати"
 
-#: .\templates\home\index.html:59
+#: .\templates\home\index.html:89
 msgid "Drop filters"
 msgstr "Скинути фільтри"
 
-#: .\templates\home\quiz_list.html:9
+#: .\templates\home\nothing_found.html:3
+msgid "Nothing was found - SuperQuizzes"
+msgstr "Нічого не знайдено - SuperQuizzes"
+
+#: .\templates\home\nothing_found.html:6
+msgid "No matches found for current filters"
+msgstr "За вашими фільтрами нічого не знайдено"
+
+#: .\templates\home\quiz_list.html:11
 msgid "up to"
 msgstr "до"
 
 # msgid "Question amount"
 # msgstr "Кількість запитань"
-#: .\templates\home\quiz_list.html:11
+#: .\templates\home\quiz_list.html:13
 msgid "questions"
 msgstr "запитань(я)"
 
-#: .\templates\home\quiz_list.html:12
+#: .\templates\home\quiz_list.html:14
 msgid "Attempt as a form"
 msgstr "Пройти як форму"
 
-#: .\templates\home\quiz_list.html:13
+#: .\templates\home\quiz_list.html:15
 msgid "Attempt as a quiz"
 msgstr "Пройти як квіз"
 
-#: .\templates\home\quiz_list.html:23
+#: .\templates\home\quiz_list.html:25
 msgid "Global attempts"
 msgstr "Всього проходжень"
 
-#: .\templates\home\quiz_list.html:25
+#: .\templates\home\quiz_list.html:27
 msgid "Form"
 msgstr "Форма"
 
-#: .\templates\home\quiz_list.html:26
+#: .\templates\home\quiz_list.html:28
 msgid "Quiz"
 msgstr "Квіз"
 

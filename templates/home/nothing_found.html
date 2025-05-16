@@ -1,6 +1,7 @@
 {% extends "home/index.html" %}
-{% block title %}Нічого не знайдено - SuperQuizzes{% endblock %}
+{% load i18n %}
+{% block title %}{% trans 'Nothing was found - SuperQuizzes' %}{% endblock %}
 {% block quiz_list %}
 <h1>¯⁠\⁠_⁠(⁠ツ⁠)⁠_⁠/⁠¯</h1>
-<h1>За вашими фільтрами нічого не знайдено</h1>
+<h1>{% trans 'No matches found for current filters' %}</h1>
 {% endblock %}
