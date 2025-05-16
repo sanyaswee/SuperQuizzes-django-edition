@@ -2,7 +2,7 @@
 {% load static %}
 {% load sort %}
 {% load i18n %}
-<html lang="uk">
+<html>
     <head>
         <title>{% block title %}{% trans 'Quiz list - SuperQuizzes' %}{% endblock %}</title>
         <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -51,7 +51,6 @@
         <div class="content-grid">
             <div class="side-bar">
                 <form action="{% url 'filter' %}" method="get">
-                    {% csrf_token %}
                     <h1>{% trans "Filters" %}</h1>
 
                     {{ form.non_field_errors }}
@@ -68,7 +67,7 @@
                     </div>
 
                     <div class="tags">
-                        <p>{% trans "Allow tags" %}</p>
+                        <p>{% trans "Allow tags" %}:</p>
                         {% for field in form %}
                             {% if field.name not in "search for_age" %}
                                 <div class="tag-filter-field">

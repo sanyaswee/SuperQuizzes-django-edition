@@ -2,55 +2,24 @@ from django.db.models import Avg
 from django.db.utils import IntegrityError
 from django.http import HttpRequest  # , HttpResponse
 from django.shortcuts import render, redirect
-from django import forms
 
 from . import tools
+from .forms import FilterForm
 from .models import Quiz, Completion, Tag
 from .templatetags.sort import key as tag_sort_key
-from .forms import FilterForm
 
 
 # Create your views here.
 def index(request):
-    quizzes = Quiz.objects.filter(available=True)
-    quizzes = sorted(quizzes, key=tools.sort_alphabetically_key)
-
+    quizzes = Quiz.objects.filter(available=True).order_by('name')
     tags = Tag.objects.filter(popular=True)
-    tag_choices = [(tag.tag, tag.localized_uk_ua) for tag in tags]
-
-    # Dynamically add checkbox fields for tags
-    class DynamicFilterForm(FilterForm):
-        pass
-
-    for tag_value, tag_label in tag_choices:
-        DynamicFilterForm.base_fields[tag_value] = forms.BooleanField(
-            label=tag_label, required=False  # No _(tag_label)
-        )
-
-    form = DynamicFilterForm(request.GET or None)
-
-    if form.is_valid():
-        search = form.cleaned_data.get('search')
-        for_age = form.cleaned_data.get('for_age')
-
-        # Filter by name
-        if search:
-            quizzes = [q for q in quizzes if search.lower() in q.name.lower()]
-
-        # Filter by age
-        if for_age:
-            quizzes = [q for q in quizzes if q.for_age <= for_age]
-
-        # Filter by tags
-        selected_tags = [tag.tag for tag in tags if form.cleaned_data.get(tag.tag)]
-        if selected_tags:
-            quizzes = [q for q in quizzes if any(tag.tag in selected_tags for tag in q.tags.all())]
 
     return render(request, 'home/quiz_list.html', {
         'quizzes': quizzes,
         'tags': tags,
-        'form': form
+        'form': FilterForm(tags=tags)
     })
+
 
 def coming_soon(request: HttpRequest):
     return render(request, 'home/soon.html')
@@ -101,27 +70,41 @@ def result(request: HttpRequest):
         return redirect('index')
 
 
-def filter_view(request: HttpRequest):
+def filter_view(request):
     if request.method == 'GET':
-        conditions = {'available': True}
-        try:
-            conditions = tools.search(request, conditions)
-            conditions = tools.filter_age(request, conditions)
-            conditions = tools.filter_questions_amount(request, conditions)
-            conditions = tools.process_tags(request, conditions)
-        except AssertionError:
-            return render(request, 'home/filter_error.html')
-
-        quizzes = Quiz.objects.filter(**conditions)
-        quizzes = sorted(quizzes, key=tools.sort_alphabetically_key)
-
-        if len(quizzes) == 0:
-            return render(request, 'home/nothing_found.html')
-
         tags = Tag.objects.filter(popular=True)
-        return render(
-            request, 'home/quiz_list.html', {'quizzes': quizzes, 'tags': tags}
-        )
+        filter_form = FilterForm(request.GET or None, tags=tags)
+
+        if not filter_form.is_valid():
+            return render(request, 'home/filter_error.html', {'form': filter_form})
+
+        quizzes = Quiz.objects.filter(available=True)
+
+        search = filter_form.cleaned_data.get('search')
+        for_age = filter_form.cleaned_data.get('for_age')
+
+        if search:
+            quizzes = quizzes.filter(name__icontains=search)
+        if for_age:
+            quizzes = quizzes.filter(min_age__lte=for_age, max_age__gte=for_age)
+
+        selected_tag_slugs = [tag.tag for tag in tags if filter_form.cleaned_data.get(tag.tag)]
+        if selected_tag_slugs:
+            quizzes = quizzes.filter(tags__tag__in=selected_tag_slugs).distinct()
+
+        quizzes = quizzes.order_by('name')
+
+        if not quizzes.exists():
+            return render(request, 'home/nothing_found.html', {'tags': tags, 'form': filter_form})
+
+        return render(request, 'home/quiz_list.html', {
+            'quizzes': quizzes,
+            'tags': tags,
+            'form': filter_form,
+        })
+
+    return redirect('index')
+
 
 
 def advanced_search(request: HttpRequest):
