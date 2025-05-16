@@ -221,13 +221,14 @@ def sort_alphabetically_key(quiz: Quiz):
     return settings.ALPHABET.find(str(quiz.name)[0].lower())
 
 
-def convert_tags_to_table(tags):
+def convert_tags_to_table(tags, per_row=4):
     rows = []
     row = []
     for i, t in enumerate(tags):
         row.append(t)
-        if (i + 1) % 4 == 0:
-            rows.append(row.copy())
-            row.clear()
-
+        if (i + 1) % per_row == 0:
+            rows.append(row)
+            row = []
+    if row:  # Add the last partial row
+        rows.append(row)
     return rows

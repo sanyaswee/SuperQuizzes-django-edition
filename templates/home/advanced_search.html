@@ -1,8 +1,9 @@
 <!DOCTYPE html>
-<html lang="uk">
+<html>
 {% load static %}
 {% load sort %}
 {% load i18n %}
+{% load form_extras %}
 <head>
     <meta charset="UTF-8">
     <title>{% trans 'Advanced search' %}</title>
@@ -16,45 +17,50 @@
     <link rel="stylesheet" href="{% static 'home/css/advanced_search.css' %}">
 </head>
 <body>
-    <form action="{% url 'filter' %}">
-        {# csrf_token #}
+    <form method="get" action="{% url 'filter' %}">
         <h1>{% trans 'Filters' %}</h1>
 
         <div class="upper-filter">
             <p>{% trans "Search by name" %}</p>
-            <input type="text" name="search" placeholder="{% trans 'Input quiz name' %}">
+            {{ form.search }}
         </div>
 
         <div class="upper-filter">
             <p>{% trans 'Question amount' %}</p>
-            <label>{% trans 'From' %}</label>
-            <input type="number" name="min-questions" min="0" class="number-input">
-            <label>{% trans 'to' %}</label>
-            <input type="number" name="max-questions" min="1" class="number-input">
+            <label>{{ form.min_questions.label }} </label>{{ form.min_questions }}
+            <label>{{ form.max_questions.label }} </label>{{ form.max_questions }}
         </div>
 
         <div class="upper-filter">
             <label>{% trans "Fine for" %}</label>
-            <input type="number" name="for-age" class="number-input" max="99" min="1">
+            {{ form.for_age }}
             <label>{% trans "years of age" %}</label>
         </div>
 
         <div class="tags">
             <h2>{% trans 'Tags' %}</h2>
-
             <table>
-                {% for row in tags %}
+                {% for row in tag_table %}
                     <tr>
                         {% for t in row %}
-                            <td><input type="checkbox" name="{{ t.tag }}"><label>{{ t.localized_uk_ua }}</label></td>
+                            <td>
+                                {% with form|field:t.tag as tag_field %}
+                                    {{ tag_field }}
+                                    <label for="{{ tag_field.id_for_label }}">{{ tag_field.label }}</label>
+                                {% endwith %}
+                            </td>
                         {% endfor %}
                     </tr>
                 {% endfor %}
             </table>
+
         </div>
 
         <input type="submit" value="{% trans 'Apply filters' %}" class="submit">
     </form>
-    <a href="{% url 'index' %}"><button class="submit">{% trans 'Home' %}</button></a>
+
+    <a href="{% url 'index' %}">
+        <button class="submit">{% trans 'Home' %}</button>
+    </a>
 </body>
 </html>

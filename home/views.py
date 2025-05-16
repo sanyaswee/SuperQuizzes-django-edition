@@ -4,7 +4,7 @@ from django.http import HttpRequest  # , HttpResponse
 from django.shortcuts import render, redirect
 
 from . import tools
-from .forms import FilterForm
+from .forms import FilterForm, AdvancedSearchForm
 from .models import Quiz, Completion, Tag
 from .templatetags.sort import key as tag_sort_key
 
@@ -108,7 +108,13 @@ def filter_view(request):
 
 
 def advanced_search(request: HttpRequest):
-    tags = sorted(Tag.objects.all(), key=tag_sort_key)
-    tags = tools.convert_tags_to_table(tags)
+    all_tags = sorted(Tag.objects.all(), key=tag_sort_key)
+    search_form = AdvancedSearchForm(request.GET or None, tags=all_tags)
 
-    return render(request, 'home/advanced_search.html', {'tags': tags})
+    # Optional: format tag fields into a table for display
+    tag_table = tools.convert_tags_to_table(all_tags)
+
+    return render(request, 'home/advanced_search.html', {
+        'form': search_form,
+        'tag_table': tag_table  # only for layout
+    })
