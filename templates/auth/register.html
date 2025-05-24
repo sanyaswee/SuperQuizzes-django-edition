@@ -1,21 +1,22 @@
 {% extends 'auth/base.html' %}
+{% load i18n %}
 
-{% block title %}Register - Quiz Platform{% endblock %}
+{% block title %}{% trans 'Register at SupperQuizzes' %}{% endblock %}
 
-{% block heading %}Join Quiz Platform{% endblock %}
+{% block heading %}{% trans 'Join our Quiz Platform' %}{% endblock %}
 
 {% block content %}
 <div class="auth-container">
     <div class="auth-header">
-        <h2>Create Your Account</h2>
-        <p>Sign up to start taking quizzes and track your progress!</p>
+        <h2>{% trans 'Create Your Account' %}</h2>
+        <p>{% trans 'Sign up to start taking quizzes and track your progress!' %}</p>
     </div>
     
     <form method="post">
         {% csrf_token %}
         
         <div class="form-field">
-            <label for="{{ form.username.id_for_label }}">Username:</label>
+            <label for="{{ form.username.id_for_label }}">{% trans 'Username' %}:</label>
             {{ form.username }}
             {% if form.username.errors %}
                 <ul class="errorlist">
@@ -30,7 +31,7 @@
         </div>
         
         <div class="form-field">
-            <label for="{{ form.password1.id_for_label }}">Password:</label>
+            <label for="{{ form.password1.id_for_label }}">{% trans 'Password' %}:</label>
             {{ form.password1 }}
             {% if form.password1.errors %}
                 <ul class="errorlist">
@@ -45,7 +46,7 @@
         </div>
         
         <div class="form-field">
-            <label for="{{ form.password2.id_for_label }}">Confirm Password:</label>
+            <label for="{{ form.password2.id_for_label }}">{% trans 'Confirm Password' %}:</label>
             {{ form.password2 }}
             {% if form.password2.errors %}
                 <ul class="errorlist">
@@ -68,12 +69,12 @@
         {% endif %}
         
         <div class="form-actions">
-            <button type="submit" class="submit">Create Account</button>
+            <button type="submit" class="submit">{% trans 'Create Account' %}</button>
         </div>
     </form>
     
     <div class="nav-links">
-        <p>Already have an account? <a href="{% url 'login' %}">Login here</a></p>
+        <p>{% trans 'Already have an account?' %} <a href="{% url 'login' %}">{% trans 'Login here' %}</a></p>
     </div>
 </div>
 {% endblock %}

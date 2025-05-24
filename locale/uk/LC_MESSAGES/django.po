@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-05-16 15:53+0300\n"
+"POT-Creation-Date: 2025-05-24 22:55+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -21,23 +21,117 @@ msgstr ""
 "100 > 14) ? 1 : n % 1 == 0 && (n % 10 ==0 || (n % 10 >=5 && n % 10 <=9) || "
 "(n % 100 >=11 && n % 100 <=14 )) ? 2: 3);\n"
 
+#: .\account\views.py:19
+#, python-format
+msgid "Account created for %(username)s!"
+msgstr "Створено акаунт для %(username)s!"
+
+#: .\account\views.py:24
+msgid "Please correct the errors below."
+msgstr "Будь ласка, виправіть помилки нижче."
+
+#: .\account\views.py:44
+#, python-format
+msgid "Welcome back, %(username)s!"
+msgstr "Вітаємо знову, %(username)s!"
+
+#: .\account\views.py:49 .\account\views.py:51
+msgid "Invalid username or password."
+msgstr "Невірний лоґін або пароль"
+
+#: .\account\views.py:61
+msgid "You have been logged out successfully."
+msgstr "Ви успішно вийшли з акаунту."
+
 #: .\home\forms.py:6 .\templates\home\advanced_search.html:24
 msgid "Search by name"
 msgstr "Шукати за назвою"
 
-#: .\home\forms.py:7 .\templates\home\advanced_search.html:25
+#: .\home\forms.py:7 .\home\forms.py:26
 msgid "Input quiz name"
 msgstr "Введіть назву"
 
-#: .\home\forms.py:10 .\templates\home\advanced_search.html:37
+#: .\home\forms.py:10 .\templates\home\advanced_search.html:35
 msgid "Fine for"
 msgstr "Підходить для"
 
-#: .\templates\home\advanced_search.html:8 .\templates\home\index.html:83
+#: .\home\forms.py:31 .\templates\home\quiz_list.html:11
+msgid "From"
+msgstr "Від"
+
+#: .\home\forms.py:37
+msgid "to"
+msgstr "до"
+
+#: .\templates\auth\login.html:4
+msgid "Login to SupperQuizzes"
+msgstr "Увійти до SuperQuizzes"
+
+#: .\templates\auth\login.html:6
+msgid "Login to Quiz Platform"
+msgstr "Увійдіть на платформу вікторин"
+
+#: .\templates\auth\login.html:11
+msgid "Welcome Back!"
+msgstr "Вітаємо знов!"
+
+#: .\templates\auth\login.html:12
+msgid "Please enter your credentials to access your account."
+msgstr "Будь ласка, введіть ваші дані задля входу в акаунт."
+
+#: .\templates\auth\login.html:19 .\templates\auth\register.html:19
+msgid "Username"
+msgstr "Лоґін"
+
+#: .\templates\auth\login.html:31 .\templates\auth\register.html:34
+msgid "Password"
+msgstr "Пароль"
+
+#: .\templates\auth\login.html:56
+msgid "Don't have an account?"
+msgstr "Немає акаунту?"
+
+#: .\templates\auth\login.html:56
+msgid "Register here"
+msgstr "Створіть тут"
+
+#: .\templates\auth\register.html:4
+msgid "Register at SupperQuizzes"
+msgstr "Реєстрація на SupperQuizzes"
+
+#: .\templates\auth\register.html:6
+msgid "Join our Quiz Platform"
+msgstr "Доєднуйтеся до нашої платформи вікторин"
+
+#: .\templates\auth\register.html:11
+msgid "Create Your Account"
+msgstr "Створіть Акаунт"
+
+#: .\templates\auth\register.html:12
+msgid "Sign up to start taking quizzes and track your progress!"
+msgstr "Зареєструйтеся щоб проходити вікторини та відстежувати результати!"
+
+#: .\templates\auth\register.html:49
+msgid "Confirm Password"
+msgstr "Підтвердіть пароль"
+
+#: .\templates\auth\register.html:72
+msgid "Create Account"
+msgstr "Створити Акаунт"
+
+#: .\templates\auth\register.html:77
+msgid "Already have an account?"
+msgstr "Вже є акаунт?"
+
+#: .\templates\auth\register.html:77
+msgid "Login here"
+msgstr "Увійдіть тут"
+
+#: .\templates\home\advanced_search.html:9 .\templates\home\index.html:86
 msgid "Advanced search"
 msgstr "Розширений пошук"
 
-#: .\templates\home\advanced_search.html:21 .\templates\home\index.html:54
+#: .\templates\home\advanced_search.html:21 .\templates\home\index.html:57
 msgid "Filters"
 msgstr "Фільтри"
 
@@ -45,30 +139,22 @@ msgstr "Фільтри"
 msgid "Question amount"
 msgstr "Кількість запитань"
 
-#: .\templates\home\advanced_search.html:30 .\templates\home\quiz_list.html:11
-msgid "From"
-msgstr "Від"
-
-#: .\templates\home\advanced_search.html:32
-msgid "to"
-msgstr "до"
-
-#: .\templates\home\advanced_search.html:39 .\templates\home\index.html:66
+#: .\templates\home\advanced_search.html:37 .\templates\home\index.html:69
 #: .\templates\home\quiz_list.html:11
 msgid "years of age"
 msgstr "років"
 
-#: .\templates\home\advanced_search.html:43
+#: .\templates\home\advanced_search.html:41
 msgid "Tags"
 msgstr "Теґи"
 
-#: .\templates\home\advanced_search.html:56
+#: .\templates\home\advanced_search.html:59
 #, fuzzy
 #| msgid "Apply filter"
 msgid "Apply filters"
 msgstr "Фільтрувати"
 
-#: .\templates\home\advanced_search.html:58 .\templates\home\result.html:21
+#: .\templates\home\advanced_search.html:63 .\templates\home\result.html:21
 #: .\templates\home\soon.html:19
 msgid "Home"
 msgstr "На головну"
@@ -85,7 +171,7 @@ msgstr "Упс, здається фільтри задано недійсні ф
 msgid "Back to filters"
 msgstr "Назад до фільтрів"
 
-#: .\templates\home\form.html:32 .\templates\home\result.html:8
+#: .\templates\home\form.html:37 .\templates\home\result.html:8
 msgid "Result"
 msgstr "Результат"
 
@@ -93,19 +179,27 @@ msgstr "Результат"
 msgid "Quiz list - SuperQuizzes"
 msgstr "Список вікторин - SuperQuizzes"
 
-#: .\templates\home\index.html:35
+#: .\templates\home\index.html:23
+msgid "Register"
+msgstr "Реєстрація"
+
+#: .\templates\home\index.html:23
+msgid "Log In"
+msgstr "Увійти"
+
+#: .\templates\home\index.html:38
 msgid "Take a look at those quizzes!"
 msgstr "Ми пропонуємо вам пройти одну з наступних вікторин!"
 
-#: .\templates\home\index.html:70
+#: .\templates\home\index.html:73
 msgid "Allow tags"
 msgstr "Дозволити теґи"
 
-#: .\templates\home\index.html:80
+#: .\templates\home\index.html:83
 msgid "Apply filter"
 msgstr "Фільтрувати"
 
-#: .\templates\home\index.html:89
+#: .\templates\home\index.html:92
 msgid "Drop filters"
 msgstr "Скинути фільтри"
 

@@ -3,6 +3,7 @@ from django.contrib.auth import login, authenticate
 from django.contrib.auth import logout
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.shortcuts import render, redirect
+from django.utils.translation import gettext_lazy as _
 
 
 def register_view(request):
@@ -15,12 +16,12 @@ def register_view(request):
         if form.is_valid():
             user = form.save()
             username = form.cleaned_data.get('username')
-            messages.success(request, f'Account created for {username}!')
+            messages.success(request, _('Account created for %(username)s!') % {'username': username})
             # Log the user in after registration
             login(request, user)
             return redirect('index')  # Redirect to dashboard or home page
         else:
-            messages.error(request, 'Please correct the errors below.')
+            messages.error(request, _('Please correct the errors below.'))
     else:
         form = UserCreationForm()
 
@@ -40,14 +41,14 @@ def login_view(request):
             user = authenticate(username=username, password=password)
             if user is not None:
                 login(request, user)
-                messages.success(request, f'Welcome back, {username}!')
+                messages.success(request, _('Welcome back, %(username)s!') % {'username': username})
                 # Redirect to next page if specified, otherwise to dashboard
                 next_page = request.GET.get('next', 'index')
                 return redirect(next_page)
             else:
-                messages.error(request, 'Invalid username or password.')
+                messages.error(request, _('Invalid username or password.'))
         else:
-            messages.error(request, 'Invalid username or password.')
+            messages.error(request, _('Invalid username or password.'))
     else:
         form = AuthenticationForm()
 
@@ -57,5 +58,5 @@ def login_view(request):
 def logout_view(request):
     """User logout view"""
     logout(request)
-    messages.success(request, 'You have been logged out successfully.')
+    messages.success(request, _('You have been logged out successfully.'))
     return redirect('login')
