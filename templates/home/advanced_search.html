@@ -14,53 +14,69 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Display:ital@1&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'home/css/base.css' %}">
+    <link rel="stylesheet" href="{% static 'account/css/auth.css' %}">
     <link rel="stylesheet" href="{% static 'home/css/advanced_search.css' %}">
 </head>
 <body>
-    <form method="get" action="{% url 'filter' %}">
-        <h1>{% trans 'Filters' %}</h1>
+    <div class="auth-container advanced-search-container">
+        <form method="get" action="{% url 'filter' %}" class="advanced-search-form">
+            <h1>{% trans 'Advanced Search' %}</h1>
 
-        <div class="upper-filter">
-            <p>{% trans "Search by name" %}</p>
-            {{ form.search }}
+            <div class="form-field">
+                <label for="{{ form.search.id_for_label }}">{% trans "Search by name" %}</label>
+                {{ form.search }}
+            </div>
+
+            <div class="form-field">
+                <label>{% trans 'Question amount' %}</label>
+                <div class="question-range">
+                    <div class="range-input">
+                        <label for="{{ form.min_questions.id_for_label }}">{{ form.min_questions.label }}</label>
+                        {{ form.min_questions }}
+                    </div>
+                    <div class="range-input">
+                        <label for="{{ form.max_questions.id_for_label }}">{{ form.max_questions.label }}</label>
+                        {{ form.max_questions }}
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-field">
+                <label for="{{ form.for_age.id_for_label }}">{% trans "Fine for" %}</label>
+                <div class="age-input-container">
+                    {{ form.for_age }}
+                    <span class="age-suffix">{% trans "years of age" %}</span>
+                </div>
+            </div>
+
+            <div class="form-field tags-section">
+                <h2>{% trans 'Tags' %}</h2>
+                <div class="tags-grid">
+                    {% for row in tag_table %}
+                        <div class="tag-row">
+                            {% for t in row %}
+                                <div class="tag-item">
+                                    {% with form|field:t.tag as tag_field %}
+                                        {{ tag_field }}
+                                        <label for="{{ tag_field.id_for_label }}">{{ tag_field.label }}</label>
+                                    {% endwith %}
+                                </div>
+                            {% endfor %}
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="form-actions">
+                <input type="submit" value="{% trans 'Apply filters' %}" class="submit">
+            </div>
+        </form>
+
+        <div class="form-actions">
+            <a href="{% url 'index' %}">
+                <button type="button" class="submit">{% trans 'Home' %}</button>
+            </a>
         </div>
-
-        <div class="upper-filter">
-            <p>{% trans 'Question amount' %}</p>
-            <label>{{ form.min_questions.label }} </label>{{ form.min_questions }}
-            <label>{{ form.max_questions.label }} </label>{{ form.max_questions }}
-        </div>
-
-        <div class="upper-filter">
-            <label>{% trans "Fine for" %}</label>
-            {{ form.for_age }}
-            <label>{% trans "years of age" %}</label>
-        </div>
-
-        <div class="tags">
-            <h2>{% trans 'Tags' %}</h2>
-            <table>
-                {% for row in tag_table %}
-                    <tr>
-                        {% for t in row %}
-                            <td>
-                                {% with form|field:t.tag as tag_field %}
-                                    {{ tag_field }}
-                                    <label for="{{ tag_field.id_for_label }}">{{ tag_field.label }}</label>
-                                {% endwith %}
-                            </td>
-                        {% endfor %}
-                    </tr>
-                {% endfor %}
-            </table>
-
-        </div>
-
-        <input type="submit" value="{% trans 'Apply filters' %}" class="submit">
-    </form>
-
-    <a href="{% url 'index' %}">
-        <button class="submit">{% trans 'Home' %}</button>
-    </a>
+    </div>
 </body>
 </html>

@@ -16,24 +16,33 @@
         <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Display:ital@1&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="{% static 'home/css/base.css' %}">
         <link rel="stylesheet" href="{% static 'home/css/index.css' %}">
+        <link rel="stylesheet" href="{% static 'account/css/auth.css' %}">
     </head>
     <body>
         <div class="hat">
-            <p>
-                <a href="{% url 'register' %}">{% trans 'Register' %}</a> | <a href="{% url 'login' %}">{% trans 'Log In' %}</a>
-            </p>
-            <ul class="lang-select">
-                <li>
+            <div class="hat-content">
+                <div class="auth-links">
+                    {% if user.is_authenticated %}
+                        <p>
+                            <a href="{% url 'logout' %}">{% trans 'Logout' %}</a>
+                        </p>
+                    {% else %}
+                        <p>
+                            <a href="{% url 'register' %}">{% trans 'Register' %}</a> |
+                            <a href="{% url 'login' %}">{% trans 'Log In' %}</a>
+                        </p>
+                    {% endif %}
+                </div>
+
+                <div class="lang-select">
                     <a href="{% url 'set_language' %}" onclick="event.preventDefault(); document.getElementById('lang-en').submit();">
-                        <img src="{% static 'home/img/uk-flag.png' %}" class="lang-icon">
+                        <img src="{% static 'home/img/uk-flag.png' %}" class="lang-icon" alt="English">
                     </a>
-                </li>
-                <li>
                     <a href="{% url 'set_language' %}" onclick="event.preventDefault(); document.getElementById('lang-uk').submit();">
-                        <img src="{% static 'home/img/ua-flag.png' %}" class="lang-icon">
+                        <img src="{% static 'home/img/ua-flag.png' %}" class="lang-icon" alt="Українська">
                     </a>
-                </li>
-            </ul>
+                </div>
+            </div>
 
             <h1><i>{% trans "Take a look at those quizzes!" %}</i></h1>
 
@@ -48,25 +57,26 @@
                 <input name="language" type="hidden" value="uk-ua">
                 <input name="next" type="hidden" value="{{ request.path }}">
             </form>
-
         </div>
 
         <div class="content-grid">
             <div class="side-bar">
-                <form action="{% url 'filter' %}" method="get">
+                <form action="{% url 'filter' %}" method="get" class="filter-form">
                     <h1>{% trans "Filters" %}</h1>
 
                     {{ form.non_field_errors }}
 
-                    <div class="search">
+                    <div class="form-field">
                         {{ form.search.label_tag }}
                         {{ form.search }}
                     </div>
 
-                    <div class="for-age">
+                    <div class="form-field age-field">
                         {{ form.for_age.label_tag }}
-                        {{ form.for_age }}
-                        <label>{% trans "years of age" %}</label>
+                        <div class="age-input-group">
+                            {{ form.for_age }}
+                            <label class="age-suffix">{% trans "years of age" %}</label>
+                        </div>
                     </div>
 
                     <div class="tags">
