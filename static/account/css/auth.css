@@ -1,0 +1,272 @@
+/* Authentication system styles */
+
+/* Main auth container styling similar to quiz-label */
+.auth-container {
+    border-color: yellow;
+    border-radius: 10px;
+    border-width: 2px;
+    border-style: solid;
+    padding: 30px;
+    margin: 30px auto;
+    max-width: 500px;
+    background-color: white;
+    transition: border-color 0.5s, border-radius 0.5s, box-shadow 0.5s;
+}
+
+.auth-container:hover {
+    border-color: green;
+    border-radius: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+/* Form field styling */
+.form-field {
+    margin: 15px 0;
+    text-align: left;
+}
+
+.form-field label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    font-family: 'Comfortaa', cursive;
+}
+
+.form-field input {
+    width: 100%;
+    padding: 10px;
+    border: 2px solid #ddd;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-family: 'Comfortaa', cursive;
+    transition: border-color 0.3s;
+}
+
+.form-field input:focus {
+    border-color: purple;
+    outline: none;
+    box-shadow: 0 0 5px rgba(128, 0, 128, 0.3);
+}
+
+/* Error styling */
+.errorlist {
+    list-style: none;
+    padding: 0;
+    margin: 5px 0;
+}
+
+.errorlist li {
+    color: red;
+    font-size: 0.9em;
+    margin: 2px 0;
+    font-family: 'Comfortaa', cursive;
+}
+
+/* Help text styling */
+.help-text {
+    font-size: 0.85em;
+    color: #666;
+    margin: 5px 0;
+    font-style: italic;
+    font-family: 'Comfortaa', cursive;
+}
+
+/* Navigation links */
+.nav-links {
+    margin: 20px 0;
+}
+
+.nav-links a {
+    color: purple;
+    text-decoration: none;
+    margin: 0 10px;
+    font-family: 'Comfortaa', cursive;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+.nav-links a:hover {
+    color: green;
+}
+
+/* Dashboard specific styling */
+.dashboard-content {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: left;
+}
+
+.user-info {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    border: 2px solid yellow;
+    margin: 20px 0;
+    font-family: 'Comfortaa', cursive;
+    transition: border-color 0.5s, box-shadow 0.5s;
+}
+
+.user-info:hover {
+    border-color: green;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.user-info h2 {
+    font-family: 'Noto Sans Display', sans-serif;
+    color: #333;
+    margin-bottom: 15px;
+}
+
+.user-info ul {
+    list-style: none;
+    padding: 0;
+}
+
+.user-info li {
+    margin: 8px 0;
+    padding: 5px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.user-info li:last-child {
+    border-bottom: none;
+}
+
+/* Action buttons with different colors */
+.action-button {
+    font-family: 'Comfortaa', cursive;
+    margin: 10px;
+    border-radius: 20px;
+    border-style: solid;
+    border-width: 2px;
+    cursor: pointer;
+    padding: 10px 20px;
+    font-weight: bold;
+    color: white;
+    transition: background-color 0.15s, padding-left 0.15s, padding-right 0.15s, color 0.15s;
+}
+
+.action-button:hover {
+    background-color: white !important;
+    color: black !important;
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+.action-button.purple {
+    background-color: purple;
+    border-color: purple;
+}
+
+.action-button.blue {
+    background-color: blue;
+    border-color: blue;
+}
+
+.action-button.green {
+    background-color: green;
+    border-color: green;
+}
+
+.action-button.red {
+    background-color: red;
+    border-color: red;
+}
+
+/* Statistics grid */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 20px;
+    text-align: center;
+    margin: 20px 0;
+}
+
+.stat-card {
+    padding: 15px;
+    border-radius: 10px;
+    transition: transform 0.3s;
+}
+
+.stat-card:hover {
+    transform: translateY(-5px);
+}
+
+.stat-card h4 {
+    margin: 0;
+    font-family: 'Noto Sans Display', sans-serif;
+    font-size: 1.8em;
+}
+
+.stat-card p {
+    margin: 5px 0;
+    font-family: 'Comfortaa', cursive;
+    font-size: 0.9em;
+}
+
+/* Auth page specific layouts */
+.auth-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.auth-header h2 {
+    font-family: 'Noto Sans Display', sans-serif;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.auth-header p {
+    font-family: 'Comfortaa', cursive;
+    color: #666;
+    font-size: 1.1em;
+}
+
+/* Form button container */
+.form-actions {
+    text-align: center;
+    margin: 25px 0;
+}
+
+/* Logout link styling */
+.logout-section {
+    margin-top: 30px;
+    border-top: 1px solid #ddd;
+    padding-top: 20px;
+    text-align: center;
+}
+
+.logout-section a {
+    color: red;
+    text-decoration: none;
+    font-family: 'Comfortaa', cursive;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+.logout-section a:hover {
+    color: darkred;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .auth-container {
+        margin: 20px 10px;
+        padding: 20px;
+    }
+
+    .dashboard-content {
+        padding: 0 10px;
+    }
+
+    .stats-grid {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+
+    .action-button {
+        display: block;
+        width: 100%;
+        margin: 10px 0;
+    }
+}

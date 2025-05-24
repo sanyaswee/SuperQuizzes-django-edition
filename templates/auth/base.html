@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Auth System{% endblock %}</title>
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;700&family=Noto+Sans+Display:wght@400;500;700&family=Pacifico&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'home/css/base.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'account/css/auth.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'account/css/messages.css' %}">
+
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            background-color: #f8f9fa;
+        }
+    </style>
+    {% block extra_css %}{% endblock %}
+</head>
+<body>
+    <h1>{% block heading %}Quiz Platform{% endblock %}</h1>
+
+    {# Display messages #}
+    {% if messages %}
+        <div class="messages-container">
+            {% for message in messages %}
+                <div class="message {{ message.tags }}" id="message-{{ forloop.counter }}">
+                    <span class="message-icon"></span>
+                    {{ message }}
+                    <button class="message-close" onclick="closeMessage('message-{{ forloop.counter }}')">&times;</button>
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    {% block content %}
+    {% endblock %}
+
+    {% block extra_js %}
+        <script src="{% static 'account/js/autoHide.js' %}"></script>
+    {% endblock %}
+</body>
+</html>

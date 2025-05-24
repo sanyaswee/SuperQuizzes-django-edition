@@ -1,0 +1,79 @@
+{% extends 'auth/base.html' %}
+
+{% block title %}Register - Quiz Platform{% endblock %}
+
+{% block heading %}Join Quiz Platform{% endblock %}
+
+{% block content %}
+<div class="auth-container">
+    <div class="auth-header">
+        <h2>Create Your Account</h2>
+        <p>Sign up to start taking quizzes and track your progress!</p>
+    </div>
+    
+    <form method="post">
+        {% csrf_token %}
+        
+        <div class="form-field">
+            <label for="{{ form.username.id_for_label }}">Username:</label>
+            {{ form.username }}
+            {% if form.username.errors %}
+                <ul class="errorlist">
+                    {% for error in form.username.errors %}
+                        <li>{{ error }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+            {% if form.username.help_text %}
+                <p class="help-text">{{ form.username.help_text }}</p>
+            {% endif %}
+        </div>
+        
+        <div class="form-field">
+            <label for="{{ form.password1.id_for_label }}">Password:</label>
+            {{ form.password1 }}
+            {% if form.password1.errors %}
+                <ul class="errorlist">
+                    {% for error in form.password1.errors %}
+                        <li>{{ error }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+            {% if form.password1.help_text %}
+                <p class="help-text">{{ form.password1.help_text }}</p>
+            {% endif %}
+        </div>
+        
+        <div class="form-field">
+            <label for="{{ form.password2.id_for_label }}">Confirm Password:</label>
+            {{ form.password2 }}
+            {% if form.password2.errors %}
+                <ul class="errorlist">
+                    {% for error in form.password2.errors %}
+                        <li>{{ error }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+            {% if form.password2.help_text %}
+                <p class="help-text">{{ form.password2.help_text }}</p>
+            {% endif %}
+        </div>
+        
+        {% if form.non_field_errors %}
+            <ul class="errorlist">
+                {% for error in form.non_field_errors %}
+                    <li>{{ error }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+        
+        <div class="form-actions">
+            <button type="submit" class="submit">Create Account</button>
+        </div>
+    </form>
+    
+    <div class="nav-links">
+        <p>Already have an account? <a href="{% url 'login' %}">Login here</a></p>
+    </div>
+</div>
+{% endblock %}

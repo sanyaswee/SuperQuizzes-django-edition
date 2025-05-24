@@ -17,7 +17,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from django.conf.urls.i18n import i18n_patterns
-from home.views import *
+import home.views
+import account.views
 
 urlpatterns = [
 
@@ -26,13 +27,16 @@ urlpatterns = [
 
 urlpatterns += i18n_patterns(
     path('admin/', admin.site.urls),
-    path('', index, name='index'),
-    path('form/<id_>', form, name='form'),
-    path('quiz', quiz_view, name='quiz'),
-    path('result', result, name='result'),
-    path('filter', filter_view, name='filter'),
-    path('coming-soon', coming_soon, name='soon'),
-    path('search', advanced_search, name='advanced_search'),
+    path('', home.views.index, name='index'),
+    path('form/<id_>', home.views.form, name='form'),
+    path('quiz', home.views.quiz_view, name='quiz'),
+    path('result', home.views.result, name='result'),
+    path('filter', home.views.filter_view, name='filter'),
+    path('coming-soon', home.views.coming_soon, name='soon'),
+    path('search', home.views.advanced_search, name='advanced_search'),
+    path('register/', account.views.register_view, name='register'),
+    path('login/', account.views.login_view, name='login'),
+    path('logout/', account.views.logout_view, name='logout'),
     path('i18n/', include('django.conf.urls.i18n')),
 
     prefix_default_language=True

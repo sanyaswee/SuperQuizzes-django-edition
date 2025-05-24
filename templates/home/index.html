@@ -19,6 +19,9 @@
     </head>
     <body>
         <div class="hat">
+            <p>
+                <a href="{% url 'register' %}">{% trans 'Register' %}</a> | <a href="{% url 'login' %}">{% trans 'Log In' %}</a>
+            </p>
             <ul class="lang-select">
                 <li>
                     <a href="{% url 'set_language' %}" onclick="event.preventDefault(); document.getElementById('lang-en').submit();">
