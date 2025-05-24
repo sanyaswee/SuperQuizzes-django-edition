@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-05-24 22:55+0300\n"
+"POT-Creation-Date: 2025-05-24 23:12+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -87,9 +87,13 @@ msgstr "Лоґін"
 msgid "Password"
 msgstr "Пароль"
 
+#: .\templates\auth\login.html:51
+msgid "Login"
+msgstr "Увійти"
+
 #: .\templates\auth\login.html:56
 msgid "Don't have an account?"
-msgstr "Немає акаунту?"
+msgstr "Досі немає акаунту?"
 
 #: .\templates\auth\login.html:56
 msgid "Register here"

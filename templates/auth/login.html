@@ -48,12 +48,12 @@
         {% endif %}
         
         <div class="form-actions">
-            <button type="submit" class="submit">Login</button>
+            <button type="submit" class="submit">{% trans 'Login' %}</button>
         </div>
     </form>
     
     <div class="nav-links">
-        <p>{% trans 'Don\'t have an account?' %} <a href="{% url 'register' %}">{% trans 'Register here' %}</a></p>
+        <p>{% trans "Don't have an account?" %} <a href="{% url 'register' %}">{% trans 'Register here' %}</a></p>
     </div>
 </div>
 {% endblock %}
