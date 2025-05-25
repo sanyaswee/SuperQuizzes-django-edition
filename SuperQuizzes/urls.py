@@ -31,6 +31,7 @@ urlpatterns += i18n_patterns(
     path('form/<id_>', home.views.form, name='form'),
     path('quiz', home.views.quiz_view, name='quiz'),
     path('result', home.views.result, name='result'),
+    path('all-results/<int:quiz_id>/', home.views.all_results, name='all_results'),
     path('filter', home.views.filter_view, name='filter'),
     path('coming-soon', home.views.coming_soon, name='soon'),
     path('search', home.views.advanced_search, name='advanced_search'),

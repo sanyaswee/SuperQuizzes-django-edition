@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+{% load static %}
+{% load color %}
+{% load i18n %}
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>{% trans 'All Results' %} - {{ quiz.name }}</title>
+    <link rel="stylesheet" href="{% static 'home/css/base.css' %}">
+    <link rel="stylesheet" href="{% static 'home/css/result.css' %}">
+</head>
+<body>
+    <h1>{% trans 'All Results for' %} "{{ quiz.name }}"</h1>
+
+    <div class="quiz-stats">
+        <p>{% trans 'Total completions' %}: <span class="color-box blue-box">{{ total_completions }}</span></p>
+        <p>{% trans 'Average score' %}: <span class="color-box {% color_class average_score %}">{{ average_score }}%</span></p>
+    </div>
+
+    <div class="return-to-main">
+        <a href="{% url 'index' %}"><button class="submit">{% trans 'Home' %}</button></a>
+    </div>
+
+    {% if all_results %}
+    <div class="all-results-block">
+        <h2>{% trans 'All Completions' %}</h2>
+        <table>
+            <tr class="table-info">
+                <th>#</th>
+                <th>{% trans 'User' %}</th>
+                <th>{% trans 'Score' %}</th>
+                <th>{% trans 'Time' %}</th>
+                <th>{% trans 'Date' %}</th>
+            </tr>
+            {% for result in all_results %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ result.username }}</td>
+                    <td><span class="color-box {% color_class result.score %}">{{ result.score }}%</span></td>
+                    <td>{{ result.time_taken }} {% trans 'seconds' %}</td>
+                    <td>{{ result.completion_date|date:"M d, Y H:i" }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+    {% else %}
+    <div class="no-results">
+        <p>{% trans 'No results found for this quiz.' %}</p>
+    </div>
+    {% endif %}
+</body>
+</html>

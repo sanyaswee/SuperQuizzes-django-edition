@@ -20,6 +20,7 @@
     <div class="return-to-main">
         <a href="{% url 'index' %}"><button class="submit">{% trans 'Home' %}</button></a>
     </div>
+
     <div class="answers-block">
         <h2>{% trans 'Check your answers' %}</h2>
         <table>
@@ -45,5 +46,31 @@
             {% endfor %}
         </table>
     </div>
+
+    {# Other Users Results Table #}
+    {% if other_users_results %}
+    <div class="other-users-block">
+        <h2>{% trans 'Other Users Results' %}</h2>
+        <table>
+            <tr class="table-info">
+                <th>{% trans 'User' %}</th>
+                <th>{% trans 'Score' %}</th>
+                <th>{% trans 'Time' %}</th>
+                <th>{% trans 'Date' %}</th>
+            </tr>
+            {% for result in other_users_results %}
+                <tr>
+                    <td>{{ result.username }}</td>
+                    <td><span class="color-box {% color_class result.score %}">{{ result.score }}%</span></td>
+                    <td>{{ result.time_taken }} {% trans 'seconds' %}</td>
+                    <td>{{ result.completion_date|date:"M d, Y H:i" }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+    <div class="all-results-button">
+        <a href="{% url 'all_results' quiz_id %}"><button class="submit">{% trans 'All Results for This Quiz' %}</button></a>
+    </div>
+    {% endif %}
 </body>
 </html>
