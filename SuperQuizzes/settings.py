@@ -121,7 +121,7 @@ LOCALE_PATHS = [
     BASE_DIR / 'locale',
 ]
 
-TIME_ZONE = 'Europe/Kyiv'
+TIME_ZONE = 'Europe/Kiev'
 
 USE_I18N = True
 
