@@ -32,3 +32,16 @@ b {
 .option:hover {
 	opacity: 0.7;
 }
+
+.option label {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+.option label:hover {
+    opacity: 0.8;
+}
+.color-box {
+    margin-left: 8px;
+}

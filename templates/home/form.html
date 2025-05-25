@@ -16,14 +16,16 @@
     <form action="{% url 'result' %}" method="post">
     {% csrf_token %}
 
-    {% for field in form %}
+    {% for field in form|shuffle %}
         {% if field.name not in "quiz_id completed_as start_time" %}
             <div class="question">
                 <h1>{{ field.label }}</h1>
-                {% for radio in field %}
+                {% for radio in field|shuffle %}
                     <div class="option">
-                        {{ radio.tag }}
-                        <b class="color-box transparent-box">{{ radio.choice_label }}</b>
+                        <label for="{{ radio.id_for_label }}">
+                            {{ radio.tag }}
+                            <b class="color-box transparent-box">{{ radio.choice_label }}</b>
+                        </label>
                     </div>
                 {% endfor %}
             </div>
