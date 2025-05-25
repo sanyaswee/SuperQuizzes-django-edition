@@ -1,0 +1,192 @@
+.profile-container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/*
+.profile-edit-section {
+    margin: 30px 0;
+}
+*/
+
+.profile-actions {
+    text-align: center;
+    margin: 40px 0;
+}
+
+.profile-actions h2 {
+    font-family: 'Noto Sans Display', sans-serif;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.actions-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+    margin: 20px 0;
+}
+
+.info-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 15px;
+    margin: 15px 0;
+}
+
+.info-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid #eee;
+    font-family: 'Comfortaa', cursive;
+}
+
+.info-item:last-child {
+    border-bottom: none;
+}
+
+.info-item strong {
+    color: #333;
+    min-width: 140px;
+    text-align: left;
+}
+
+.info-item span {
+    color: #666;
+    text-align: right;
+    flex: 1;
+}
+
+/* Header styling similar to index.html */
+.hat {
+    padding: 15px 0;
+    border-bottom: 2px solid #ddd;
+    margin-bottom: 20px;
+}
+
+.hat-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.auth-links {
+    flex: 1;
+}
+
+.auth-links p {
+    margin: 0;
+    font-family: 'Comfortaa', cursive;
+    font-weight: bold;
+}
+
+.auth-links a {
+    color: purple;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.auth-links a:hover {
+    color: green;
+}
+
+.lang-select {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.lang-icon {
+    border-radius: 50%;
+    width: 25px;
+    height: 25px;
+    transition: transform 0.3s, box-shadow 0.3s;
+    cursor: pointer;
+}
+
+.lang-icon:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+}
+
+.hat h1 {
+    text-align: center;
+    margin: 20px 0 0 0;
+    font-family: 'Noto Sans Display', sans-serif;
+}
+
+/* Enhanced logout section */
+.logout-section {
+    margin-top: 40px;
+    border-top: 2px solid #ddd;
+    padding-top: 30px;
+    text-align: center;
+    background-color: #fafafa;
+    border-radius: 10px;
+    padding: 30px;
+}
+
+.logout-section h3 {
+    font-family: 'Noto Sans Display', sans-serif;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.logout-section p {
+    font-family: 'Comfortaa', cursive;
+    color: #666;
+    margin-bottom: 20px;
+}
+
+/* Responsive design for profile page */
+@media (max-width: 768px) {
+    .profile-container {
+        padding: 10px;
+    }
+
+    .hat-content {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+    }
+
+    .auth-links {
+        order: 2;
+    }
+
+    .lang-select {
+        order: 1;
+        justify-content: center;
+    }
+
+    .actions-grid {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+
+    .info-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 5px;
+    }
+
+    .info-item span {
+        text-align: left;
+    }
+}
+
+@media (max-width: 480px) {
+    .hat-content {
+        padding: 0 10px;
+    }
+
+    .logout-section {
+        padding: 20px 15px;
+    }
+}

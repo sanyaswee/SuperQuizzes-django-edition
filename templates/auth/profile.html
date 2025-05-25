@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+{% load static %}
+{% load i18n %}
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>{% trans 'Profile' %} - SuperQuizzes</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Display:ital@1&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'home/css/base.css' %}">
+    <link rel="stylesheet" href="{% static 'account/css/auth.css' %}">
+    <link rel="stylesheet" href="{% static 'account/css/profile.css' %}">
+    <link rel="stylesheet" href="{% static 'account/css/messages.css' %}">
+</head>
+<body>
+    {# Navigation Header #}
+    <div class="hat">
+        <div class="hat-content">
+            <div class="auth-links">
+                <p>
+                    <a href="{% url 'index' %}">{% trans 'Home' %}</a>
+                </p>
+            </div>
+
+            <div class="lang-select">
+                <a href="{% url 'set_language' %}" onclick="event.preventDefault(); document.getElementById('lang-en').submit();">
+                    <img src="{% static 'home/img/uk-flag.png' %}" class="lang-icon" alt="English">
+                </a>
+                <a href="{% url 'set_language' %}" onclick="event.preventDefault(); document.getElementById('lang-uk').submit();">
+                    <img src="{% static 'home/img/ua-flag.png' %}" class="lang-icon" alt="Українська">
+                </a>
+            </div>
+        </div>
+
+        <h1><i>{% trans "Your Profile" %}</i></h1>
+
+        <form id="lang-en" action="{% url 'set_language' %}" method="post" style="display:none;">
+            {% csrf_token %}
+            <input name="language" type="hidden" value="en-us">
+            <input name="next" type="hidden" value="{{ request.path }}">
+        </form>
+
+        <form id="lang-uk" action="{% url 'set_language' %}" method="post" style="display:none;">
+            {% csrf_token %}
+            <input name="language" type="hidden" value="uk-ua">
+            <input name="next" type="hidden" value="{{ request.path }}">
+        </form>
+    </div>
+
+    {# Messages #}
+    {% if messages %}
+        <div class="messages-container">
+            {% for message in messages %}
+                <div class="message {{ message.tags }}">
+                    <span class="message-icon"></span>
+                    {{ message }}
+                    <button type="button" class="message-close" onclick="this.parentElement.style.display='none'">&times;</button>
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    {# Profile Content #}
+    <div class="profile-container">
+        {# Current User Info #}
+        <div class="user-info">
+            <h2>{% trans "Account Information" %}</h2>
+            <div class="info-grid">
+                <div class="info-item">
+                    <strong>{% trans "Username" %}:</strong>
+                    <span>{{ user.username }}</span>
+                </div>
+                <div class="info-item">
+                    <strong>{% trans "Email" %}:</strong>
+                    <span>{{ user.email|default:"Not provided" }}</span>
+                </div>
+                <div class="info-item">
+                    <strong>{% trans "Member since" %}:</strong>
+                    <span>{{ user.date_joined|date:"F d, Y" }}</span>
+                </div>
+                <div class="info-item">
+                    <strong>{% trans "Last login" %}:</strong>
+                    <span>{{ user.last_login|date:"F d, Y H:i"|default:"Never" }}</span>
+                </div>
+            </div>
+        </div>
+
+        {# Edit Username Form #}
+        <div class="auth-container profile-edit-section">
+            <div class="auth-header">
+                <h2>{% trans "Edit Username" %}</h2>
+                <p>{% trans "Change your display name" %}</p>
+            </div>
+
+            <form method="post" action="{% url 'profile' %}">
+                {% csrf_token %}
+
+                {% if form.non_field_errors %}
+                    <div class="errorlist">
+                        {% for error in form.non_field_errors %}
+                            <div class="message error">
+                                <span class="message-icon"></span>
+                                {{ error }}
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+
+                <div class="form-field">
+                    <label for="{{ form.username.id_for_label }}">{% trans "New Username" %}</label>
+                    {{ form.username }}
+                    {% if form.username.errors %}
+                        <ul class="errorlist">
+                            {% for error in form.username.errors %}
+                                <li>{{ error }}</li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                    {% if form.username.help_text %}
+                        <div class="help-text">{{ form.username.help_text }}</div>
+                    {% endif %}
+                </div>
+
+                <div class="form-actions">
+                    <input type="submit" name="update_username" value="{% trans 'Update Username' %}" class="submit">
+                </div>
+            </form>
+        </div>
+
+        {# Quick Actions #}
+        <div class="profile-actions">
+            <h2>{% trans "Account Actions" %}</h2>
+            <div class="actions-grid">
+                <a href="{% url 'index' %}" class="action-button green">
+                    {% trans "Browse Quizzes" %}
+                </a>
+                <a href="{% url 'soon' %}" class="action-button purple">
+                    {% trans "Change Password" %}
+                </a>
+            </div>
+        </div>
+
+        {# Logout Section #}
+        <div class="logout-section">
+            <h3>{% trans "Sign Out" %}</h3>
+            <p>{% trans "Ready to leave? You can sign out of your account." %}</p>
+            <form method="post" action="{% url 'logout' %}" style="display: inline;">
+                {% csrf_token %}
+                <input type="submit" value="{% trans 'Logout' %}" class="action-button red"
+                    onclick="return confirm('{% trans "Are you sure you want to logout?" %}');">
+            </form>
+        </div>
+    </div>
+
+    <script src="{% static 'account/js/autoHideProfile.js' %}"></script>
+</body>
+</html>

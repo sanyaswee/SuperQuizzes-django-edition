@@ -1,9 +1,12 @@
 from django.contrib import messages
 from django.contrib.auth import login, authenticate
 from django.contrib.auth import logout
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.shortcuts import render, redirect
 from django.utils.translation import gettext_lazy as _
+
+from .forms import ProfileForm
 
 
 def register_view(request):
@@ -60,3 +63,28 @@ def logout_view(request):
     logout(request)
     messages.success(request, _('You have been logged out successfully.'))
     return redirect('login')
+
+
+@login_required
+def profile(request):
+    """
+    Profile page where users can view and edit their account information.
+    """
+    if request.method == 'POST':
+        form = ProfileForm(request.POST, user=request.user)
+
+        if form.is_valid():
+            form.save()
+            messages.success(request, _('Your username has been updated successfully!'))
+            return redirect('profile')
+        else:
+            messages.error(request, _('Please correct the errors below.'))
+    else:
+        form = ProfileForm(user=request.user)
+
+    context = {
+        'form': form,
+        'user': request.user,
+    }
+
+    return render(request, 'auth/profile.html', context)

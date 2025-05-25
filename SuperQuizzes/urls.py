@@ -37,6 +37,7 @@ urlpatterns += i18n_patterns(
     path('register/', account.views.register_view, name='register'),
     path('login/', account.views.login_view, name='login'),
     path('logout/', account.views.logout_view, name='logout'),
+    path('profile/', account.views.profile, name='profile'),
     path('i18n/', include('django.conf.urls.i18n')),
 
     prefix_default_language=True
