@@ -100,19 +100,22 @@
     justify-content: space-between;
 }
 
+.tag-item input[type="checkbox"] {
+    width: auto;
+    transform: scale(1.1);
+    margin-right: 6px;
+    vertical-align: middle;
+    align-self: center;
+}
+
+
 .tag-item {
     display: flex;
     align-items: center;
-    gap: 8px;
-    min-width: 200px;
+    gap: 0;
     flex: 1;
 }
 
-.tag-item input[type="checkbox"] {
-    transform: scale(1.2);
-    cursor: pointer;
-    margin: 0;
-}
 
 .tag-item label {
     cursor: pointer;
