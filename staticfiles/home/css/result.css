@@ -1,0 +1,13 @@
+table {
+    border-style: solid;
+    text-align: left;
+	margin: auto;
+	font-family: 'Noto Sans Display', sans-serif;
+}
+
+th, td {
+	padding: 5px;
+}
+th {
+	padding-bottom: 10px;
+}

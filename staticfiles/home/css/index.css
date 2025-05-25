@@ -1,0 +1,289 @@
+/* Existing styles */
+.quiz-label {
+	border-color: yellow;
+	border-radius: 10px;
+	border-width: 2px;
+	border-style: solid;
+
+	padding: 30px;
+	margin: 30px;
+
+	transition: border-color 0.5s, border-radius 0.5s, box-shadow 0.5s;
+}
+
+.quiz-label:hover {
+	border-color: green;
+	border-radius: 20px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.quiz-name {
+	font-family: 'Pacifico', cursive;
+}
+
+.complete {
+	margin: 20px;
+	border-radius: 20px;
+	border-style: solid;
+	cursor: pointer;
+	padding-left: 20px;
+	padding-right: 20px;
+	padding-bottom: 10px;
+	padding-top: 10px;
+	font-weight: bold;
+
+	transition: background-color 0.15s, padding-left 0.15s, padding-right 0.15s, color 0.15s;
+}
+
+.complete:hover {
+	background-color: white;
+	padding-left: 30px;
+	padding-right: 30px;
+}
+
+.complete-as-form {
+	background-color: yellow;
+	border-color: yellow;
+}
+
+.complete-as-quiz {
+	background-color: purple;
+	border-color: purple;
+	color: white;
+}
+
+.complete-as-quiz:hover {
+	color: black;
+}
+
+.side-bar {
+	display: inline-block;
+	width: 14.5%;
+	vertical-align: top;
+}
+
+.questions-block {
+	display: inline-block;
+	width: 85%;
+}
+
+.tag-filter-field {
+	margin-bottom: 3px;
+}
+
+.tags {
+	text-align: left;
+	padding-left: 30px;
+}
+
+.number-input {
+	width: 30px;
+	margin: 5px;
+}
+
+li {
+	display: inline-block;
+	font-family: 'Comfortaa', cursive;
+}
+
+ul {
+	padding: 0;
+}
+
+.completed-times {
+	margin-left: 10px;
+	margin-right: 10px;
+}
+
+.additional-info {
+	border-width: 3px;
+	border-style: solid;
+	border-radius: 5px;
+	border-color: red;
+
+	margin-left: 25%;
+	margin-right: 25%;
+}
+
+/* Updated header styling */
+.hat {
+    padding: 15px 0;
+    border-bottom: 2px solid #ddd;
+    margin-bottom: 20px;
+}
+
+.hat-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.auth-links {
+    flex: 1;
+}
+
+.auth-links p {
+    margin: 0;
+    font-family: 'Comfortaa', cursive;
+    font-weight: bold;
+}
+
+.auth-links a {
+    color: purple;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.auth-links a:hover {
+    color: green;
+}
+
+.lang-select {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.lang-icon {
+    border-radius: 50%;
+    width: 25px;
+    height: 25px;
+    transition: transform 0.3s, box-shadow 0.3s;
+    cursor: pointer;
+}
+
+.lang-icon:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+}
+
+.hat h1 {
+    text-align: center;
+    margin: 20px 0 0 0;
+    font-family: 'Noto Sans Display', sans-serif;
+}
+
+/* Filter form styling to match auth.css */
+.filter-form .form-field {
+    margin: 15px 0;
+    text-align: left;
+}
+
+.filter-form .form-field label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    font-family: 'Comfortaa', cursive;
+}
+
+.filter-form .form-field input[type="text"],
+.filter-form .form-field input[type="number"] {
+    width: 100%;
+    padding: 8px;
+    border: 2px solid #ddd;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-family: 'Comfortaa', cursive;
+    transition: border-color 0.3s;
+}
+
+.filter-form .form-field input[type="text"]:focus,
+.filter-form .form-field input[type="number"]:focus {
+    border-color: purple;
+    outline: none;
+    box-shadow: 0 0 5px rgba(128, 0, 128, 0.3);
+}
+
+.age-field {
+    display: flex;
+    flex-direction: column;
+}
+
+.age-input-group {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.age-input-group input {
+    width: 50px !important;
+    flex-shrink: 0;
+    padding: 6px !important;
+}
+
+.age-suffix {
+    font-size: 0.9em;
+    color: #666;
+    margin: 0 !important;
+    font-weight: normal !important;
+}
+
+/* Tag checkboxes styling */
+.tags {
+    text-align: left;
+    padding-left: 15px;
+}
+
+.tag-filter-field {
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.tag-filter-field input[type="checkbox"] {
+    margin: 0;
+    transform: scale(1.2);
+    cursor: pointer;
+}
+
+.tag-filter-field label {
+    margin: 0 !important;
+    cursor: pointer;
+    font-family: 'Comfortaa', cursive;
+    font-weight: normal;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .hat-content {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+    }
+
+    .auth-links {
+        order: 2;
+    }
+
+    .lang-select {
+        order: 1;
+        justify-content: center;
+    }
+
+    .side-bar {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+
+    .questions-block {
+        width: 100%;
+    }
+
+    .content-grid {
+        display: block;
+    }
+}
+
+@media (max-width: 480px) {
+    .hat-content {
+        padding: 0 10px;
+    }
+
+    .auth-links a {
+        font-size: 0.9em;
+    }
+}
