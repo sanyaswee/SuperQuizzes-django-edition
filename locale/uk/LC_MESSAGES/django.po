@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-05-25 14:48+0300\n"
+"POT-Creation-Date: 2025-05-25 15:40+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -121,7 +121,8 @@ msgid "Profile"
 msgstr "Профіль"
 
 #: .\templates\auth\profile.html:28 .\templates\home\advanced_search.html:77
-#: .\templates\home\result.html:21 .\templates\home\soon.html:19
+#: .\templates\home\all_results.html:21 .\templates\home\result.html:21
+#: .\templates\home\soon.html:19
 msgid "Home"
 msgstr "На головну"
 
@@ -250,6 +251,52 @@ msgstr "Теґи"
 msgid "Apply filters"
 msgstr "Фільтрувати"
 
+#: .\templates\home\all_results.html:8
+msgid "All Results"
+msgstr "Всі результати"
+
+#: .\templates\home\all_results.html:13
+msgid "All Results for"
+msgstr "Всі результати для"
+
+#: .\templates\home\all_results.html:16
+msgid "Total completions"
+msgstr "Усього проходжень"
+
+#: .\templates\home\all_results.html:17 .\templates\home\result.html:16
+msgid "Average score"
+msgstr "Середній результат"
+
+#: .\templates\home\all_results.html:26
+msgid "All Completions"
+msgstr "Всі проходження"
+
+#: .\templates\home\all_results.html:30 .\templates\home\result.html:56
+msgid "User"
+msgstr "Ім'я"
+
+#: .\templates\home\all_results.html:31 .\templates\home\result.html:57
+msgid "Score"
+msgstr "Результат"
+
+#: .\templates\home\all_results.html:32 .\templates\home\result.html:58
+#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:2458
+msgid "Time"
+msgstr "Час"
+
+#: .\templates\home\all_results.html:33 .\templates\home\result.html:59
+msgid "Date"
+msgstr "Дата"
+
+#: .\templates\home\all_results.html:40 .\templates\home\result.html:18
+#: .\templates\home\result.html:19 .\templates\home\result.html:65
+msgid "seconds"
+msgstr "секунда(и)"
+
+#: .\templates\home\all_results.html:48
+msgid "No results found for this quiz."
+msgstr "Не знайдено результатів для цієї вікторини"
+
 #: .\templates\home\filter_error.html:7
 msgid "Oops..."
 msgstr "Ой ой..."
@@ -348,58 +395,58 @@ msgstr "Ваші відповіді"
 msgid "Your score"
 msgstr "У відсотках"
 
-#: .\templates\home\result.html:16
-msgid "Average score"
-msgstr "Середній результат"
-
 #: .\templates\home\result.html:18
 msgid "Time taken"
 msgstr "Витрачено часу"
-
-#: .\templates\home\result.html:18 .\templates\home\result.html:19
-msgid "seconds"
-msgstr "секунда(и)"
 
 #: .\templates\home\result.html:19
 msgid "Avergae time"
 msgstr "Середній час"
 
-#: .\templates\home\result.html:24
+#: .\templates\home\result.html:25
 msgid "Check your answers"
 msgstr "Перевірте свої відповіді"
 
 # msgid "Question amount"
 # msgstr "Кількість запитань"
-#: .\templates\home\result.html:27
+#: .\templates\home\result.html:28
 #, fuzzy
 msgid "Question"
 msgstr "Запитання"
 
-#: .\templates\home\result.html:28
+#: .\templates\home\result.html:29
 msgid "Your answer"
 msgstr "Ваша відповідь"
 
-#: .\templates\home\result.html:29
+#: .\templates\home\result.html:30
 msgid "Correct answer"
 msgstr "Правильна відповідь"
 
-#: .\templates\home\result.html:30
+#: .\templates\home\result.html:31
 msgid "Passed?"
 msgstr "Зараховано?"
 
-#: .\templates\home\result.html:31
+#: .\templates\home\result.html:32
 msgid "Correct answers"
 msgstr "Правильних відповідей"
 
-#: .\templates\home\result.html:39
+#: .\templates\home\result.html:40
 #: .\venv\Lib\site-packages\django\forms\widgets.py:795
 msgid "Yes"
 msgstr "Так"
 
-#: .\templates\home\result.html:41
+#: .\templates\home\result.html:42
 #: .\venv\Lib\site-packages\django\forms\widgets.py:796
 msgid "No"
 msgstr "Ні"
+
+#: .\templates\home\result.html:53
+msgid "Other Users Results"
+msgstr "Результати інших користувачів"
+
+#: .\templates\home\result.html:72
+msgid "All Results for This Quiz"
+msgstr "Повні результати цієї вікторини"
 
 # msgid "Drop filters"
 # msgstr "Скинути фільтри"
@@ -791,10 +838,6 @@ msgstr ""
 msgid ""
 "“%(value)s” value has the correct format (HH:MM[:ss[.uuuuuu]]) but it is an "
 "invalid time."
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:2458
-msgid "Time"
 msgstr ""
 
 #: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:2566
