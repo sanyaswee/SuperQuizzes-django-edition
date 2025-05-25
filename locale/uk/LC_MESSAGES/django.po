@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-05-25 15:40+0300\n"
+"POT-Creation-Date: 2025-05-25 16:11+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -38,29 +38,29 @@ msgstr ""
 msgid "A user with that username already exists."
 msgstr ""
 
-#: .\account\views.py:22
+#: .\account\views.py:26
 #, python-format
 msgid "Account created for %(username)s!"
 msgstr "Створено акаунт для %(username)s!"
 
-#: .\account\views.py:27 .\account\views.py:81
+#: .\account\views.py:31 .\account\views.py:85
 msgid "Please correct the errors below."
 msgstr "Будь ласка, виправіть помилки нижче."
 
-#: .\account\views.py:47
+#: .\account\views.py:51
 #, python-format
 msgid "Welcome back, %(username)s!"
 msgstr "Вітаємо знову, %(username)s!"
 
-#: .\account\views.py:52 .\account\views.py:54
+#: .\account\views.py:56 .\account\views.py:58
 msgid "Invalid username or password."
 msgstr "Невірний лоґін або пароль"
 
-#: .\account\views.py:64
+#: .\account\views.py:68
 msgid "You have been logged out successfully."
 msgstr "Ви успішно вийшли з акаунту."
 
-#: .\account\views.py:78
+#: .\account\views.py:82
 msgid "Your username has been updated successfully!"
 msgstr "Ваш лоґін оновлено успішно!"
 
@@ -116,11 +116,13 @@ msgstr "Досі немає акаунту?"
 msgid "Register here"
 msgstr "Створіть тут"
 
-#: .\templates\auth\profile.html:7 .\templates\home\index.html:27
+#: .\templates\auth\profile.html:7 .\templates\auth\user_completions.html:30
+#: .\templates\home\index.html:27
 msgid "Profile"
 msgstr "Профіль"
 
-#: .\templates\auth\profile.html:28 .\templates\home\advanced_search.html:77
+#: .\templates\auth\profile.html:28 .\templates\auth\user_completions.html:29
+#: .\templates\home\advanced_search.html:77
 #: .\templates\home\all_results.html:21 .\templates\home\result.html:21
 #: .\templates\home\soon.html:19
 msgid "Home"
@@ -166,9 +168,9 @@ msgstr "Оновити лоґін"
 msgid "Account Actions"
 msgstr "Дії з акаунтом"
 
-#: .\templates\auth\profile.html:142
-msgid "Browse Quizzes"
-msgstr "Огляд вікторин"
+#: .\templates\auth\profile.html:142 .\templates\auth\user_completions.html:8
+msgid "My Completions"
+msgstr "Мої проходження"
 
 #: .\templates\auth\profile.html:145
 msgid "Change Password"
@@ -222,6 +224,73 @@ msgstr "Вже є акаунт?"
 msgid "Login here"
 msgstr "Увійдіть тут"
 
+#: .\templates\auth\user_completions.html:44
+msgid "My Quiz Completions"
+msgstr "Мої проходження вікторин"
+
+#: .\templates\auth\user_completions.html:61
+#: .\templates\home\all_results.html:16
+msgid "Total completions"
+msgstr "Усього проходжень"
+
+#: .\templates\auth\user_completions.html:62
+#: .\templates\home\all_results.html:17 .\templates\home\result.html:16
+msgid "Average score"
+msgstr "Середній результат"
+
+#: .\templates\auth\user_completions.html:67
+#: .\templates\auth\user_completions.html:103
+msgid "Browse Quizzes"
+msgstr "Огляд вікторин"
+
+#: .\templates\auth\user_completions.html:68
+msgid "Back to Profile"
+msgstr "Назад до профілю"
+
+#: .\templates\auth\user_completions.html:74
+msgid "Your Quiz History"
+msgstr "Ваша історія проходжень"
+
+#: .\templates\auth\user_completions.html:78
+msgid "Quiz Name"
+msgstr "Вікторина"
+
+#: .\templates\auth\user_completions.html:79
+msgid "Type"
+msgstr "Тип"
+
+#: .\templates\auth\user_completions.html:80
+#: .\templates\home\all_results.html:31 .\templates\home\result.html:57
+msgid "Score"
+msgstr "Результат"
+
+#: .\templates\auth\user_completions.html:81
+#: .\templates\home\all_results.html:32 .\templates\home\result.html:58
+#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:2458
+msgid "Time"
+msgstr "Час"
+
+#: .\templates\auth\user_completions.html:82
+msgid "Completed"
+msgstr "Час проходження"
+
+#: .\templates\auth\user_completions.html:90
+#: .\templates\home\all_results.html:40 .\templates\home\result.html:18
+#: .\templates\home\result.html:19 .\templates\home\result.html:65
+msgid "seconds"
+msgstr "секунда(и)"
+
+#: .\templates\auth\user_completions.html:99
+#, fuzzy
+#| msgid "All Completions"
+msgid "No Completions Yet"
+msgstr "Всі проходження"
+
+#: .\templates\auth\user_completions.html:100
+msgid ""
+"You haven't completed any quizzes yet. Start exploring our quiz collection!"
+msgstr "Ви ще не пройшли жодної вікторини. Почніть просто зараз!"
+
 #: .\templates\home\advanced_search.html:9 .\templates\home\index.html:96
 msgid "Advanced search"
 msgstr "Розширений пошук"
@@ -259,14 +328,6 @@ msgstr "Всі результати"
 msgid "All Results for"
 msgstr "Всі результати для"
 
-#: .\templates\home\all_results.html:16
-msgid "Total completions"
-msgstr "Усього проходжень"
-
-#: .\templates\home\all_results.html:17 .\templates\home\result.html:16
-msgid "Average score"
-msgstr "Середній результат"
-
 #: .\templates\home\all_results.html:26
 msgid "All Completions"
 msgstr "Всі проходження"
@@ -275,23 +336,9 @@ msgstr "Всі проходження"
 msgid "User"
 msgstr "Ім'я"
 
-#: .\templates\home\all_results.html:31 .\templates\home\result.html:57
-msgid "Score"
-msgstr "Результат"
-
-#: .\templates\home\all_results.html:32 .\templates\home\result.html:58
-#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:2458
-msgid "Time"
-msgstr "Час"
-
 #: .\templates\home\all_results.html:33 .\templates\home\result.html:59
 msgid "Date"
 msgstr "Дата"
-
-#: .\templates\home\all_results.html:40 .\templates\home\result.html:18
-#: .\templates\home\result.html:19 .\templates\home\result.html:65
-msgid "seconds"
-msgstr "секунда(и)"
 
 #: .\templates\home\all_results.html:48
 msgid "No results found for this quiz."

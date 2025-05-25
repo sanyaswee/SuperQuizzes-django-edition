@@ -5,8 +5,12 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.shortcuts import render, redirect
 from django.utils.translation import gettext_lazy as _
+from django.db.models import Avg
+from django.utils import timezone
 
 from .forms import ProfileForm
+
+from home.models import Completion
 
 
 def register_view(request):
@@ -88,3 +92,46 @@ def profile(request):
     }
 
     return render(request, 'auth/profile.html', context)
+
+
+@login_required
+def user_completions(request):
+    """
+    View to show all completions for the current user.
+    """
+    # Get all completions for the current user, ordered by most recent first
+    completions = Completion.objects.filter(user=request.user).select_related('quiz').order_by('-end_time')
+
+    # Calculate statistics
+    total_completions = completions.count()
+
+    # Calculate average score if there are completions
+    if total_completions > 0:
+        average_score = completions.aggregate(avg_score=Avg('score'))['avg_score']
+        average_score = round(average_score, 1) if average_score else 0
+    else:
+        average_score = 0
+
+    # Prepare completion data with additional calculations
+    completion_data = []
+    for completion in completions:
+        # Calculate time taken in seconds
+        time_taken = (completion.end_time - completion.start_time).total_seconds()
+
+        completion_data.append({
+            'quiz_name': completion.quiz.name,
+            'quiz_id': completion.quiz.id,
+            'score': completion.score,
+            'time_taken': int(time_taken),
+            'completion_date': completion.end_time,
+            'completion_type': 'Quiz' if not completion.is_form else 'Form'
+        })
+
+    context = {
+        'completions': completion_data,
+        'total_completions': total_completions,
+        'average_score': average_score,
+        'user': request.user,
+    }
+
+    return render(request, 'auth/user_completions.html', context)

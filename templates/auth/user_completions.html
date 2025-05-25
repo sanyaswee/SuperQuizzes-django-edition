@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+{% load static %}
+{% load color %}
+{% load i18n %}
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>{% trans 'My Completions' %} - SuperQuizzes</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Display:ital@1&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'home/css/base.css' %}">
+    <link rel="stylesheet" href="{% static 'home/css/result.css' %}">
+    <link rel="stylesheet" href="{% static 'account/css/auth.css' %}">
+    <link rel="stylesheet" href="{% static 'account/css/profile.css' %}">
+</head>
+<body>
+    {# Navigation Header #}
+    <div class="hat">
+        <div class="hat-content">
+            <div class="auth-links">
+                <p>
+                    <a href="{% url 'index' %}">{% trans 'Home' %}</a> |
+                    <a href="{% url 'profile' %}">{% trans 'Profile' %}</a>
+                </p>
+            </div>
+
+            <div class="lang-select">
+                <a href="{% url 'set_language' %}" onclick="event.preventDefault(); document.getElementById('lang-en').submit();">
+                    <img src="{% static 'home/img/uk-flag.png' %}" class="lang-icon" alt="English">
+                </a>
+                <a href="{% url 'set_language' %}" onclick="event.preventDefault(); document.getElementById('lang-uk').submit();">
+                    <img src="{% static 'home/img/ua-flag.png' %}" class="lang-icon" alt="Українська">
+                </a>
+            </div>
+        </div>
+
+        <h1><i>{% trans "My Quiz Completions" %}</i></h1>
+
+        <form id="lang-en" action="{% url 'set_language' %}" method="post" style="display:none;">
+            {% csrf_token %}
+            <input name="language" type="hidden" value="en-us">
+            <input name="next" type="hidden" value="{{ request.path }}">
+        </form>
+
+        <form id="lang-uk" action="{% url 'set_language' %}" method="post" style="display:none;">
+            {% csrf_token %}
+            <input name="language" type="hidden" value="uk-ua">
+            <input name="next" type="hidden" value="{{ request.path }}">
+        </form>
+    </div>
+
+    {# User Statistics #}
+    <div class="quiz-stats">
+        <p>{% trans 'Total completions' %}: <span class="color-box blue-box">{{ total_completions }}</span></p>
+        <p>{% trans 'Average score' %}: <span class="color-box {% color_class average_score %}">{{ average_score }}%</span></p>
+    </div>
+
+    {# Navigation Buttons #}
+    <div class="return-to-main">
+        <a href="{% url 'index' %}"><button class="submit">{% trans 'Browse Quizzes' %}</button></a>
+        <a href="{% url 'profile' %}"><button class="submit">{% trans 'Back to Profile' %}</button></a>
+    </div>
+
+    {# Completions Table #}
+    {% if completions %}
+    <div class="all-results-block">
+        <h2>{% trans 'Your Quiz History' %}</h2>
+        <table>
+            <tr class="table-info">
+                <th>#</th>
+                <th>{% trans 'Quiz Name' %}</th>
+                <th>{% trans 'Type' %}</th>
+                <th>{% trans 'Score' %}</th>
+                <th>{% trans 'Time' %}</th>
+                <th>{% trans 'Completed' %}</th>
+            </tr>
+            {% for completion in completions %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td><strong>{{ completion.quiz_name }}</strong></td>
+                    <td>{{ completion.completion_type }}</td>
+                    <td><span class="color-box {% color_class completion.score %}">{{ completion.score }}%</span></td>
+                    <td>{{ completion.time_taken }} {% trans 'seconds' %}</td>
+                    <td>{{ completion.completion_date|date:"M d, Y H:i" }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+    {% else %}
+    <div class="no-results">
+        <div class="user-info">
+            <h2>{% trans "No Completions Yet" %}</h2>
+            <p>{% trans "You haven't completed any quizzes yet. Start exploring our quiz collection!" %}</p>
+            <div style="text-align: center; margin-top: 20px;">
+                <a href="{% url 'index' %}" class="action-button green">
+                    {% trans "Browse Quizzes" %}
+                </a>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+</body>
+</html>
