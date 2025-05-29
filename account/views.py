@@ -1,5 +1,5 @@
 from django.contrib import messages
-from django.contrib.auth import login, authenticate
+from django.contrib.auth import login, authenticate, update_session_auth_hash
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
@@ -8,7 +8,7 @@ from django.utils.translation import gettext_lazy as _
 from django.db.models import Avg
 from django.utils import timezone
 
-from .forms import ProfileForm
+from .forms import ProfileForm, CustomPasswordChangeForm
 
 from home.models import Completion
 
@@ -92,6 +92,32 @@ def profile(request):
     }
 
     return render(request, 'auth/profile.html', context)
+
+
+@login_required
+def change_password(request):
+    """
+    View for changing user password
+    """
+    if request.method == 'POST':
+        form = CustomPasswordChangeForm(request.user, request.POST)
+        if form.is_valid():
+            user = form.save()
+            # Important: Update the session auth hash to prevent logout
+            update_session_auth_hash(request, user)
+            messages.success(request, _('Your password has been changed successfully!'))
+            return redirect('profile')
+        else:
+            messages.error(request, _('Please correct the errors below.'))
+    else:
+        form = CustomPasswordChangeForm(request.user)
+
+    context = {
+        'form': form,
+        'user': request.user,
+    }
+
+    return render(request, 'auth/change_password.html', context)
 
 
 @login_required

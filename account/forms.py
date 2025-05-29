@@ -1,5 +1,6 @@
 from django import forms
 from django.contrib.auth.models import User
+from django.contrib.auth.forms import PasswordChangeForm
 from django.utils.translation import gettext_lazy as _
 from django.core.exceptions import ValidationError
 
@@ -48,3 +49,47 @@ class ProfileForm(forms.ModelForm):
                 self.user.save()
             return self.user
         return super().save(commit)
+
+
+class CustomPasswordChangeForm(PasswordChangeForm):
+    """
+    Custom password change form with styling and translation support
+    """
+    old_password = forms.CharField(
+        label=_("Current Password"),
+        widget=forms.PasswordInput(attrs={
+            'class': 'form-control',
+            'placeholder': _("Enter your current password")
+        }),
+        strip=False,
+    )
+
+    new_password1 = forms.CharField(
+        label=_("New Password"),
+        widget=forms.PasswordInput(attrs={
+            'class': 'form-control',
+            'placeholder': _("Enter your new password")
+        }),
+        strip=False,
+        help_text=_("Your password must contain at least 8 characters and can't be entirely numeric.")
+    )
+
+    new_password2 = forms.CharField(
+        label=_("Confirm New Password"),
+        widget=forms.PasswordInput(attrs={
+            'class': 'form-control',
+            'placeholder': _("Confirm your new password")
+        }),
+        strip=False,
+    )
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        # Update error messages for better UX
+        self.error_messages['password_incorrect'] = _(
+            "Your old password was entered incorrectly. Please enter it again."
+        )
+        self.error_messages['password_mismatch'] = _(
+            "The two password fields didn't match."
+        )
