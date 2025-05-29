@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-05-25 16:11+0300\n"
+"POT-Creation-Date: 2025-05-29 17:16+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -21,29 +21,67 @@ msgstr ""
 "100 > 14) ? 1 : n % 1 == 0 && (n % 10 ==0 || (n % 10 >=5 && n % 10 <=9) || "
 "(n % 100 >=11 && n % 100 <=14 )) ? 2: 3);\n"
 
-#: .\account\forms.py:9 .\templates\auth\login.html:19
+#: .\account\forms.py:10 .\templates\auth\login.html:19
 #: .\templates\auth\profile.html:77 .\templates\auth\register.html:19
 msgid "Username"
 msgstr "Лоґін"
 
-#: .\account\forms.py:13
+#: .\account\forms.py:14
 msgid "Enter your new username"
-msgstr ""
+msgstr "Введіть новий лоґін"
 
-#: .\account\forms.py:16
+#: .\account\forms.py:17
 msgid "Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only."
-msgstr ""
+msgstr "Обов'язково. Не більше 150 символів. Лише латинські літери, цифри та @/./+/-/_"
 
-#: .\account\forms.py:40
+#: .\account\forms.py:41
 msgid "A user with that username already exists."
-msgstr ""
+msgstr "Користувач із цим лоґіном вже існує."
+
+#: .\account\forms.py:59 .\templates\auth\change_password.html:95
+msgid "Current Password"
+msgstr "Нинішній пароль"
+
+#: .\account\forms.py:62
+msgid "Enter your current password"
+msgstr "Введіть нинішній пароль"
+
+#: .\account\forms.py:68 .\templates\auth\change_password.html:107
+msgid "New Password"
+msgstr "Новий пароль"
+
+#: .\account\forms.py:71
+msgid "Enter your new password"
+msgstr "Введіть новий пароль"
+
+#: .\account\forms.py:74
+msgid ""
+"Your password must contain at least 8 characters and can't be entirely "
+"numeric."
+msgstr "Пароль має складатись з принаймні 8 символів та не може складатися лише з цифр."
+
+#: .\account\forms.py:78 .\templates\auth\change_password.html:122
+msgid "Confirm New Password"
+msgstr "Підтвердіть новий пароль"
+
+#: .\account\forms.py:81
+msgid "Confirm your new password"
+msgstr "Підтвердіть новий пароль"
+
+#: .\account\forms.py:91
+msgid "Your old password was entered incorrectly. Please enter it again."
+msgstr "Старий пароль введено неправильно. Будь ласка, спробуйте ще раз."
+
+#: .\account\forms.py:94
+msgid "The two password fields didn't match."
+msgstr "Паролі не збігаються"
 
 #: .\account\views.py:26
 #, python-format
 msgid "Account created for %(username)s!"
 msgstr "Створено акаунт для %(username)s!"
 
-#: .\account\views.py:31 .\account\views.py:85
+#: .\account\views.py:31 .\account\views.py:85 .\account\views.py:111
 msgid "Please correct the errors below."
 msgstr "Будь ласка, виправіть помилки нижче."
 
@@ -64,6 +102,10 @@ msgstr "Ви успішно вийшли з акаунту."
 msgid "Your username has been updated successfully!"
 msgstr "Ваш лоґін оновлено успішно!"
 
+#: .\account\views.py:108
+msgid "Your password has been changed successfully!"
+msgstr "Ваш пароль оновлено успішно!"
+
 #: .\home\forms.py:6 .\templates\home\advanced_search.html:26
 msgid "Search by name"
 msgstr "Шукати за назвою"
@@ -83,6 +125,61 @@ msgstr "Від"
 #: .\home\forms.py:37
 msgid "to"
 msgstr "до"
+
+#: .\templates\auth\change_password.html:7
+#: .\templates\auth\change_password.html:44
+#: .\templates\auth\change_password.html:134 .\templates\auth\profile.html:145
+msgid "Change Password"
+msgstr "Змінити пароль"
+
+#: .\templates\auth\change_password.html:28 .\templates\auth\profile.html:28
+#: .\templates\auth\user_completions.html:29
+#: .\templates\home\advanced_search.html:77
+#: .\templates\home\all_results.html:21 .\templates\home\result.html:21
+#: .\templates\home\soon.html:19
+msgid "Home"
+msgstr "На головну"
+
+#: .\templates\auth\change_password.html:30 .\templates\auth\profile.html:7
+#: .\templates\auth\user_completions.html:30 .\templates\home\index.html:27
+msgid "Profile"
+msgstr "Профіль"
+
+#: .\templates\auth\change_password.html:76
+msgid "Update Your Password"
+msgstr "Оновити пароль"
+
+#: .\templates\auth\change_password.html:77
+msgid "Enter your current password and choose a new secure password"
+msgstr "Введіть ваш нинішній пароль та придумайте новий та безпечний"
+
+#: .\templates\auth\change_password.html:137
+msgid "Cancel"
+msgstr "Скасувати"
+
+#: .\templates\auth\change_password.html:145
+msgid "Password Security Tips"
+msgstr "Поради щодо безпеки"
+
+#: .\templates\auth\change_password.html:149
+msgid "Use at least 8 characters"
+msgstr "Використовуйте принаймні 8 символів"
+
+#: .\templates\auth\change_password.html:150
+msgid "Include uppercase and lowercase letters"
+msgstr "Використовуйте великі й малі літери"
+
+#: .\templates\auth\change_password.html:151
+msgid "Add numbers and special characters"
+msgstr "Додавайте цифри та спецсимволи"
+
+#: .\templates\auth\change_password.html:152
+msgid "Avoid using personal information"
+msgstr "Не використовуйте персональну інформацію"
+
+#: .\templates\auth\change_password.html:153
+msgid "Don't reuse passwords from other accounts"
+msgstr "Не використовуйте паролі від інших акаунтів"
 
 #: .\templates\auth\login.html:4
 msgid "Login to SupperQuizzes"
@@ -115,18 +212,6 @@ msgstr "Досі немає акаунту?"
 #: .\templates\auth\login.html:56
 msgid "Register here"
 msgstr "Створіть тут"
-
-#: .\templates\auth\profile.html:7 .\templates\auth\user_completions.html:30
-#: .\templates\home\index.html:27
-msgid "Profile"
-msgstr "Профіль"
-
-#: .\templates\auth\profile.html:28 .\templates\auth\user_completions.html:29
-#: .\templates\home\advanced_search.html:77
-#: .\templates\home\all_results.html:21 .\templates\home\result.html:21
-#: .\templates\home\soon.html:19
-msgid "Home"
-msgstr "На головну"
 
 #: .\templates\auth\profile.html:42
 msgid "Your Profile"
@@ -171,10 +256,6 @@ msgstr "Дії з акаунтом"
 #: .\templates\auth\profile.html:142 .\templates\auth\user_completions.html:8
 msgid "My Completions"
 msgstr "Мої проходження"
-
-#: .\templates\auth\profile.html:145
-msgid "Change Password"
-msgstr "Змінити пароль"
 
 #: .\templates\auth\profile.html:152
 msgid "Sign Out"
@@ -356,7 +437,7 @@ msgstr "Упс, здається фільтри задано недійсні ф
 msgid "Back to filters"
 msgstr "Назад до фільтрів"
 
-#: .\templates\home\form.html:37 .\templates\home\result.html:8
+#: .\templates\home\form.html:39 .\templates\home\result.html:8
 msgid "Result"
 msgstr "Результат"
 
