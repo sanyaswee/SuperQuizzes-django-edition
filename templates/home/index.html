@@ -61,39 +61,48 @@
 
         <div class="content-grid">
             <div class="side-bar">
-                <form action="{% url 'filter' %}" method="get" class="filter-form">
-                    <h1>{% trans "Filters" %}</h1>
-
-                    {{ form.non_field_errors }}
-
-                    <div class="form-field">
-                        {{ form.search.label_tag }}
-                        {{ form.search }}
+                {% if advanced_search_active %}
+                    <div class="advanced-search-notice">
+                        <h1>{% trans "Advanced Search Results" %}</h1>
+                        <p>{% trans "Advanced search filters are active." %}</p>
+                        <a href="{% url 'advanced_search' %}"><button class="submit">{% trans "Modify Advanced Search" %}</button></a>
+                        <a href="{% url 'index' %}"><button class="submit">{% trans "Clear All Filters" %}</button></a>
                     </div>
+                {% else %}
+                    <form action="{% url 'filter' %}" method="get" class="filter-form">
+                        <h1>{% trans "Filters" %}</h1>
 
-                    <div class="form-field age-field">
-                        {{ form.for_age.label_tag }}
-                        <div class="age-input-group">
-                            {{ form.for_age }}
-                            <label class="age-suffix">{% trans "years of age" %}</label>
+                        {{ form.non_field_errors }}
+
+                        <div class="form-field">
+                            {{ form.search.label_tag }}
+                            {{ form.search }}
                         </div>
-                    </div>
 
-                    <div class="tags">
-                        <p>{% trans "Allow tags" %}:</p>
-                        {% for field in form %}
-                            {% if field.name not in "search for_age" %}
-                                <div class="tag-filter-field">
-                                    {{ field }} {{ field.label_tag }}
-                                </div>
-                            {% endif %}
-                        {% endfor %}
-                    </div>
+                        <div class="form-field age-field">
+                            {{ form.for_age.label_tag }}
+                            <div class="age-input-group">
+                                {{ form.for_age }}
+                                <label class="age-suffix">{% trans "years of age" %}</label>
+                            </div>
+                        </div>
 
-                    <input type="submit" value="{% trans 'Apply filter' %}" class="submit">
-                </form>
+                        <div class="tags">
+                            <p>{% trans "Allow tags" %}:</p>
+                            {% for field in form %}
+                                {% if field.name not in "search for_age" %}
+                                    <div class="tag-filter-field">
+                                        {{ field }} {{ field.label_tag }}
+                                    </div>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
 
-                <a href="{% url 'advanced_search' %}"><button class="submit">{% trans "Advanced search" %}</button></a>
+                        <input type="submit" value="{% trans 'Apply filter' %}" class="submit">
+                    </form>
+
+                    <a href="{% url 'advanced_search' %}"><button class="submit">{% trans "Advanced search" %}</button></a>
+                {% endif %}
             </div>
 
             <div class="questions-block">

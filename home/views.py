@@ -1,4 +1,4 @@
-from django.db.models import Avg
+from django.db.models import Avg, Count
 from django.db.utils import IntegrityError
 from django.http import HttpRequest  # , HttpResponse
 from django.shortcuts import render, redirect
@@ -137,14 +137,81 @@ def filter_view(request):
 
 def advanced_search(request: HttpRequest):
     all_tags = sorted(Tag.objects.all(), key=tag_sort_key)
-    search_form = AdvancedSearchForm(request.GET or None, tags=all_tags)
 
-    # Optional: format tag fields into a table for display
+    # If form is submitted, process the advanced search
+    if request.GET:
+        search_form = AdvancedSearchForm(request.GET, tags=all_tags)
+
+        if not search_form.is_valid():
+            tag_table = tools.convert_tags_to_table(all_tags)
+            return render(request, 'home/advanced_search.html', {
+                'form': search_form,
+                'tag_table': tag_table
+            })
+
+        # Start with all available quizzes
+        quizzes = Quiz.objects.filter(available=True)
+
+        # Apply search filter
+        search = search_form.cleaned_data.get('search')
+        if search:
+            quizzes = quizzes.filter(name__icontains=search)
+
+        # Apply age filter
+        for_age = search_form.cleaned_data.get('for_age')
+        if for_age:
+            quizzes = quizzes.filter(min_age__lte=for_age, max_age__gte=for_age)
+
+        # Apply question count filters
+        min_questions = search_form.cleaned_data.get('min_questions')
+        max_questions = search_form.cleaned_data.get('max_questions')
+
+        if min_questions is not None or max_questions is not None:
+            # Annotate quizzes with question count
+            quizzes = quizzes.annotate(question_count=Count('questions'))
+
+            if min_questions is not None:
+                quizzes = quizzes.filter(question_count__gte=min_questions)
+            if max_questions is not None:
+                quizzes = quizzes.filter(question_count__lte=max_questions)
+
+        # Apply tag filters
+        selected_tag_slugs = [tag.tag for tag in all_tags if search_form.cleaned_data.get(tag.tag)]
+        if selected_tag_slugs:
+            quizzes = quizzes.filter(tags__tag__in=selected_tag_slugs).distinct()
+
+        quizzes = quizzes.order_by('name')
+
+        if not quizzes.exists():
+            # For no results, also use regular FilterForm for sidebar
+            popular_tags = Tag.objects.filter(popular=True)
+            sidebar_form = FilterForm(tags=popular_tags)
+            return render(request, 'home/nothing_found.html', {
+                'tags': popular_tags,
+                'form': sidebar_form,
+                'advanced_search_active': True,
+            })
+
+        # For results, create a regular FilterForm for the sidebar
+        # but keep the advanced search parameters in the context
+        popular_tags = Tag.objects.filter(popular=True)
+        sidebar_form = FilterForm(tags=popular_tags)
+
+        return render(request, 'home/quiz_list.html', {
+            'quizzes': quizzes,
+            'tags': popular_tags,
+            'form': sidebar_form,
+            'is_advanced_search': True,
+            'advanced_search_active': True,
+        })
+
+    # If no GET parameters, show empty form
+    search_form = AdvancedSearchForm(tags=all_tags)
     tag_table = tools.convert_tags_to_table(all_tags)
 
     return render(request, 'home/advanced_search.html', {
         'form': search_form,
-        'tag_table': tag_table  # only for layout
+        'tag_table': tag_table
     })
 
 

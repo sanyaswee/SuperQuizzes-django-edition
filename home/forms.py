@@ -1,6 +1,7 @@
 from django import forms
 from django.utils.translation import gettext_lazy as _
 
+
 class FilterForm(forms.Form):
     search = forms.CharField(
         label=_("Search by name"), max_length=100, required=False,
@@ -46,6 +47,7 @@ class AdvancedSearchForm(forms.Form):
     )
 
     def __init__(self, *args, tags=None, **kwargs):
+        kwargs.setdefault('label_suffix', '')  # disables colon like FilterForm
         super().__init__(*args, **kwargs)
         if tags:
             for tag in tags:
@@ -53,6 +55,20 @@ class AdvancedSearchForm(forms.Form):
                     required=False,
                     label=tag.localized_uk_ua,
                 )
+
+    def clean(self):
+        cleaned_data = super().clean()
+        min_questions = cleaned_data.get('min_questions')
+        max_questions = cleaned_data.get('max_questions')
+
+        # Validate that min is not greater than max
+        if min_questions is not None and max_questions is not None:
+            if min_questions > max_questions:
+                raise forms.ValidationError(
+                    _("Minimum number of questions cannot be greater than maximum.")
+                )
+
+        return cleaned_data
 
 
 class QuizForm(forms.Form):
@@ -72,4 +88,3 @@ class QuizForm(forms.Form):
         self.fields['quiz_id'] = forms.CharField(widget=forms.HiddenInput)
         self.fields['completed_as'] = forms.CharField(widget=forms.HiddenInput, initial='form')
         self.fields['start_time'] = forms.CharField(widget=forms.HiddenInput)
-
