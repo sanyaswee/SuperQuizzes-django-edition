@@ -16,15 +16,31 @@
     <link rel="stylesheet" href="{% static 'home/css/base.css' %}">
     <link rel="stylesheet" href="{% static 'account/css/auth.css' %}">
     <link rel="stylesheet" href="{% static 'home/css/advanced_search.css' %}">
+    <link rel="stylesheet" href="{% static 'home/css/form_errors.css' %}">
 </head>
 <body>
     <div class="auth-container advanced-search-container">
-        <form method="get" class="advanced-search-form">
+        <form method="get" action="{% url 'advanced_search' %}" class="advanced-search-form">
             <h1>{% trans 'Advanced Search' %}</h1>
+
+            {% if form.non_field_errors %}
+                <div class="form-errors">
+                    {% for error in form.non_field_errors %}
+                        <div class="error-message">{{ error }}</div>
+                    {% endfor %}
+                </div>
+            {% endif %}
 
             <div class="form-field">
                 <label for="{{ form.search.id_for_label }}">{% trans "Search by name" %}</label>
                 {{ form.search }}
+                {% if form.search.errors %}
+                    <div class="field-errors">
+                        {% for error in form.search.errors %}
+                            <span class="error-message">{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% endif %}
             </div>
 
             <div class="form-field">
@@ -33,10 +49,24 @@
                     <div class="range-input">
                         <label for="{{ form.min_questions.id_for_label }}">{{ form.min_questions.label }}</label>
                         {{ form.min_questions }}
+                        {% if form.min_questions.errors %}
+                            <div class="field-errors">
+                                {% for error in form.min_questions.errors %}
+                                    <span class="error-message">{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
                     </div>
                     <div class="range-input">
                         <label for="{{ form.max_questions.id_for_label }}">{{ form.max_questions.label }}</label>
                         {{ form.max_questions }}
+                        {% if form.max_questions.errors %}
+                            <div class="field-errors">
+                                {% for error in form.max_questions.errors %}
+                                    <span class="error-message">{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
                     </div>
                 </div>
             </div>
@@ -47,6 +77,13 @@
                     {{ form.for_age }}
                     <span class="age-suffix">{% trans "years of age" %}</span>
                 </div>
+                {% if form.for_age.errors %}
+                    <div class="field-errors">
+                        {% for error in form.for_age.errors %}
+                            <span class="error-message">{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% endif %}
             </div>
 
             <div class="form-field tags-section">
@@ -59,6 +96,13 @@
                                     {% with form|field:t.tag as tag_field %}
                                         {{ tag_field }}
                                         <label for="{{ tag_field.id_for_label }}">{{ tag_field.label }}</label>
+                                        {% if tag_field.errors %}
+                                            <div class="field-errors">
+                                                {% for error in tag_field.errors %}
+                                                    <span class="error-message">{{ error }}</span>
+                                                {% endfor %}
+                                            </div>
+                                        {% endif %}
                                     {% endwith %}
                                 </div>
                             {% endfor %}

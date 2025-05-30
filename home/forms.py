@@ -68,6 +68,17 @@ class AdvancedSearchForm(forms.Form):
                     _("Minimum number of questions cannot be greater than maximum.")
                 )
 
+        # Validate that values are reasonable
+        if min_questions is not None and min_questions < 0:
+            raise forms.ValidationError(
+                _("Minimum number of questions cannot be negative.")
+            )
+
+        if max_questions is not None and max_questions < 1:
+            raise forms.ValidationError(
+                _("Maximum number of questions must be at least 1.")
+            )
+
         return cleaned_data
 
 

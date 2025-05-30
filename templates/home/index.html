@@ -65,7 +65,7 @@
                     <div class="advanced-search-notice">
                         <h1>{% trans "Advanced Search Results" %}</h1>
                         <p>{% trans "Advanced search filters are active." %}</p>
-                        <a href="{% url 'advanced_search' %}"><button class="submit">{% trans "Modify Advanced Search" %}</button></a>
+                        <a href="{% url 'advanced_search' %}?{{ advanced_search_params }}"><button class="submit">{% trans "Modify Advanced Search" %}</button></a>
                         <a href="{% url 'index' %}"><button class="submit">{% trans "Clear All Filters" %}</button></a>
                     </div>
                 {% else %}

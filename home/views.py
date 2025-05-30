@@ -146,7 +146,8 @@ def advanced_search(request: HttpRequest):
             tag_table = tools.convert_tags_to_table(all_tags)
             return render(request, 'home/advanced_search.html', {
                 'form': search_form,
-                'tag_table': tag_table
+                'tag_table': tag_table,
+                'form_errors': True,
             })
 
         # Start with all available quizzes
@@ -197,12 +198,16 @@ def advanced_search(request: HttpRequest):
         popular_tags = Tag.objects.filter(popular=True)
         sidebar_form = FilterForm(tags=popular_tags)
 
+        # Create URL with current advanced search parameters for "Modify" button
+        current_params = request.GET.urlencode()
+
         return render(request, 'home/quiz_list.html', {
             'quizzes': quizzes,
             'tags': popular_tags,
             'form': sidebar_form,
             'is_advanced_search': True,
             'advanced_search_active': True,
+            'advanced_search_params': current_params,
         })
 
     # If no GET parameters, show empty form
