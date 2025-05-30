@@ -139,7 +139,7 @@ def advanced_search(request: HttpRequest):
     all_tags = sorted(Tag.objects.all(), key=tag_sort_key)
 
     # If form is submitted, process the advanced search
-    if request.GET:
+    if request.GET:  # and request.GET.get('no_submit') != 1:
         search_form = AdvancedSearchForm(request.GET, tags=all_tags)
 
         if not search_form.is_valid():
@@ -199,7 +199,7 @@ def advanced_search(request: HttpRequest):
         sidebar_form = FilterForm(tags=popular_tags)
 
         # Create URL with current advanced search parameters for "Modify" button
-        current_params = request.GET.urlencode()
+        current_params = request.GET.urlencode()  # + "&no_submit=1"
 
         return render(request, 'home/quiz_list.html', {
             'quizzes': quizzes,
