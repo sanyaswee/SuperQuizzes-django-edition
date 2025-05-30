@@ -1,0 +1,196 @@
+/* Enhanced form validation error styling */
+
+/* General form errors container */
+.form-errors {
+    margin: 20px 0;
+    padding: 15px;
+    background-color: #ffeaea;
+    border: 2px solid red;
+    border-radius: 10px;
+    text-align: left;
+}
+
+/* Individual error messages */
+.error-message {
+    color: red;
+    font-family: 'Comfortaa', cursive;
+    font-weight: bold;
+    font-size: 0.95em;
+    margin: 5px 0;
+    display: block;
+}
+
+/* Field-specific error styling */
+.field-errors {
+    margin-top: 8px;
+}
+
+.field-errors .error-message {
+    background-color: #ffeaea;
+    padding: 8px 12px;
+    border-left: 4px solid red;
+    border-radius: 0 5px 5px 0;
+    margin: 5px 0;
+    font-size: 0.85em;
+    transition: all 0.3s ease;
+}
+
+.field-errors .error-message:hover {
+    background-color: #ffdddd;
+    border-left-width: 6px;
+    transform: translateX(5px);
+}
+
+/* Input field styling when there's an error */
+.form-field input.error,
+.form-field input[aria-invalid="true"] {
+    border-color: red !important;
+    box-shadow: 0 0 8px rgba(255, 0, 0, 0.3) !important;
+    background-color: #fff5f5;
+}
+
+.form-field input.error:focus,
+.form-field input[aria-invalid="true"]:focus {
+    border-color: darkred !important;
+    box-shadow: 0 0 10px rgba(255, 0, 0, 0.5) !important;
+}
+
+/* Error styling for checkboxes and special inputs */
+.tag-item input[type="checkbox"].error + label {
+    color: red;
+    font-weight: bold;
+}
+
+/* Enhanced errorlist styling (Django default) */
+.errorlist {
+    list-style: none;
+    padding: 0;
+    margin: 8px 0;
+    background-color: #ffeaea;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.errorlist li {
+    color: red;
+    font-size: 0.9em;
+    margin: 0;
+    padding: 10px 15px;
+    font-family: 'Comfortaa', cursive;
+    font-weight: bold;
+    border-bottom: 1px solid #ffdddd;
+    transition: background-color 0.3s ease;
+}
+
+.errorlist li:last-child {
+    border-bottom: none;
+}
+
+.errorlist li:hover {
+    background-color: #ffdddd;
+}
+
+/* Error icon for visual enhancement */
+.error-message::before {
+    content: "⚠ ";
+    font-size: 1.1em;
+    margin-right: 5px;
+}
+
+/* Success state styling (for when errors are fixed) */
+.form-field input.success {
+    border-color: green !important;
+    box-shadow: 0 0 5px rgba(0, 128, 0, 0.3) !important;
+    background-color: #f5fff5;
+}
+
+/* Advanced search specific error styling */
+.advanced-search-form .field-errors .error-message {
+    font-size: 0.8em;
+    padding: 6px 10px;
+}
+
+.range-input .field-errors .error-message {
+    margin-top: 5px;
+    font-size: 0.75em;
+}
+
+/* Age input error styling */
+.age-input-container input.error {
+    border-color: red !important;
+    box-shadow: 0 0 5px rgba(255, 0, 0, 0.3) !important;
+}
+
+/* Non-field errors (form-wide errors) */
+.form-errors .error-message:first-child {
+    margin-top: 0;
+}
+
+.form-errors .error-message:last-child {
+    margin-bottom: 0;
+}
+
+/* Form field label styling when there's an error */
+.form-field.has-error label {
+    color: red;
+    font-weight: bold;
+}
+
+/* Error animation */
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    75% { transform: translateX(5px); }
+}
+
+/* Apply shake animation to error fields */
+.form-field input.error {
+    animation: shake 0.5s ease-in-out;
+}
+
+/* Error state for the entire form field container */
+.form-field.has-error {
+    position: relative;
+}
+
+.form-field.has-error::before {
+    content: "";
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: linear-gradient(45deg, red, transparent, red, transparent);
+    border-radius: 12px;
+    z-index: -1;
+    opacity: 0.1;
+}
+
+/* Responsive error styling */
+@media (max-width: 768px) {
+    .form-errors {
+        margin: 15px 0;
+        padding: 12px;
+    }
+
+    .field-errors .error-message {
+        padding: 6px 10px;
+        font-size: 0.8em;
+    }
+
+    .errorlist li {
+        padding: 8px 12px;
+        font-size: 0.85em;
+    }
+}
+
+@media (max-width: 480px) {
+    .field-errors .error-message {
+        padding: 5px 8px;
+        font-size: 0.75em;
+    }
+
+    .error-message::before {
+        font-size: 1em;
+    }
+}
