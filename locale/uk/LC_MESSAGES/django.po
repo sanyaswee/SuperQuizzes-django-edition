@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-05-29 17:16+0300\n"
+"POT-Creation-Date: 2025-05-30 13:32+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -32,7 +32,9 @@ msgstr "Введіть новий лоґін"
 
 #: .\account\forms.py:17
 msgid "Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only."
-msgstr "Обов'язково. Не більше 150 символів. Лише латинські літери, цифри та @/./+/-/_"
+msgstr ""
+"Обов'язково. Не більше 150 символів. Лише латинські літери, цифри та @/./+/-/"
+"_"
 
 #: .\account\forms.py:41
 msgid "A user with that username already exists."
@@ -58,7 +60,9 @@ msgstr "Введіть новий пароль"
 msgid ""
 "Your password must contain at least 8 characters and can't be entirely "
 "numeric."
-msgstr "Пароль має складатись з принаймні 8 символів та не може складатися лише з цифр."
+msgstr ""
+"Пароль має складатись з принаймні 8 символів та не може складатися лише з "
+"цифр."
 
 #: .\account\forms.py:78 .\templates\auth\change_password.html:122
 msgid "Confirm New Password"
@@ -106,25 +110,37 @@ msgstr "Ваш лоґін оновлено успішно!"
 msgid "Your password has been changed successfully!"
 msgstr "Ваш пароль оновлено успішно!"
 
-#: .\home\forms.py:6 .\templates\home\advanced_search.html:26
+#: .\home\forms.py:7 .\templates\home\advanced_search.html:35
 msgid "Search by name"
 msgstr "Шукати за назвою"
 
-#: .\home\forms.py:7 .\home\forms.py:26
+#: .\home\forms.py:8 .\home\forms.py:27
 msgid "Input quiz name"
 msgstr "Введіть назву"
 
-#: .\home\forms.py:10 .\templates\home\advanced_search.html:45
+#: .\home\forms.py:11 .\templates\home\advanced_search.html:75
 msgid "Fine for"
 msgstr "Підходить для"
 
-#: .\home\forms.py:31 .\templates\home\quiz_list.html:11
+#: .\home\forms.py:32 .\templates\home\quiz_list.html:11
 msgid "From"
 msgstr "Від"
 
-#: .\home\forms.py:37
+#: .\home\forms.py:38
 msgid "to"
 msgstr "до"
+
+#: .\home\forms.py:68
+msgid "Minimum number of questions cannot be greater than maximum."
+msgstr "Мінімальна кількість запитань не може бути більшою за максимальної."
+
+#: .\home\forms.py:74
+msgid "Minimum number of questions cannot be negative."
+msgstr "Мінімальна кількість запитань не може бути негативною."
+
+#: .\home\forms.py:79
+msgid "Maximum number of questions must be at least 1."
+msgstr "Максимальна кількість запитань має бути не меншою за 1."
 
 #: .\templates\auth\change_password.html:7
 #: .\templates\auth\change_password.html:44
@@ -134,7 +150,7 @@ msgstr "Змінити пароль"
 
 #: .\templates\auth\change_password.html:28 .\templates\auth\profile.html:28
 #: .\templates\auth\user_completions.html:29
-#: .\templates\home\advanced_search.html:77
+#: .\templates\home\advanced_search.html:121
 #: .\templates\home\all_results.html:21 .\templates\home\result.html:21
 #: .\templates\home\soon.html:19
 msgid "Home"
@@ -372,32 +388,28 @@ msgid ""
 "You haven't completed any quizzes yet. Start exploring our quiz collection!"
 msgstr "Ви ще не пройшли жодної вікторини. Почніть просто зараз!"
 
-#: .\templates\home\advanced_search.html:9 .\templates\home\index.html:96
+#: .\templates\home\advanced_search.html:9 .\templates\home\index.html:104
 msgid "Advanced search"
 msgstr "Розширений пошук"
 
-#: .\templates\home\advanced_search.html:23
-#, fuzzy
-#| msgid "Advanced search"
+#: .\templates\home\advanced_search.html:24
 msgid "Advanced Search"
-msgstr "Розширений пошук"
+msgstr "Розширений Пошук"
 
-#: .\templates\home\advanced_search.html:31
+#: .\templates\home\advanced_search.html:47
 msgid "Question amount"
 msgstr "Кількість запитань"
 
-#: .\templates\home\advanced_search.html:48 .\templates\home\index.html:78
+#: .\templates\home\advanced_search.html:78 .\templates\home\index.html:86
 #: .\templates\home\quiz_list.html:11
 msgid "years of age"
 msgstr "років"
 
-#: .\templates\home\advanced_search.html:53
+#: .\templates\home\advanced_search.html:90
 msgid "Tags"
 msgstr "Теґи"
 
-#: .\templates\home\advanced_search.html:71
-#, fuzzy
-#| msgid "Apply filter"
+#: .\templates\home\advanced_search.html:115
 msgid "Apply filters"
 msgstr "Фільтрувати"
 
@@ -457,19 +469,35 @@ msgstr "Увійти"
 msgid "Take a look at those quizzes!"
 msgstr "Ми пропонуємо вам пройти одну з наступних вікторин!"
 
-#: .\templates\home\index.html:65
+#: .\templates\home\index.html:66
+msgid "Advanced Search Results"
+msgstr "Результати розширеного пошуку"
+
+#: .\templates\home\index.html:67
+msgid "Advanced search filters are active."
+msgstr "Розширений пошук активний"
+
+#: .\templates\home\index.html:68
+msgid "Modify Advanced Search"
+msgstr "Змінити розширений пошук"
+
+#: .\templates\home\index.html:69
+msgid "Clear All Filters"
+msgstr "Очистити все"
+
+#: .\templates\home\index.html:73
 msgid "Filters"
 msgstr "Фільтри"
 
-#: .\templates\home\index.html:83
+#: .\templates\home\index.html:91
 msgid "Allow tags"
 msgstr "Дозволити теґи"
 
-#: .\templates\home\index.html:93
+#: .\templates\home\index.html:101
 msgid "Apply filter"
 msgstr "Фільтрувати"
 
-#: .\templates\home\index.html:102
+#: .\templates\home\index.html:111
 msgid "Drop filters"
 msgstr "Скинути фільтри"
 
